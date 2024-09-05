@@ -1,0 +1,102 @@
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files gen>
+    Order allow,deny
+    Deny from all
+</Files>
+
+<FilesMatch "(\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|json|lock|swp|xml|twig|gitignore|yml|md|jade|scss|sqlite3|html)|~)$">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</FilesMatch>
+
+<ifModule mod_rewrite.c>
+    Options +FollowSymLinks
+    RewriteEngine On
+
+    # --- FORZAR HTTPS EN SU SITIO --- #
+    RewriteCond %{SERVER_PORT} 80 
+    RewriteRule ^(.*)$ https://eltimonlibreria.com/$1 [R,L]
+    # --- FORZAR HTTPS EN SU SITIO --- #
+
+    # --- HELP PARA ROUTER DEL FRAMEWORK --- #
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?routing=$1 [QSA,L]
+    # --- HELP PARA ROUTER DEL FRAMEWORK --- #
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Sirve archivos comprimidos gzip CSS si existen
+    # y el cliente acepta gzip.
+    RewriteCond "%{HTTP:Accept-encoding}" "gzip"
+    RewriteCond "%{REQUEST_FILENAME}\.gz" -s
+    RewriteRule "^(.*)\.css" "$1\.css\.gz" [QSA]
+
+    # Sirve archivos comprimidos gzip JS si existen
+    # y el cliente acepta gzip.
+    RewriteCond "%{HTTP:Accept-encoding}" "gzip"
+    RewriteCond "%{REQUEST_FILENAME}\.gz" -s
+    RewriteRule "^(.*)\.js" "$1\.js\.gz" [QSA]
+
+    # Sirve los tipos de contenido correctos y evita mod_deflate double gzip.
+    RewriteRule "\.css\.gz$" "-" [T=text/css,E=no-gzip:1]
+    RewriteRule "\.js\.gz$" "-" [T=text/javascript,E=no-gzip:1]
+
+    <FilesMatch "(\.js\.gz|\.css\.gz)$">
+      # Sirve el tipo de codificación correcto.
+      Header append Content-Encoding gzip
+
+      # Forzar proxies para almacenar en caché gzip y
+      # archivos css / js no comprimidos por separado.
+      Header append Vary Accept-Encoding
+    </FilesMatch>
+
+    # --- FORZAR CACHÉ POR 1 MES --- #
+    #<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|swf|js|xml|txt|css|svg)$">
+    #    Header set Cache-Control "max-age=2592000, public"
+    #</FilesMatch>
+
+</IfModule>
+
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http://bodega.eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://bodega.eltimonlibreria.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://eltimonlibreria.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://inventario.eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://inventario.eltimonlibreria.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.bodega.eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.bodega.eltimonlibreria.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.eltimonlibreria.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.inventario.eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.inventario.eltimonlibreria.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://bodega.eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://bodega.eltimonlibreria.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://eltimonlibreria.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://inventario.eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://inventario.eltimonlibreria.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.bodega.eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.bodega.eltimonlibreria.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.eltimonlibreria.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.inventario.eltimonlibreria.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.inventario.eltimonlibreria.com$      [NC]
+RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ https://eltimonlibreria.com [R,NC]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php73” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php73___lsphp .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
