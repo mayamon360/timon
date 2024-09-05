@@ -1,0 +1,76 @@
+<!--=====================================
+PRODUCTOS RECIENTES
+======================================-->
+
+<!-- PRODUCT LIST -->
+<div class="box box-default">
+
+	<!-- box-header -->
+  	<div class="box-header with-border">
+    
+    	<h3 class="box-title">Productos agregados recientemente</h3>
+
+    	<div class="box-tools pull-right">
+      
+      	<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i>
+      	</button>
+    
+    	</div>
+
+  </div>
+   <!-- box-header -->
+
+   	<!-- box-body -->
+  	<div class="box-body">
+
+	    <!-- products-list -->
+	    <ul class="products-list product-list-in-box">
+
+	    	{% for p in ultimosProductos %}
+
+	    		<li class="item">
+			        <div class="product-img">
+			          	<img src="assets/plantilla/{{ p.imagen }}" alt="Product Image">
+			        </div>
+			        <div class="product-info">
+			          	<a href="productos" class="product-title">{{ p.producto }}
+
+			          		{% if p.precio == 0 %}
+
+			          			<span class='label label-danger pull-right'>GRATIS</span>
+
+							{% else %}
+
+			          			<span class='label label-info pull-right'>$ {{ p.precio|number_format(2, '.', ',') }}</span>
+
+			          		{% endif %}
+			            
+			            </a>
+			              	<span class="product-description">
+			                	{{ amigable_time(p.fechaRegistro) }}
+			              	</span>
+			        </div>
+			    </li>
+
+	    	{% endfor %}
+
+	    </ul>
+	    <!-- products-list -->
+
+  	</div>
+  	<!-- box-body -->
+
+  	<!-- box-footer -->
+  	<div class="box-footer text-center">
+
+  		{% if totalProductos >= 8 %}
+    		<a href="productos" class="uppercase">Ver todos los productos</a>
+    	{% else %}
+    		No hay más productos registrados
+		{% endif %}    	
+  
+  	</div>
+  	<!-- box-footer -->
+
+</div>
+<!-- PRODUCT LIST -->

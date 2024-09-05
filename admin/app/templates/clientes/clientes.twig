@@ -1,0 +1,132 @@
+{% extends 'overall/layout' %}
+{% block titleSeccion %}
+    <title>Clientes</title>
+{% endblock %}
+{% block appHeader %}
+<!-- DataTables -->
+<!-- <link rel="stylesheet" href="assets/plantilla/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/css/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/css/responsive.bootstrap.css"/>
+
+<!-- Bootstrap Datetimepicker https://bootstrap-datepicker.readthedocs.io/en/latest/index.html -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/css/bootstrap-datepicker.css"/>
+{% endblock %} 
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+  	{% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+	    <!-- Main content -->
+	    <section class="content">
+
+	    	<div class="box">
+
+    			<div class="box-header with-border">
+    				
+					<h3 class="box-title">{{datosModulo.modulo}}</h3>
+
+					<div class="box-tools pull-right">
+						
+						<a href="productos" class="btn btn-sm btn-flat btn-default font-weight-bold">PRODUCTOS</a>
+						<a href="registrarCredito" class="btn btn-sm bg-orange btn-flat text-uppercase font-weight-bold"><i class="fas fa-barcode"></i> Crédito</a>
+						<a href="puntoDeVenta" class="btn btn-sm bg-aqua btn-flat text-uppercase font-weight-bold"><i class="fas fa-barcode"></i> Salida</a>
+						
+						<button type="button" class="btn bg-blue btn-sm btn-flat text-uppercase font-weight-bold agregarCliente" style="margin-left:20px;" data-toggle="modal" data-target="#modalAgregar">
+							<i class="fas fa-plus"></i> Nuevo cliente
+						</button>
+
+					</div>
+						
+    			</div>
+
+    			<div class="box-body">
+    				
+    				<div class="table-responsive">
+
+    					<table class="table table-inverse table-bordered table-hover table-condensed" style="width:100%" id="tablaClientes">
+    						<thead>
+					            <tr class="bg-navy text-uppercase text-white">
+					                <th>ID</th>
+									<th>Cliente</th>
+					                <th>RFC</th>
+					                <th>Correo electrónico</th>
+					                <th>Teléfono</th>
+                          			<th>Compras</th>
+                          			<th>Última compra</th>
+									<th>Estado</th>
+					                <th width="60px">Acciones</th>
+					            </tr>
+					        </thead>
+    					</table>
+
+    				</div>
+
+    			</div>
+
+    		</div>
+
+    		<!-- MODAL EDITAR -->
+    		<div id="modalEditar" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+        		<div class="modal-dialog modal-lg">
+            		<div class="modal-content">
+              			<div class="modal-header">
+                			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  				  <span aria-hidden="true">&times;</span>
+                  			</button>
+                			  <h4 class="modal-title"><i class="fas fa-pencil-alt"></i> Editar cliente</h4>
+              			</div>
+              			<div class="modal-body">
+              				  <div class="box-body">
+                				    <form role="form" id="editar_form">
+                                
+                            		</form>
+                			  </div>
+              			</div>
+              			<div class="modal-footer text-right">
+              				  <button type="button" class="btn btn-flat bg-blue font-weight-bold btn-sm text-uppercase" id="editar">Guardar cambios</button>
+                			  <button type="button" class="btn btn-flat btn-default font-weight-bold btn-sm text-uppercase" data-dismiss="modal">Cerrar</button>
+              			</div>
+            		</div>
+          		<!-- /.modal-content -->
+        		</div>
+        		<!-- /.modal-dialog -->
+      	    </div>
+      	    <!-- /.modal -->
+
+            {% include 'clientes/agregar' %}
+
+	    </section>
+	    <!-- /.content -->
+
+	</div>
+  	<!-- /.content-wrapper -->
+
+  	{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+<!-- DataTables -->
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/js/dataTables.responsive.js"></script>
+
+{# InputMask #}
+	<script src="assets/plantilla/AdminLTE/plugins/input-mask/dist/jquery.inputmask.bundle.js"></script>
+
+<!-- Bootstrap Datetimepicker https://bootstrap-datepicker.readthedocs.io/en/latest/index.html -->
+  	<script type="text/javascript" src="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+  	<script type="text/javascript" src="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/locales/bootstrap-datepicker.es.min.js"></script>
+
+    <script src="./assets/jscontrollers/clientes/clientes.js"></script>
+{% endblock %}

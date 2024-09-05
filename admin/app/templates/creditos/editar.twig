@@ -1,0 +1,400 @@
+{% extends 'overall/layout' %}
+{% block titleSeccion %}
+    <title>Editar crédito</title>
+{% endblock %}
+{% block appHeader %}
+<link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
+
+<!-- DataTables -->
+<!-- <link rel="stylesheet" href="assets/plantilla/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/css/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/css/responsive.bootstrap.css"/>
+<style>
+	table tr.group:hover {
+		background: #f4f4f4 !important;
+	}
+</style>
+{% endblock %} 
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+  	{% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+	    <!-- Main content -->
+	    <section class="content">
+
+			<div class="row">
+				<!-- DETALLES DEL CRÉDITO -->
+				<div class="col-sm-6 col-md-7">
+					<div class="box" id="resumenCredito">
+						<!-- .box-header -->
+						<div class="box-header with-border">
+							<div class="row">
+								<div class="col-xs-6" style="min-height:30px;">
+									<h3 class="box-title" style="vertical-align:middle;">Productos en lista</h3>
+								</div>
+                                <div class="col-xs-6 text-right">
+                                    {% if estado == 1 %}
+                                        <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="tooltip" title="Cerrar crédito" id="cerrar_credito">
+                                            <i class="fas fa-clipboard-check"></i>
+                                        </button>
+                                    {% endif %}
+                                    {% if estado == 1 or estado == 2 %}
+                                        <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="tooltip" title="Realizar abono" id="realizar_abono" folio="{{folio}}">
+                                            <i class="fas fa-wallet"></i>
+                                        </button>
+                                    {% endif %}
+                                </div>
+							</div>
+			            </div>
+			            <!-- .box-body -->
+			            <div class="box-body no-padding">
+			            	<div class="table-responsive">
+				            	<table class="table table-condensed">
+				            		<thead class="bg-navy text-uppercase">
+				            			<tr>
+											<th style="width:90px;" class="text-center"></th>
+                                            <th style="width:50px;" class="text-center">Solicitud</th>
+                                            <th style="width:50px;" class="text-center">Retorno</th>
+				            				<th style="width:50px;" class="text-center">Venta</th>
+				            				<th style="width:500px;">Descripción</th>
+				            				<th style="width:140px; min-width:140px;" class="text-center">Precio</th>
+				            				<th style="width:70px; min-width:70px;" class="text-center">Descuento</th>
+				            				<th style="width:100px; min-width:100px;" class="text-right">Subtotal</th>
+				            			</tr>
+				            		</thead>
+				            		<tbody id="listaProductosCredito"></tbody>
+				            		<tfoot>
+				            			<tr>
+											<th></th>
+                                            <th class="text-center">
+                                                <span id="sumaCantidad">0</span>
+                                            </th>
+                                            <th class="text-center">
+                                                <span id="sumaDevolucion">0</span>
+                                            </th>
+				            				<th class="text-center">
+				            					<span id="sumaVendido">0</span>
+				            				</th>
+				            				<th colspan="3" class="text-right">TOTAL:</th>
+				            				<th class="text-right text-red">
+				            					<span id="total">$ 0.00</span>
+				            				</th>
+				            			</tr>
+				            		</tfoot>
+				            	</table>
+				            </div>
+			            </div>
+					</div>
+				</div>
+				<!--  -->
+				<div class="col-xs-12 col-sm-6 col-md-5">
+
+					<div class="box" id="infoCredito">
+			            <div class="box-header with-border">
+			              	<h3 class="box-title">Información del crédito</h3>
+			              	<div class="box-tools pull-right">
+
+		                        <a href="creditos" class="btn btn-flat btn-default font-weight-bold btn-sm">VER CRÉDITOS</a>
+		                        <a href="registrarCredito" class="btn btn-sm bg-orange btn-flat font-weight-bold text-uppercase"><i class="fas fa-barcode"></i> CRÉDITO</a>
+
+		                    </div>
+			            </div>
+
+			            <div class="box-body no-padding bg-black-active text-center" style="border-radius:0;">
+			            	<h1 id="totalTitulo" style="font-family: 'Russo One', sans-serif; color: yellow;">$ 0.00</h1>
+			            	<input type="hidden" id="id_credito" value="{{id_credito}}">
+                            <input type="hidden" id="totalNumero" value="{{totalNumero}}">
+			            </div>
+
+						<div class="box-body no-padding">
+							<div class="table-responsive">
+								<table class="table table-condensed" style="margin:0;"> 
+									<tbody> 
+                                        <tr> 
+											<th scope="row" style="width:30%;" class="text-right">Folio de crédito:</th> 
+											<td style="width:70%; vertical-align:middle;">
+                                                {{folio}}
+                                                {% if estado == 1 %}
+                                                    <span class="label bg-gray animated infinite flash" style="vertical-align:middle;">Abierto</span>
+                                                {% elseif estado == 2 %}
+                                                    <span class="label bg-aqua" style="vertical-align:middle;">Cerrado</span>
+                                                {% elseif estado == 3 %}
+                                                    <span class="label bg-green" style="vertical-align:middle;">Pagado</span>
+                                                {% endif %}
+                                            </td> 
+										</tr> 
+										<tr> 
+											<th scope="row" style="width:30%;" class="text-right">Fecha:</th> 
+											<td style="width:70%;">{{fecha}}</td> 
+										</tr> 
+										<tr> 
+											<th scope="row" style="width:30%;" class="text-right">Cliente:</th> 
+											<td style="width:70%;">{{cliente}}</td> 
+										</tr>
+                                        <tr> 
+											<th scope="row" style="width:50%;" class="text-right">Devolución permitida (#):</th> 
+											<td style="width:50%;">
+                                                <span class="text-black" id="limite">0</span>
+                                            </td> 
+										</tr>
+                                        <tr> 
+											<th scope="row" style="width:50%;" class="text-right">Devolución aplicada (%):</th> 
+											<td style="width:50%;">
+                                                <span class="text-black" id="porcentaje_devolucion">0</span>
+                                            </td> 
+										</tr>
+                                        <tr> 
+											<th scope="row" style="width:50%;" class="text-right">Venta real (%):</th> 
+											<td style="width:50%;">
+                                                <span class="text-black" id="porcentaje_venta">0</span>
+                                            </td> 
+										</tr>
+                                        <tr> 
+											<th scope="row" style="width:50%; vertical-align:middle;" class="text-right">Abonado:</th> 
+											<td style="width:50%; vertical-align:middle;">
+                                                <span class="badge bg-black" id="pagos"></span> 
+                                            </td> 
+										</tr>
+									</tbody> 
+								</table>
+							</div>
+						</div>
+                        <div class="box-footer clearfix whit-borde bg-gray no-padding text-center">
+			            	<h1 id="resta" style="font-family: 'Russo One', sans-serif; color: red;"></h1>
+			            </div>
+			        </div>
+
+					<div class="box collapsed-box" id="infoDevoluciones">
+						<div class="box-header with-border">
+			              	<h3 class="box-title">Cantidades solicitadas</h3>
+							<div class="box-tools pull-right">
+	                			
+								<button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Nota de salidas" id="descargarSalidas">
+									<i class="fas fa-file-alt"></i>
+	                			</button>
+	                			
+								<button type="button" class="btn btn-box-tool" data-widget="collapse">
+									<i class="fa fa-plus"></i>
+								</button>
+							</div>
+			            </div>
+						<div class="box-body">
+							<div class="table-responsive">
+
+								<table class="table table-codensed table-bordered" style="width:100%" id="tablaSalidas">
+
+									<thead class="bg-navy text-uppercase">
+										<tr>
+											<th><!-- Fecha sin formato --></th>
+											<th>Fecha</th>
+											<th>Descripción</th>
+											<th style="width:60px;" class="text-right">Cantidad</th>
+											<th style="width:70px;">Hora</th>
+										</tr>
+									</thead>
+
+									<tbody></tbody>
+
+									<tfoot>
+										<tr>
+											<th></th>
+											<th></th>
+											<th class="text-right">TOTAL</th>
+											<th class="text-right"></th>
+											<th></th>
+										</tr>
+									</tfoot>
+
+								</table>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="box collapsed-box" id="infoDevoluciones">
+						<div class="box-header with-border">
+			              	<h3 class="box-title">Devoluciones aplicadas</h3>
+							<div class="box-tools pull-right">
+
+								<button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Nota de devoluciones" id="descargarDevoluciones">
+									<i class="fas fa-file-alt"></i>
+	                			</button>
+								<button type="button" class="btn btn-box-tool" data-widget="collapse">
+									<i class="fa fa-plus"></i>
+								</button>
+							</div>
+			            </div>
+						<div class="box-body">
+							<div class="table-responsive">
+
+								<table class="table table-codensed table-bordered" style="width:100%" id="tablaDevoluciones">
+
+									<thead class="bg-navy text-uppercase">
+										<tr>
+											<th><!-- Fecha sin formato --></th>
+											<th>Fecha</th>
+											<th>Descripción</th>
+											<th style="width:60px;" class="text-right">Cantidad</th>
+											<th style="width:70px;">Hora</th>
+										</tr>
+									</thead>
+
+									<tbody></tbody>
+
+									<tfoot>
+										<tr>
+											<th></th>
+											<th></th>
+											<th class="text-right">TOTAL</th>
+											<th class="text-right"></th>
+											<th></th>
+										</tr>
+									</tfoot>
+
+								</table>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="box collapsed-box" id="infoPagos">
+						<div class="box-header with-border">
+			              	<h3 class="box-title">Abonos realizados</h3>
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Ticket de pagos" id="descargarPagos">
+									<i class="fas fa-receipt"></i>
+	                			</button>
+								<button type="button" class="btn btn-box-tool" data-widget="collapse">
+									<i class="fa fa-plus"></i>
+								</button>
+							</div>
+			            </div>
+						<div class="box-body">
+							<div class="table-responsive">
+
+								<table class="table table-codensed table-bordered" style="width:100%" id="tablaPagos">
+
+									<thead class="bg-navy text-uppercase">
+										<tr>
+											<th><!-- Fecha sin formato --></th>
+											<th>Fecha</th>
+											<th>Hora</th>
+											<th style="width:60px;" class="text-right">Monto</th>
+											<th>Médtodo pago</th>
+										</tr>
+									</thead>
+
+									<tbody></tbody>
+
+									<tfoot>
+										<tr>
+											<th></th>
+											<th></th>
+											<th class="text-right">TOTAL</th>
+											<th class="text-right"></th>
+											<th></th>
+										</tr>
+									</tfoot>
+
+								</table>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+	    </section>
+	    <!-- /.content -->
+
+
+        <!-- MODAL COBROS -->
+        <div id="modalCobros" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"><i class="fas fa-wallet"></i> Abonar a crédito <span id="folioCredito" style="font-weight:bold;"></span></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box-body">
+                            <form role="form" id="cobros_form">
+
+                                <div class="form-group">
+                                    <label>Método de pago:</label>
+                                    <select class="form-control input-sm" id="metodo_pago" name="metodo_pago">
+                                        <option value="efectivo" selected>Efectivo</option>
+                                        <option value="deposito">Depósito</option>
+                                        <option value="condonacion">Condonación</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fas fa-dollar-sign"></i></span>
+                                        <input type="text" class="form-control input-sm text-right" name="monto_abono" id="monto_abono" placeholder="Monto" autocomplete="off">
+                                    </div>
+                                </div>
+
+								<div class="form-group hidden" id="group_referencia">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fas fa-receipt"></i></span>
+                                        <input type="text" class="form-control input-sm" name="referencia" id="referencia" placeholder="Referencia" autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="form-group hidden" id="group_descripcion">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fas fa-pen-alt"></i>
+                                        </span>
+                                        <input type="text" class="form-control input-sm" name="descripcion" id="descripcion" placeholder="Descripción">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer text-right">
+                        <button type="button" class="btn bg-navy btn-sm" id="cobrar">Realizar abono</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+
+	</div>
+  	<!-- /.content-wrapper -->
+
+  	{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+<!-- DataTables -->
+  <script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/dataTables.bootstrap.js"></script>
+  <script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/js/dataTables.responsive.js"></script>
+
+{# InputMask #}
+	<script src="assets/plantilla/AdminLTE/plugins/input-mask/dist/jquery.inputmask.bundle.js"></script>
+
+    <script src="./assets/jscontrollers/creditos/editar.js"></script>
+{% endblock %}

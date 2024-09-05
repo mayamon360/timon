@@ -1,0 +1,310 @@
+<div class="box box-solid">
+
+	<!--=====================================
+  	DATOS COMERCIALES
+  	======================================-->
+  	
+  	<div class="box-header with-border">
+
+		<h3 class="box-title">INFORMACIÓN COMERCIAL</h3>
+
+		<div class="box-tools pull-right">
+		
+		</div>
+	
+	</div>
+
+	<div class="box-body">
+
+		<div class="row">
+
+			<div class="col-xs-12 col-sm-6 col-lg-4">
+				
+				<div class="form-group">
+					<label for="impuesto">Comisión</label>
+				    <div class="input-group">
+				      	<input type="text" class="form-control informacionComercialK" id="impuesto" placeholder="Impuesto" value="{{comercio.impuesto|number_format(2, '.', '')}}">
+				      	<div class="input-group-addon">
+				      		<i class="fas fa-percentage"></i>
+				      	</div>
+				    </div>
+				</div>
+
+			</div>
+
+			<div class="col-xs-12 col-sm-6 col-lg-4">
+				
+				<div class="form-group">
+					<label for="envioNacional">Envió nacional</label>
+				    <div class="input-group">
+				    	<div class="input-group-addon">
+				      		<i class="fas fa-dollar-sign"></i>
+				      	</div>
+				      	<input type="text" class="form-control informacionComercialK" id="envioNacional" placeholder="Envió nacional" value="{{comercio.envioNacional|number_format(2, '.', '')}}">
+				    </div>
+				</div>
+
+			</div>
+
+			<div class="col-xs-12 col-sm-6 col-lg-4">
+				
+				<div class="form-group">
+					<label for="envioInternacional">Envió internacional</label>
+				    <div class="input-group">
+				    	<div class="input-group-addon">
+				      		<i class="fas fa-dollar-sign"></i>
+				      	</div>
+				      	<input type="text" class="form-control informacionComercialK" id="envioInternacional" placeholder="Envió Internacional" value="{{comercio.envioInternacional|number_format(2, '.', '')}}">
+				    </div>
+				</div>
+
+			</div>
+
+			<div class="col-xs-12 col-sm-6 col-lg-4">
+				
+				<div class="form-group">
+					<label for="tasaMinimaNac">Tasa miníma nacional</label>
+				    <div class="input-group">
+				    	<div class="input-group-addon">
+				      		<i class="fas fa-dollar-sign"></i>
+				      	</div>
+				      	<input type="text" class="form-control informacionComercialK" id="tasaMinimaNac" placeholder="Tasa miníma nacional" value="{{comercio.tasaMinimaNac|number_format(2, '.', '')}}">
+				    </div>
+				</div>
+
+			</div>
+
+			<div class="col-xs-12 col-sm-6 col-lg-4">
+				
+				<div class="form-group">
+					<label for="tasaMinimaInt">Tasa miníma internacional</label>
+				    <div class="input-group">
+				    	<div class="input-group-addon">
+				      		<i class="fas fa-dollar-sign"></i>
+				      	</div>
+				      	<input type="text" class="form-control informacionComercialK" id="tasaMinimaInt" placeholder="Tasa miníma internacional" value="{{comercio.tasaMinimaInt|number_format(2, '.', '')}}">
+				    </div>
+				</div>
+
+			</div>
+
+			<div class="col-xs-12 col-sm-6 col-lg-4">
+				
+				<div class="form-group">
+					<label for="seleccionarPais">País</label>
+					<input type="hidden" id="codigoPais" value="{{comercio.pais}}">
+				    <div class="input-group">
+				    	<div class="input-group-addon">
+				      		<i class="fas fa-globe-americas" aria-hidden="true"></i>
+				      	</div>
+				      	<select class="form-control informacionComercialC" id="seleccionarPais" style="width: 100%;">
+				      	</select>
+				    </div>
+				</div>
+
+			</div>
+		
+		</div>
+ 			
+		<div class="panel panel-default">
+
+			<div class="panel-body">
+
+				<div class="row">
+
+					<div class="col-xs-12 col-md-6">
+
+						<div class="text-center">
+							<label>Paypal</label>
+						</div>
+
+						<hr>
+
+						<div class="form-group text-center">
+
+							{% if comercio.modoPaypal == "sandbox" %}
+
+								<label class="checkbox-inline">
+									
+									<input type="radio" class="informacionComercialR" value="sandbox" name="modoPaypal" checked> 
+									Sandbox
+
+								</label>
+
+								<label class="checkbox-inline">
+									
+									<input type="radio" class="informacionComercialR" value="live" name="modoPaypal"> 
+									Live
+
+								</label>
+
+							{% else %}
+
+								<label class="checkbox-inline">
+									
+									<input type="radio" class="informacionComercialR" value="sandbox" name="modoPaypal"> 
+									Sandbox
+
+								</label>
+
+								<label class="checkbox-inline">
+									
+									<input type="radio" class="informacionComercialR" value="live" name="modoPaypal" checked> 
+									Live
+
+								</label>
+
+							{% endif %}
+
+						</div>
+						
+						<label for="clientIdPaypal" style="font-weight:normal;">Client ID:</label>
+						<div class="input-group">
+
+							<div class="input-group-addon">
+
+					  			<i class="fa fa-id-card" aria-hidden="true"></i>
+
+					  		</div>
+				      		
+							<input type="text" class="form-control informacionComercialK" id="clientIdPaypal" value="{{comercio.clientIdPaypal}}">
+					    	
+					    </div>
+						<br>
+
+						<label for="secretPaypal" style="font-weight:normal;">Secret key:</label>
+						<div class="input-group">
+
+							<div class="input-group-addon">
+
+					  			<i class="fa fa-key" aria-hidden="true"></i>
+
+					  		</div>
+				      		
+							<input type="text" class="form-control informacionComercialK" id="secretPaypal" value="{{comercio.secretPaypal}}">
+					    	
+					    </div>
+
+					</div>
+
+					<div class="col-xs-12 col-md-6">
+
+						<div class="text-center">
+							<label>Payu</label>
+						</div>
+
+						<hr>
+
+						<div class="form-group text-center">
+
+							{% if comercio.modoPayulatam == "sandbox" %}
+
+								<label class="checkbox-inline">
+									
+									<input type="radio" class="informacionComercialR" value="sandbox" name="modoPayu" checked> 
+									Sandbox
+
+								</label>
+
+								<label class="checkbox-inline">
+									
+									<input type="radio" class="informacionComercialR" value="live" name="modoPayu"> 
+									Live
+
+								</label>
+
+							{% else %}
+
+								<label class="checkbox-inline">
+									
+									<input type="radio" class="informacionComercialR" value="sandbox" name="modoPayu"> 
+									Sandbox
+
+								</label>
+
+								<label class="checkbox-inline">
+									
+									<input type="radio" class="informacionComercialR" value="live" name="modoPayu" checked> 
+									Live
+
+								</label>
+
+							{% endif %}
+
+						</div>
+
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<label for="merchantId" style="font-weight:normal;">Merchant ID:</label>
+								<div class="input-group">
+
+									<div class="input-group-addon">
+
+							  			<i class="fa fa-id-card" aria-hidden="true"></i>
+
+							  		</div>
+						      		
+									<input type="text" class="form-control informacionComercialK" id="merchantId" value="{{comercio.merchantIdPayulatam}}">
+							    	
+							    </div>
+							</div>
+							<div class="col-xs-12 col-md-6">
+								<label for="accountId" style="font-weight:normal;">Account ID:</label>
+								<div class="input-group">
+
+									<div class="input-group-addon">
+
+							  			<i class="fa fa-id-card" aria-hidden="true"></i>
+
+							  		</div>
+						      		
+									<input type="text" class="form-control informacionComercialK" id="accountId" value="{{comercio.accountIdPayulatam}}">
+							    	
+							    </div>
+							</div>
+						</div>
+						<br>
+						
+						<label for="apiKey" style="font-weight:normal;">API Key:</label>
+						<div class="input-group">
+
+							<div class="input-group-addon">
+
+					  			<i class="fa fa-key" aria-hidden="true"></i>
+
+					  		</div>
+				      		
+							<input type="text" class="form-control informacionComercialK" id="apiKey" value="{{comercio.apiKeyPayulatam}}">
+					    	
+					    </div>
+						
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		
+	</div>
+
+	<div class="box-footer text-right">
+
+		<div class="form-inline">
+			
+			<div class="form-group">
+			    <div class="input-group">
+			      	<div class="input-group-addon">
+			      		<i class="fas fa-key prefix"></i>
+			      	</div>
+			      	<input type="password" class="form-control input-sm" id="pwdInformacion" placeholder="Contraseña" disabled>
+			    </div>
+			</div>
+
+			<button type="button" id="guardarInformacionComercial" class="btn btn-sm bg-navy" disabled>Actualizar informacion</button>
+
+		</div>
+    
+	</div>
+
+  </div>		

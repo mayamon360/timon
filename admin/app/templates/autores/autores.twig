@@ -1,0 +1,175 @@
+{% extends 'overall/layout' %}
+{% block titleSeccion %}
+    <title>Autores</title>
+{% endblock %}
+{% block appHeader %}
+<!-- DataTables -->
+<!-- <link rel="stylesheet" href="assets/plantilla/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/css/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/css/responsive.bootstrap.css"/>
+
+<!-- Bootstrap Tags Input https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/ -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/plugins/bootstrap-tagsinput-latest/bootstrap-tagsinput.css"/>
+
+<!-- Bootstrap Datetimepicker https://bootstrap-datepicker.readthedocs.io/en/latest/index.html -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/css/bootstrap-datepicker.css"/>
+{% endblock %} 
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+  {% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+  	    <!-- Main content -->
+  	    <section class="content">
+  	    	
+    		<div class="box">
+
+                <div class="box-header with-border">
+    				
+					<h3 class="box-title">{{datosModulo.modulo}}</h3>
+
+					<div class="box-tools pull-right">
+						
+						<a href="editoriales" class="btn btn-flat btn-sm btn-default text-uppercase font-weight-bold">Editoriales</a>
+						<a href="productos" class="btn btn-flat btn-sm btn-default text-uppercase font-weight-bold">Productos</a>
+						
+						<button type="button" class="btn btn-flat bg-blue btn-sm text-uppercase font-weight-bold agregarEditorial" style="margin-left:20px;" data-toggle="modal" data-target="#modalAgregar">
+
+							<i class="fas fa-plus"></i> Nuevo autor
+
+						</button>
+
+					</div>
+						
+    			</div>
+
+                <div class="box-body">
+    				
+    				<div class="table-responsive">
+
+    					<table class="table table-inverse table-bordered table-hover table-condensed" style="width:100%" id="tablaAutores">
+    						<thead>
+					            <tr class="bg-navy text-white font-weight-bold text-uppercase">
+					                <th style="width:30px;">ID</th>
+					                <th>Autor</th>
+						            <th>#Pctos.</th>
+					                <th>Oferta en línea</th>
+					                <th>Fin oferta</th>
+					                <th width="60px">Acciones</th>
+					            </tr>
+					        </thead>
+    					</table>
+
+    				</div>
+
+    			</div>
+
+            </div>
+
+            <!-- MODAL EDITAR -->
+    		<div id="modalEditar" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+        		<div class="modal-dialog">
+            		<div class="modal-content">
+              			<div class="modal-header">
+                			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  				<span aria-hidden="true">&times;</span>
+                  			</button>
+                			<h4 class="modal-title"><i class="fas fa-pencil-alt"></i> Editar autor</h4>
+              			</div>
+              			<div class="modal-body">
+              				<div class="box-body">
+                				<form role="form" id="editar_form" enctype="multipart/form-data">
+                                
+                                </form>
+                			</div>
+              			</div>
+              			<div class="modal-footer text-right">
+              				<button type="button" class="btn btn-flat bg-blue btn-sm text-uppercase font-weight-bold" id="editar">Guardar cambios</button>
+                			<button type="button" class="btn btn-flat btn-default btn-sm text-uppercase font-weight-bold" data-dismiss="modal">Cerrar</button>
+              			</div>
+            		</div>
+          		<!-- /.modal-content -->
+        		</div>
+        		<!-- /.modal-dialog -->
+      	    </div>
+      	    <!-- /.modal -->
+
+              <!-- MODAL AGREGAR -->
+            <div id="modalAgregar" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+        		<div class="modal-dialog">
+          		    <div class="modal-content">
+            			<div class="modal-header bg-blue">
+              			   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                			    <span aria-hidden="true">&times;</span>
+                			</button>
+              			    <h4 class="modal-title"><i class="fas fa-plus"></i> Agregar autor</h4>
+            			</div>
+            		    <div class="modal-body">
+              			    <div class="box-body">
+              				    <form role="form" id="agregar_form" enctype="multipart/form-data">
+                                    <input type="hidden" name="metodo" value="agregar">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                  					        <div class="form-group">
+                  						          <div class="input-group">
+                  							            <span class="input-group-addon text-red">
+                  								              <i class="fas fa-user-tie"></i>
+                  							            </span>
+                  							            <input type="text" class="form-control text-uppercase validarA" name="nombreA" placeholder="Autor" required>
+                  						          </div>
+                  					        </div>
+                                        </div>
+                                    </div>
+              				    </form>
+              			    </div>
+            			</div>
+            			<div class="modal-footer text-right">
+            				<button type="button" class="btn btn-flat bg-blue btn-sm text-uppercase font-weight-bold" id="enviar">Registrar autor</button>
+              			    <button type="button" class="btn btn-flat btn-default btn-sm text-uppercase font-weight-bold" data-dismiss="modal">Cerrar</button>
+            			</div>
+          		    </div>
+          		    <!-- /.modal-content -->
+        		</div>
+        		<!-- /.modal-dialog -->
+      	    </div>
+      	    <!-- /.modal -->
+
+  	    </section>
+  	    <!-- /.content -->
+
+    </div>
+    <!-- /.content-wrapper -->
+  	{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+<!-- DataTables -->
+	<!-- <script src="assets/plantilla/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script> 
+	<script src="assets/plantilla/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> -->
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/js/dataTables.responsive.js"></script>
+
+{# InputMask #}
+<script src="assets/plantilla/AdminLTE/plugins/input-mask/dist/jquery.inputmask.bundle.js"></script>
+
+<!-- Bootstrap Tags Input https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/ -->
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/plugins/bootstrap-tagsinput-latest/bootstrap-tagsinput.min.js"></script>
+
+<!-- Bootstrap Datetimepicker https://bootstrap-datepicker.readthedocs.io/en/latest/index.html -->
+  <script type="text/javascript" src="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+  <script type="text/javascript" src="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/locales/bootstrap-datepicker.es.min.js"></script>
+
+    <script src="./assets/jscontrollers/autores/autores.js"></script>
+{% endblock %}

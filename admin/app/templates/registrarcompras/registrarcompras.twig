@@ -1,0 +1,338 @@
+{# PLANTILLA REGISTRAR COMPRAS #}
+
+{% extends 'overall/layout' %}
+{% block titleSeccion %}
+    <title>Registrar entrada</title>
+{% endblock %}
+
+{% block appHeader %}
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/css/responsive.bootstrap.css"/>
+    {# Select2 #}
+    <link rel="stylesheet" href="assets/plantilla/AdminLTE/bower_components/select2/dist/css/select2.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
+    <style type="text/css">
+        table.dataTable tbody td{vertical-align: middle;}
+        #tablaProductosVer tbody tr:hover{cursor: default;}
+        input[type="search"]::-webkit-search-cancel-button{-webkit-appearance: searchfield-cancel-button;cursor:pointer;}
+        .cursor-pointer{cursor:pointer;}
+        table.dataTable span.highlight {background-color: #FFFF88;border-radius: 0.28571429rem;}
+        table.dataTable span.column_highlight {background-color: #ffcc99;border-radius: 0.28571429rem;}
+    </style>
+{% endblock %} 
+
+{% block appBody %}
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+  	{% include 'overall/sidebar' %}
+
+  	<div class="content-wrapper">
+
+	    <section class="content">
+
+            <div class="row">
+
+                {# CAJA BUSCADOR SUPERIOR #}
+                <div class="col-xs-12">
+
+                    {# .box #}
+                    <div class="box">
+
+                        {# .box-header #}
+                        <div class="box-header with-border">
+                            <h3 class="box-title font-weight-bold text-uppercase">Registrar entrada</h3>
+                            <div class="box-tools pull-right">
+                                <a href="caja" class="btn btn-default font-weight-bold btn-sm btn-flat">CAJA</a>
+                            	<a href="productos" class="btn btn-default font-weight-bold btn-sm btn-flat">PRODUCTOS</a>
+                                <a href="compras" class="btn btn-default font-weight-bold btn-sm btn-flat">VER ENTRADAS</a>
+                                <button data-toggle="modal" data-target="#modalConfirmarCompra" id="btnModalConfirmarCompra" class="btn bg-purple btn-sm font-weight-bold btn-flat hidden" style="margin-left:20px;">CONTINUAR <i class="fas fa-angle-double-right"></i></button>  
+                            </div>
+                        </div>
+                        {# .box-header #}
+
+                        {# .box-body #}
+                        <div class="box-body">
+
+                            {# .row #}
+                            <div class="row">
+                                
+                                {# FORMULARIO BASCAR #}
+
+                                <div class="col-xs-6">
+                                    <form id="buscador">
+                                        <div class="form-group" style="margin-bottom:0;">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control input-sm" id="busqueda" name="busqueda" placeholder="Buscar por código o nombre del producto" autocomplete='off'>
+                                                <span class="input-group-btn buscarLimpiar">
+                                                    <button type="button" class="btn btn-sm btn-flat btn-default" id="buscarProducto">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-flat btn-default hidden" id="limpiarB">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-xs-2">
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="modal" data-target="#modalProductos" id="btnModalProductos"><i class="fas fa-search-plus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-4 text-right">
+                                    <span class="badge bg-purple" style="vertical-align:middle; margin-right:10px;">EN ENTRADA:</span>
+                                    <span class="badge bg-black" style="vertical-align:middle;" id="totalCantSuperior">0</span>
+                                    <span class="badge bg-red" style="vertical-align:middle;" id="totalSuperior">0.00</span>
+                                    </div>
+
+                            </div>
+                            {# .row #}
+                            
+                        </div>
+                        {# .box-body #}
+
+                        <div id="diProcesando" class="hidden" style="vertical-align:middle;">
+                            <p class="text-center" style="margin:0; padding:10px 0px 20px 0px;">Procesando, por favor espere...</p>
+                        </div>
+                        <div class="box-body no-padding divResultadosBusquedaC hidden">
+                            <div class="table-responsive table-hover tableFixHead">
+                                <table class="table table-bordered table-hover resultadosBusquedaC">
+                                    <tbody><div class="loader hidden"></div></tbody>
+                                </table>
+                             </div>
+                        </div>
+
+                    </div>
+                    {# .box #}
+
+                </div>
+                {# CAJA BUSCADOR SUPERIOR #}
+
+                {# PRODUCTOS EN LA LISTA #}
+                <div class="col-xs-12">
+
+                    {# .box #}
+                    <div class="box" id="resumenCompra">
+
+                        {# .box-header #}
+                        <div class="box-header with-border">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <h3 class="box-title" style="vertical-align:middle;">Productos en lista de entrada</h3>
+                                </div>
+                                <div class="col-xs-7 text-right">
+                                    <div class="divLimpiarListaCompra hidden">
+                                        <button type="button" class="btn btn-default btn-flat btn-sm limpiarListaCompra" data-toggle="tooltip" title="Vaciar lista">
+                                            <i class="fas fa-trash-alt text-red"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {# .box-header #}
+                        
+                        {# .box-body #}
+                        <div class="box-body no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <thead class="bg-navy text-uppercase">
+                                        <tr>
+                                            <th style="width:50px;" class="text-center"></th>
+                                            <th style="width:120px; min-width:100px;" class="text-center">Cantidad</th>
+                                            <th style="width:500px;">Descripción</th>
+                                            <th style="width:135px; min-width:135px;" class="text-center"><span class="badge bg-grey">P. compra</span></th>
+                                            <th style="width:135px; min-width:135px;" class="text-center"><span class="badge bg-blue">P. venta</span></th>
+                                            
+                                            <th style="width:100px; min-width:100px;" class="text-right">Importe</th>
+                                            <th style="width:32.5px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listaProductosCompra"></tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th class="text-center" id="sumaCantidad"></th>
+                                            <th colspan="3" class="text-right">TOTAL:</th>
+                                            <th class="text-right text-red" style="font-weight:bold;" id="total"></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        {# .box-body #}
+
+                    </div>
+                    {# .box #}
+
+                </div>
+                {# PRODUCTOS EN LA LISTA #}
+
+                {# MODAL INFORMACIÓN DE LA ENTRADA #}
+                <div id="modalConfirmarCompra" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            {# .modal-header #}
+                            <div class="modal-header bg-black-active text-center">
+                                <h1 id="totalTitulo" style="font-family: 'Russo One', sans-serif; color:#FFFFFF; margin:0; padding: 0px;">0.00</h1>
+                                <input type="hidden" id="totalInput" value="">
+                            </div>
+                            {# .modal-header #}
+
+                            {# .box-body #}
+                            <div class="box-body">
+
+                                <div id="infoCompra">
+
+                                    <div class="row">
+                                        
+                                        <div class="col-xs-12 col-sm-6">
+                                            <p class="text-uppercase font-weight-bold"><small>Proveedor o acción:</small></p>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fas fa-truck"></i></span>
+                                                    <select class="form-control seleccionar input-sm" name="proveedor" id="seleccionar_proveedor" style="width: 100%; max-width:100%;" lang="es" data-placeholder="Proveedor o acción" data-allow-clear="true"></select>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-sm btn-flat btn-default btn-block agregarProveedor" data-toggle="modal" data-target="#modalAgregar"><i class="fas fa-plus"></i></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="col-xs-12 col-sm-6">
+                                            <p class="text-uppercase font-weight-bold"><small>Referencia:</small></p>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fas fa-file-invoice"></i></span>
+                                                    <input type="text" class="form-control input-sm" placeholder="Referencia" id="factura" value="{{factura}}">
+                                                </div>
+                                            </div>
+                                        </div>                          
+
+                                        <div class="divConfirmarCompra hidden">
+                                            <div class="col-xs-4">
+                                                <button type="button" class="btn btn-sm btn-block bg-blue text-uppercase btn-flat font-weight-bold" id="consignacion">entrada de Consignación</button>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <button type="button" class="btn btn-sm btn-block bg-navy text-uppercase btn-flat font-weight-bold" id="ajuste">Ajuste de inventario (sumar)</button>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <button type="button" class="btn btn-sm btn-block bg-blue text-uppercase btn-flat font-weight-bold" id="compra"><i class="fas fa-check"></i> Confirmar Compra</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                            
+                                </div>
+
+                            </div>
+                            {# .box-body #}
+
+                            {# .modal-footer#}
+                            <div class="modal-footer text-right">
+                                <button type="button" class="btn btn-default btn-sm text-uppercase btn-flat font-weight-bold btnCerrar" data-dismiss="modal">Cerrar</button>
+                            </div>
+                            {# .modal-footer #}
+
+                        </div>
+                        {# .modal-content #}
+                    </div>
+                    {# .modal-dialog #}
+                </div>
+				{# MODAL INFORMACIÓN DE LA ENTRADA #}
+
+                {# MODAL CARGAR PRODUCTOS #}
+                <div id="modalProductos" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+
+                            {# .modal-header #}
+                            <div class="modal-header">
+                            	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Productos</h4>
+                            </div>
+                            {# .modal-header #}
+
+                            {# .box-body #}
+                            <div class="box-body">
+					            <div class="table-responsive">
+                                    <table class="table table-condensed table-striped table-hover" style="width:100%" id="tablaProductosVer">
+                                        <thead class="bg-navy text-uppercase">
+                                            <th>CÓDIGO</th>
+                                            <th>ID</th>
+                                            <th>PRODUCTO</th>
+                                            <th>AUTOR</th>
+                                            <th>EDITORIAL</th>
+                                            <th><span class="badge bg-grey">P. COMPRA</span></th>
+                                            <th><span class="badge bg-blue">P. VENTA</span></th>
+                                            <th>STOCK</th>
+                                            <th></th>
+                                        </thead>
+                                        <tbody></tdoby>
+                                        <tfoot class="bg-navy text-uppercase">
+                                            <th>CÓDIGO</th>
+                                            <th>ID</th>
+                                            <th>PRODUCTO</th>
+                                            <th>AUTOR</th>
+                                            <th>EDITORIAL</th>
+                                            <th><span class="badge bg-grey">P. COMPRA</span></th>
+                                            <th><span class="badge bg-blue">P. VENTA</span></th>
+                                            <th>STOCK</th>
+                                            <th></th>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            {# .box-body #}
+
+                            {# .modal-footer #}
+                            <div class="modal-footer text-right">
+                              <button type="button" class="btn btn-default btn-sm text-uppercase btn-flat font-weight-bold btnCerrar" data-dismiss="modal">Cerrar</button>
+                            </div>
+                            {# .modal-footer #}
+
+                        </div>
+                    </div>
+                </div>
+                {# MODAL CARGAR PRODUCTOS #}
+
+            </div>
+
+            {% include 'proveedores/agregar' %}	 
+
+	    </section>
+	    {# section .content #}
+
+	</div>
+  	{# content-wrapper #}
+
+  	{% include 'overall/footer' %}
+
+</div>
+{# .wrapper #}
+
+{% endblock %}
+
+{% block appFooter %}
+    <!-- DataTables -->
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/js/dataTables.responsive.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.20/filtering/type-based/accent-neutralise.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.20/features/searchHighlight/dataTables.searchHighlight.min.js"></script>
+	<script type="text/javascript" src="https://bartaz.github.io/sandbox.js/jquery.highlight.js"></script>
+    {# InputMask #}
+    <script src="assets/plantilla/AdminLTE/plugins/input-mask/dist/jquery.inputmask.bundle.js"></script>
+    {# Select2  #}
+    <script src="assets/plantilla/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+    {# Libreria español #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>  
+    <script src="./assets/jscontrollers/registrarcompras/registrarcompras.js"></script>
+{% endblock %}
+
+{# PLANTILLA REGISTRAR COMPRAS #}

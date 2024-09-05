@@ -1,0 +1,37 @@
+<div class="col-xs-12">
+
+	<div class="box box-default" id="grafico-compras">
+
+		<div class="box-header with-border">
+
+    		<h3 class="box-title">Total en compras <span id="total_compras"></span></h3>
+
+    		<div class="box-tools pull-right">
+    		
+    			<a href="compras" class="btn btn-xs btn-flat btn-link">ADMINISTRAR ENTRADAS</a>
+    			<a class="btn btn-xs btn-flat btn-success" id="descargar_reporte"><i class="fas fa-file-excel"></i> DESCARGAR REGISTRO DE ENTRADAS</a>
+    			
+    			<button type="button" class="btn btn-xs btn-flat btn-default" id="daterange-btn">
+	                    <span>
+	                        <i class="fa fa-calendar"></i> Mostrando todo
+	                    </span>
+	                    <i class="fa fa-caret-down"></i>
+	                </button>
+	                <i class="fas fa-times btn btn-xs hidden clearDateRange"></i>
+    		</div>
+
+		</div>
+
+		<div class="box-body border-radius-none no-padding">
+			<div style="overflow: hidden; overflow-x:auto; padding:0; margin:0; max-width:100%;">
+				<div id="curve_chart" style="height: 260px; padding:0; margin:0; min-width:540px; max-width:1820px;"></div>
+			</div>
+		</div>
+
+		<div class="overlay">
+          	<i class="fa fa-refresh fa-spin"></i>
+        </div>
+		
+	</div>
+
+</div>

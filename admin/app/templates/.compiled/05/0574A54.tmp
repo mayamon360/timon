@@ -1,0 +1,662 @@
+<?php
+
+/* slider/slider.twig */
+class __TwigTemplate_3d52a9eb7435fd91b77e23532b5f9a5357d7c73556eb0fed122f87219b533215 extends Twig_Template
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        // line 1
+        $this->parent = $this->loadTemplate("overall/layout", "slider/slider.twig", 1);
+        $this->blocks = array(
+            'appHeader' => array($this, 'block_appHeader'),
+            'appBody' => array($this, 'block_appBody'),
+            'appFooter' => array($this, 'block_appFooter'),
+            'scripts' => array($this, 'block_scripts'),
+        );
+    }
+
+    protected function doGetParent(array $context)
+    {
+        return "overall/layout";
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 3
+    public function block_appHeader($context, array $blocks = array())
+    {
+        // line 4
+        echo "<link href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900\" rel=\"stylesheet\">
+<link rel=\"stylesheet\" href=\"assets/plantilla/vistas/css/carousel.css\">
+
+";
+    }
+
+    // line 9
+    public function block_appBody($context, array $blocks = array())
+    {
+        // line 10
+        echo "
+<!-- Site wrapper -->
+<div class=\"wrapper\">
+
+\t";
+        // line 14
+        $this->loadTemplate("overall/header", "slider/slider.twig", 14)->display($context);
+        // line 15
+        echo "
+  \t";
+        // line 16
+        $this->loadTemplate("overall/sidebar", "slider/slider.twig", 16)->display($context);
+        // line 17
+        echo "
+  \t<!-- Content Wrapper. Contains page content -->
+  \t<div class=\"content-wrapper\">
+
+  \t\t<!-- Content Header (Page header) -->
+    \t<section class=\"content-header\">
+
+\t      \t<h1>
+\t        \tImpacto visual
+\t        \t<small>Slider</small>
+\t      \t</h1>
+\t      \t<ol class=\"breadcrumb\">
+\t      \t\t<li><a href=\"./\"><i class=\"fas fa-tachometer-alt\"></i> Panel de control</a></li>
+\t        \t<li class=\"active\"><i class=\"fa fa-picture-o\"></i> Slider</li>
+\t      \t</ol>
+
+\t    </section>
+
+\t    <!-- Main content -->
+\t    <section class=\"content\">
+
+\t    \t<div class=\"row\">
+
+\t\t\t  \t<div class=\"col-xs-12\">
+
+\t\t\t  \t\t<!--=====================================
+\t\t\t\t  \tSLIDER
+\t\t\t\t  \t======================================-->
+\t\t\t  \t\t
+\t\t\t\t\t<div class=\"box box-default\">
+
+\t\t\t\t\t\t<div class=\"box-header with-border\">
+
+\t\t\t\t\t\t\t<h3 class=\"box-title\">LISTA DE SLIDERS</h3>
+
+\t\t\t\t\t\t\t<div class=\"box-tools pull-right\">
+\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-success btn-sm btn-flat agregarSlider\">
+
+\t\t\t\t\t\t\t\t\t<i class=\"fas fa-plus-square\"></i> Agregar slide
+
+\t\t\t\t\t\t\t\t</button>
+
+\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t
+\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t<div class=\"box-body\" style=\"padding:0;\">
+
+\t\t\t\t\t\t\t<ul class=\"todo-list\">
+
+\t\t\t\t\t\t\t\t";
+        // line 68
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(($context["sliders"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["sl"]) {
+            // line 69
+            echo "
+\t\t\t\t\t\t\t\t\t<li class=\"itemSlide\" id=\"";
+            // line 70
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\" style=\"padding:0; border:none;\">
+
+\t\t\t\t\t\t          \t\t<div class=\"panel-group\" id=\"accordion";
+            // line 72
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\" role=\"tablist\" aria-multiselectable=\"true\" style=\"margin:0;\"> ";
+            // line 73
+            echo "
+\t\t\t\t\t\t\t\t\t\t\t";
+            // line 74
+            $context["estiloTitulo"] = $this->env->getExtension('Ocrend\Kernel\Helpers\Functions')->twig_json_decode(twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "estiloTitulo", array()));
+            // line 75
+            echo "\t\t\t\t\t\t\t\t\t\t\t";
+            $context["estiloSubtitulo"] = $this->env->getExtension('Ocrend\Kernel\Helpers\Functions')->twig_json_decode(twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "estiloSubtitulo", array()));
+            // line 76
+            echo "\t\t\t\t\t\t\t\t\t\t\t";
+            $context["estiloDescripcion"] = $this->env->getExtension('Ocrend\Kernel\Helpers\Functions')->twig_json_decode(twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "estiloDescripcion", array()));
+            // line 77
+            echo "\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t\t\t<div class=\"panel box box-default\" style=\"box-shadow:none; border-top:none;\"> ";
+            // line 79
+            echo "
+\t\t\t\t\t\t\t\t\t\t      \t<div class=\"box-header with-border\" role=\"tab\" id=\"heading";
+            // line 80
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"handle\" style=\"padding-left:5px; padding-right:5px;\">
+\t\t\t\t\t\t\t\t\t\t      \t\t\t<i class=\"fas fa-arrows-alt-v\"></i>
+\t\t\t\t\t\t\t\t\t\t      \t\t</span>
+
+\t\t\t\t\t\t\t\t\t\t        \t<h4 class=\"box-title title";
+            // line 86
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\">
+
+\t\t\t\t\t\t\t\t\t\t        \t\t<small>
+
+\t\t\t\t\t\t\t\t\t\t              \t\t<a role=\"button\" data-toggle=\"collapse\" data-parent=\"#accordion";
+            // line 90
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\" href=\"#slider";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">
+
+\t\t\t\t\t\t\t\t\t\t                \t";
+            // line 92
+            if ((twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "nombre", array()) != "")) {
+                // line 93
+                echo "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "nombre", array()), "html", null, true);
+                echo "
+\t\t\t\t\t\t\t\t\t\t            \t\t";
+            } else {
+                // line 95
+                echo "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tSlider-";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+                echo "
+\t\t\t\t\t\t\t\t\t\t            \t\t";
+            }
+            // line 97
+            echo "
+\t\t\t\t\t\t\t\t\t\t              \t\t</a>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+            // line 100
+            if ((twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "estatus", array()) == 0)) {
+                // line 101
+                echo "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<i class=\"fas fa-exclamation-circle blue-text\" data-container=\"body\" data-toggle=\"popover\" data-placement=\"auto\" data-trigger=\"hover click\" title=\"¡ATENCIÓN!\" data-content=\"Es necesario editar el slider para que se pueda mostrar en la página web.\" style=\"cursor:pointer;\"></i>
+\t\t\t\t\t\t\t\t\t\t          \t\t\t";
+            }
+            // line 103
+            echo "
+\t\t\t\t\t\t\t\t\t\t          \t\t</small>
+
+\t\t\t\t\t\t\t\t\t\t        \t</h4>
+
+\t\t\t\t\t\t\t\t\t\t        \t<div class=\"btn-group pull-right\">
+\t\t\t\t\t\t\t\t\t\t        \t\t<button class=\"btn btn-sm btn-primary btn-flat actualizarSlider\" id=\"btnActualizar";
+            // line 109
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\" idSlider=\"";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\" disabled><i class=\"fas fa-save\"></i></button>
+\t\t\t\t\t\t\t\t\t\t        \t\t<button class=\"btn btn-sm btn-danger btn-flat eliminarSlider\" style=\"margin-left:35px;\"><i class=\"fas fa-trash-alt\"></i></button>
+\t\t\t\t\t\t\t\t\t\t        \t</div>
+
+\t\t\t\t\t\t\t\t\t\t      \t</div>
+
+\t\t\t\t\t\t\t\t\t\t      \t<div id=\"slider";
+            // line 115
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"heading";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\" style=\"overflow-x: hidden;\">
+
+\t\t\t\t\t\t\t\t\t\t      \t\t<div class=\"panel-body\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"row\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"col-xs-12 col-md-4\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<form role=\"form\" id=\"sliderForm";
+            // line 123
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"metodo\" value=\"actualizarSlider\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"";
+            // line 126
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"form-group\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<label for=\"nombreSlide";
+            // line 128
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\">Nombre del slide:</label>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"nombreSlide\" id=\"nombreSlide";
+            // line 129
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\" class=\"form-control nombreSlide\" key=\"";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "id", array()), "html", null, true);
+            echo "\" placeholder=\"Nombre del slide\" value=\"";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "nombre", array()), "html", null, true);
+            echo "\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</form>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"carousel\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"carousel-inner\" role=\"listbox\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"carousel-item ";
+            // line 142
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "tipoSlide", array()), "html", null, true);
+            echo "\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a ";
+            // line 144
+            echo twig_escape_filter($this->env, (((twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "vinculo", array()) != "")) ? (("href=" . twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "vinculo", array()))) : ("style=cursor:default")), "html", null, true);
+            echo ">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"view ";
+            // line 146
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "colorMascara", array()), "html", null, true);
+            echo "\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"assets/plantilla/";
+            // line 147
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "fondo", array()), "html", null, true);
+            echo "\" style=\"width:100%; height:auto;\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"mask ";
+            // line 148
+            echo "\"></div>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t<div class=\"carousel-caption\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t\t<div class=\"";
+            // line 153
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "alineacionContenido", array()), "html", null, true);
+            echo " ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "alineacionTexto", array()), "html", null, true);
+            echo "\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        \t\t<h1 class=\"h1-responsive animated ";
+            // line 154
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "claseTitulo", array()), "html", null, true);
+            echo "\"><span style=\"background-color: ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["estiloTitulo"] ?? null), "background", array()), "html", null, true);
+            echo " !important; color: ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["estiloTitulo"] ?? null), "color", array()), "html", null, true);
+            echo " !important;\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "titulo", array()), "html", null, true);
+            echo "</span></h1>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        \t\t<h2 class=\"h3-responsive animated ";
+            // line 155
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "claseSubtitulo", array()), "html", null, true);
+            echo "\"><span style=\"background-color: ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["estiloSubtitulo"] ?? null), "background", array()), "html", null, true);
+            echo " !important; color: ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["estiloSubtitulo"] ?? null), "color", array()), "html", null, true);
+            echo " !important;\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "subtitulo", array()), "html", null, true);
+            echo "</span></h2>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        \t\t<p class=\"animated ";
+            // line 156
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "claseDescripcion", array()), "html", null, true);
+            echo "\"><span style=\"background-color: ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["estiloDescripcion"] ?? null), "background", array()), "html", null, true);
+            echo " !important; color !important: ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["estiloDescripcion"] ?? null), "color", array()), "html", null, true);
+            echo " !important;\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "descripcion", array()), "html", null, true);
+            echo "</span></p>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        \t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t";
+            // line 161
+            if ((twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "imagen", array()) != "")) {
+                // line 162
+                echo "
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t<div class=\"carousel-img\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t\t
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t\t<div class=\"";
+                // line 165
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "alineacionImagen", array()), "html", null, true);
+                echo "\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t\t\t<img class=\"animated ";
+                // line 166
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "claseImagen", array()), "html", null, true);
+                echo " ";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "direccionImagen", array()), "html", null, true);
+                echo "\" width=\"";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "anchoImagen", array()), "html", null, true);
+                echo "%\" src=\"assets/plantilla/";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), $context["sl"], "imagen", array()), "html", null, true);
+                echo "\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t";
+            }
+            // line 172
+            echo "
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  \t</a>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    </div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t      \t</div>
+
+\t\t\t\t\t\t\t\t\t\t    </div> ";
+            // line 186
+            echo "
+\t\t\t\t\t\t\t\t\t\t</div> ";
+            // line 188
+            echo "
+\t\t\t\t\t            \t</li> 
+
+\t\t\t\t\t\t\t\t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['sl'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 192
+        echo "
+\t\t\t\t\t\t\t</ul>
+
+\t\t\t\t\t\t</div>
+
+\t\t\t\t\t</div>
+
+\t\t\t  \t</div>
+
+\t    \t</div>
+
+\t    </section>
+\t    <!-- /.content -->
+
+\t</div>
+  \t<!-- /.content-wrapper -->
+
+  \t";
+        // line 209
+        $this->loadTemplate("overall/footer", "slider/slider.twig", 209)->display($context);
+        // line 210
+        echo "
+</div>
+<!-- ./wrapper -->
+
+";
+    }
+
+    // line 217
+    public function block_appFooter($context, array $blocks = array())
+    {
+        // line 219
+        echo "    <script src=\"assets/plantilla/AdminLTE/bower_components/jquery-ui/jquery-ui.min.js\"></script>
+";
+    }
+
+    // line 223
+    public function block_scripts($context, array $blocks = array())
+    {
+        // line 224
+        echo "    <script src=\"./assets/jscontrollers/slider/slider.js\"></script>
+";
+    }
+
+    public function getTemplateName()
+    {
+        return "slider/slider.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  415 => 224,  412 => 223,  407 => 219,  404 => 217,  396 => 210,  394 => 209,  375 => 192,  366 => 188,  363 => 186,  348 => 172,  333 => 166,  329 => 165,  324 => 162,  322 => 161,  308 => 156,  298 => 155,  288 => 154,  282 => 153,  275 => 148,  271 => 147,  267 => 146,  262 => 144,  257 => 142,  237 => 129,  233 => 128,  228 => 126,  222 => 123,  209 => 115,  198 => 109,  190 => 103,  186 => 101,  184 => 100,  179 => 97,  173 => 95,  167 => 93,  165 => 92,  158 => 90,  151 => 86,  142 => 80,  139 => 79,  136 => 77,  133 => 76,  130 => 75,  128 => 74,  125 => 73,  122 => 72,  117 => 70,  114 => 69,  110 => 68,  57 => 17,  55 => 16,  52 => 15,  50 => 14,  44 => 10,  41 => 9,  34 => 4,  31 => 3,  11 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Twig_Source("{% extends 'overall/layout' %}
+
+{% block appHeader %}
+<link href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900\" rel=\"stylesheet\">
+<link rel=\"stylesheet\" href=\"assets/plantilla/vistas/css/carousel.css\">
+
+{% endblock %}
+
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class=\"wrapper\">
+
+\t{% include 'overall/header' %}
+
+  \t{% include 'overall/sidebar' %}
+
+  \t<!-- Content Wrapper. Contains page content -->
+  \t<div class=\"content-wrapper\">
+
+  \t\t<!-- Content Header (Page header) -->
+    \t<section class=\"content-header\">
+
+\t      \t<h1>
+\t        \tImpacto visual
+\t        \t<small>Slider</small>
+\t      \t</h1>
+\t      \t<ol class=\"breadcrumb\">
+\t      \t\t<li><a href=\"./\"><i class=\"fas fa-tachometer-alt\"></i> Panel de control</a></li>
+\t        \t<li class=\"active\"><i class=\"fa fa-picture-o\"></i> Slider</li>
+\t      \t</ol>
+
+\t    </section>
+
+\t    <!-- Main content -->
+\t    <section class=\"content\">
+
+\t    \t<div class=\"row\">
+
+\t\t\t  \t<div class=\"col-xs-12\">
+
+\t\t\t  \t\t<!--=====================================
+\t\t\t\t  \tSLIDER
+\t\t\t\t  \t======================================-->
+\t\t\t  \t\t
+\t\t\t\t\t<div class=\"box box-default\">
+
+\t\t\t\t\t\t<div class=\"box-header with-border\">
+
+\t\t\t\t\t\t\t<h3 class=\"box-title\">LISTA DE SLIDERS</h3>
+
+\t\t\t\t\t\t\t<div class=\"box-tools pull-right\">
+\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-success btn-sm btn-flat agregarSlider\">
+
+\t\t\t\t\t\t\t\t\t<i class=\"fas fa-plus-square\"></i> Agregar slide
+
+\t\t\t\t\t\t\t\t</button>
+
+\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t
+\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t<div class=\"box-body\" style=\"padding:0;\">
+
+\t\t\t\t\t\t\t<ul class=\"todo-list\">
+
+\t\t\t\t\t\t\t\t{% for sl in sliders %}
+
+\t\t\t\t\t\t\t\t\t<li class=\"itemSlide\" id=\"{{sl.id}}\" style=\"padding:0; border:none;\">
+
+\t\t\t\t\t\t          \t\t<div class=\"panel-group\" id=\"accordion{{sl.id}}\" role=\"tablist\" aria-multiselectable=\"true\" style=\"margin:0;\"> {# box-group #}
+
+\t\t\t\t\t\t\t\t\t\t\t{% set estiloTitulo = twig_json_decode(sl.estiloTitulo) %}
+\t\t\t\t\t\t\t\t\t\t\t{% set estiloSubtitulo = twig_json_decode(sl.estiloSubtitulo) %}
+\t\t\t\t\t\t\t\t\t\t\t{% set estiloDescripcion = twig_json_decode(sl.estiloDescripcion) %}
+\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t\t\t<div class=\"panel box box-default\" style=\"box-shadow:none; border-top:none;\"> {# panel #}
+
+\t\t\t\t\t\t\t\t\t\t      \t<div class=\"box-header with-border\" role=\"tab\" id=\"heading{{sl.id}}\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"handle\" style=\"padding-left:5px; padding-right:5px;\">
+\t\t\t\t\t\t\t\t\t\t      \t\t\t<i class=\"fas fa-arrows-alt-v\"></i>
+\t\t\t\t\t\t\t\t\t\t      \t\t</span>
+
+\t\t\t\t\t\t\t\t\t\t        \t<h4 class=\"box-title title{{sl.id}}\">
+
+\t\t\t\t\t\t\t\t\t\t        \t\t<small>
+
+\t\t\t\t\t\t\t\t\t\t              \t\t<a role=\"button\" data-toggle=\"collapse\" data-parent=\"#accordion{{sl.id}}\" href=\"#slider{{sl.id}}\" aria-expanded=\"true\" aria-controls=\"collapseOne\">
+
+\t\t\t\t\t\t\t\t\t\t                \t{% if sl.nombre != \"\" %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{{sl.nombre}}
+\t\t\t\t\t\t\t\t\t\t            \t\t{% else %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tSlider-{{sl.id}}
+\t\t\t\t\t\t\t\t\t\t            \t\t{% endif %}
+
+\t\t\t\t\t\t\t\t\t\t              \t\t</a>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{% if sl.estatus == 0 %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<i class=\"fas fa-exclamation-circle blue-text\" data-container=\"body\" data-toggle=\"popover\" data-placement=\"auto\" data-trigger=\"hover click\" title=\"¡ATENCIÓN!\" data-content=\"Es necesario editar el slider para que se pueda mostrar en la página web.\" style=\"cursor:pointer;\"></i>
+\t\t\t\t\t\t\t\t\t\t          \t\t\t{% endif %}
+
+\t\t\t\t\t\t\t\t\t\t          \t\t</small>
+
+\t\t\t\t\t\t\t\t\t\t        \t</h4>
+
+\t\t\t\t\t\t\t\t\t\t        \t<div class=\"btn-group pull-right\">
+\t\t\t\t\t\t\t\t\t\t        \t\t<button class=\"btn btn-sm btn-primary btn-flat actualizarSlider\" id=\"btnActualizar{{sl.id}}\" idSlider=\"{{sl.id}}\" disabled><i class=\"fas fa-save\"></i></button>
+\t\t\t\t\t\t\t\t\t\t        \t\t<button class=\"btn btn-sm btn-danger btn-flat eliminarSlider\" style=\"margin-left:35px;\"><i class=\"fas fa-trash-alt\"></i></button>
+\t\t\t\t\t\t\t\t\t\t        \t</div>
+
+\t\t\t\t\t\t\t\t\t\t      \t</div>
+
+\t\t\t\t\t\t\t\t\t\t      \t<div id=\"slider{{sl.id}}\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"heading{{sl.id}}\" style=\"overflow-x: hidden;\">
+
+\t\t\t\t\t\t\t\t\t\t      \t\t<div class=\"panel-body\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"row\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"col-xs-12 col-md-4\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<form role=\"form\" id=\"sliderForm{{sl.id}}\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"metodo\" value=\"actualizarSlider\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"{{sl.id}}\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"form-group\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<label for=\"nombreSlide{{sl.id}}\">Nombre del slide:</label>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"nombreSlide\" id=\"nombreSlide{{sl.id}}\" class=\"form-control nombreSlide\" key=\"{{sl.id}}\" placeholder=\"Nombre del slide\" value=\"{{sl.nombre}}\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</form>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"carousel\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"carousel-inner\" role=\"listbox\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"carousel-item {{sl.tipoSlide}}\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a {{ (sl.vinculo != \"\") ? \"href=\" ~ sl.vinculo  : \"style=cursor:default\" }}>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"view {{sl.colorMascara}}\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"assets/plantilla/{{sl.fondo}}\" style=\"width:100%; height:auto;\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"mask {# pattern-6 #}\"></div>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t<div class=\"carousel-caption\">
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t\t<div class=\"{{sl.alineacionContenido}} {{sl.alineacionTexto}}\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        \t\t<h1 class=\"h1-responsive animated {{sl.claseTitulo}}\"><span style=\"background-color: {{estiloTitulo.background}} !important; color: {{estiloTitulo.color}} !important;\">{{sl.titulo}}</span></h1>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        \t\t<h2 class=\"h3-responsive animated {{sl.claseSubtitulo}}\"><span style=\"background-color: {{estiloSubtitulo.background}} !important; color: {{estiloSubtitulo.color}} !important;\">{{sl.subtitulo}}</span></h2>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        \t\t<p class=\"animated {{sl.claseDescripcion}}\"><span style=\"background-color: {{estiloDescripcion.background}} !important; color !important: {{estiloDescripcion.color}} !important;\">{{sl.descripcion}}</span></p>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t        \t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t{% if sl.imagen != \"\" %}
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t<div class=\"carousel-img\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t\t
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t\t<div class=\"{{sl.alineacionImagen}}\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t\t\t<img class=\"animated {{sl.claseImagen}} {{sl.direccionImagen}}\" width=\"{{sl.anchoImagen}}%\" src=\"assets/plantilla/{{sl.imagen}}\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t      \t{% endif %}
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  \t</a>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    </div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t      \t</div>
+
+\t\t\t\t\t\t\t\t\t\t    </div> {# panel #}
+
+\t\t\t\t\t\t\t\t\t\t</div> {# box-group #}
+
+\t\t\t\t\t            \t</li> 
+
+\t\t\t\t\t\t\t\t{% endfor %}
+
+\t\t\t\t\t\t\t</ul>
+
+\t\t\t\t\t\t</div>
+
+\t\t\t\t\t</div>
+
+\t\t\t  \t</div>
+
+\t    \t</div>
+
+\t    </section>
+\t    <!-- /.content -->
+
+\t</div>
+  \t<!-- /.content-wrapper -->
+
+  \t{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+
+{% block appFooter %}
+{# jQuery UI #}
+    <script src=\"assets/plantilla/AdminLTE/bower_components/jquery-ui/jquery-ui.min.js\"></script>
+{% endblock %}
+
+
+{% block scripts %}
+    <script src=\"./assets/jscontrollers/slider/slider.js\"></script>
+{% endblock %}", "slider/slider.twig", "C:\\xampp\\htdocs\\ocrend\\app\\templates\\slider\\slider.twig");
+    }
+}

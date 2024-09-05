@@ -1,0 +1,56 @@
+# Configuración de la base de datos
+database:
+  default_driver: mysql
+  drivers:
+    mysql: 
+      host: localhost
+      user: eltimonl_user
+      pass: mayamon360
+      name: eltimonl_bd
+      port: default
+      socket: default
+    sqlite3:
+      file: '___ROOT___Ocrend/Kernel/Database/Drivers/Sqlite/db.sqlite3'
+      
+# Configuración de servidor SMTP
+mailer:
+  host: eltimonlibreria.com 
+  user: admin@eltimonlibreria.com
+  pass: Admin-2020
+  port: 465
+  logo: assets/plantilla/img/logotipo/logo.jpg
+  favicon: assets/plantilla/img/logotipo/favicon.svg
+
+# Configuración de twig
+twig:
+  cache: false
+  compiled_dir: ./app/templates/.compiled/
+  charset: UTF-8
+  strict_variables: false
+  autoescape: html
+  
+# Configuración del sitio
+build:
+  production: true
+  name: El timón librería
+  url: https://eltimonlibreria.com/
+  timezone: America/Mexico_City
+  version: 3.0.1
+
+# Configuración de cookies
+sessions:
+  lifetime: 86400
+  user_cookie:
+    enable: true
+    key_encrypt: 9DLIHPmEtV4QeIKK7GRO
+    lifetime: 86400
+
+# Configuración de la api
+api:
+  active: true
+  origin: https://eltimonlibreria.com
+
+# Configuración de ruta
+router:
+  ssl: true
+  path: eltimonlibreria.com/

@@ -1,0 +1,156 @@
+{# PLANTILLA VENTAS MOSTRADOR #}
+
+{% extends 'overall/layout' %}
+{% block titleSeccion %}
+    <title>Salidas</title>
+{% endblock %}
+{% block appHeader %}
+<!-- DataTables -->
+<!-- <link rel="stylesheet" href="assets/plantilla/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/css/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/css/responsive.bootstrap.css"/>
+
+<!-- http://www.daterangepicker.com/ -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+{% endblock %} 
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+  	{% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+	    <!-- Main content -->
+	    <section class="content">
+
+            <div class="box box-widget">
+                <div class="box-header with-border">   
+                    <div class="row">
+                        <div class="col-xs-2">
+                           <!-- <button type="button" class="btn btn-sm btn-flat btn-default" id="daterange-btn">
+                                <span>
+                                    <i class="fa fa-calendar"></i> TODAS
+                                </span>
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <i class="fas fa-times btn btn-xs btn-flat hidden clearDateRange"></i> -->
+                            <input type="date" class="form-control" name="fecha" id="fecha" max="{{ "now"|date("Y-m-d") }}" value="{{ "now"|date("Y-m-d") }}">
+                        </div>
+                        <div class="col-xs-10 text-right">
+                            <a href="caja" class="btn btn-default btn-sm btn-flat font-weight-bold">CAJA</a> 
+                            <a href="productos" class="btn btn-default btn-sm btn-flat font-weight-bold">PRODUCTOS</a> 
+                            <a href="puntoDeVenta" class="btn bg-aqua btn-sm btn-flat font-weight-bold" t><i class="fas fa-barcode"></i> SALIDA</a>  
+                        </div>
+                    </div>                     
+                </div>
+                <div class="box-body">
+        	    	<div class="table-responsive">
+                        <table class="table table-inverse table-bordered table-hover table-condensed" style="width:100%" id="tablaVentasMostrador">
+                            <thead class="bg-navy text-uppercase">
+                                <tr>
+                                    <th>fecha(columna para poder ordenar)</th>
+                                    <th style="width:100px;">Tipo</th>
+                                    <th style="width:120px;">Folio salida</th>
+                                    <th style="width:90px;">Método de pago</th>
+                                    <th style="width:70px;">Importe</th>
+                                    <th style="width:300px;">Fecha</th>
+                                    <th style="width:80px;">Estado</th>
+                                    <th width="110px">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="4" style="text-align:right"></th>
+                                    <th style="text-align:right"></th>
+                                    <th colspan="2"></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL VER VENTA -->
+            <div id="modalVerVentaSalida" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                            </button>
+                              <h4 class="modal-title"><i class="fas fa-folder"></i> Folio de <span id="tipoMovimiento"></span>: <span id="folio"></span></h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive" id="tablaVenta">
+                                <table class="table table-striped table-condensed table-bordered table-hover" style="margin-bottom:0;">
+                                    <thead class="bg-navy text-uppercase">
+                                        <tr>
+                                            <th class="text-center" style="width:50px;">Cantidad</th>
+                                            <th>Producto</th>
+                                            <th class="text-center" style="width:170px;"><span class="badge bg-blue">Precio</span></th>
+                                            <th class="text-center" style="width:80px;">Descuento</th>
+                                            <th class="text-right" style="width:100px;">Importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>  
+                            </div>
+
+                            <div class="table-responsive" id="tablaSalida">
+                                <table class="table table-striped table-condensed table-bordered table-hover" style="margin-bottom:0;">
+                                    <thead class="bg-navy text-uppercase">
+                                        <tr>
+                                            <th class="text-center" style="width:50px;">Cantidad</th>
+                                            <th>Producto</th>
+                                            <th class="text-center" style="width:80px;"><span class="badge bg-grey">P. compra</span></th>
+                                            <th class="text-center" style="width:80px;"><span class="badge bg-blue">P. venta</span></th>
+                                            <th class="text-right" style="width:100px;">Importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>  
+                            </div>      
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+	    </section>
+	    <!-- /.content -->
+
+	</div>
+  	<!-- /.content-wrapper -->
+
+  	{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+<!-- DataTables -->
+  <script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/dataTables.bootstrap.js"></script>
+  <script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/js/dataTables.responsive.js"></script>
+
+<!-- http://www.daterangepicker.com/ -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <script src="./assets/jscontrollers/ventasdemostrador/ventasdemostrador.js"></script>
+{% endblock %}
+
+{# PLANTILLA VENTAS MOSTRADOR #}

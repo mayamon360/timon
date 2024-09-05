@@ -1,0 +1,96 @@
+<div class="box box-solid">
+
+	<!--=====================================
+  	LOGOTIPO
+  	======================================-->
+
+	<div class="box-header with-border">
+
+		<h3 class="box-title">LOGOTIPO</h3>
+
+		<div class="box-tools pull-right">
+
+		</div>
+	
+	</div>
+
+	<div class="box-body">
+
+		<div class="row">
+
+			<div class="col-xs-12 col-sm-6">
+
+				<div class="text-center">
+				
+					<label>Cambiar imagen</label>
+
+					<div>
+						<label for="subirLogo" class="btn btn-sm btn-default btn-block"><i class="fa fa-upload"></i> Selecciona una imagen</label>
+						<input type="file" id="subirLogo" style="visibility:hidden;" accept="image/*">
+					</div>
+
+					<p class="help-block" style="margin-top:-10px;">Tamaño recomendado <br>170px * 70px</p>
+					
+					<p>
+						<img src="assets/plantilla/{{ plantilla.logotipo }}" class="img-thumbnail previsualizarLogo" style="width:170px; max-width: 170px; height:70px; max-height:70px;">
+					</p>
+
+				</div>
+				
+				<div class="hidden-sm visible-xs text-right" style="margin-bottom:30px;">
+					<button type="button" class="btn btn-sm bg-navy guardarLogo" disabled>Actualizar Imagen</button>
+				</div>
+
+			</div>
+			
+			<div class="col-xs-12 col-sm-6">
+
+				<div class="text-center">
+				
+					<label>Cambiar icono</label>
+					
+					<div>
+						<label for="subirIcono" class="btn btn-sm btn-default btn-block"><i class="fa fa-upload"></i> Selecciona una imagen</label>
+						<input type="file" id="subirIcono" style="visibility:hidden;" accept="image/*">
+					</div>
+
+					<p class="help-block" style="margin-top:-10px;">Tamaño recomendado <br>50px * 50px</p>
+					
+					<p style="">
+						<img src="assets/plantilla/{{ plantilla.icono }}" class="img-thumbnail previsualizarIcono" style="width:50px; max-width: 50px; height: 50px; max-height: 50px;">
+					</p>
+
+				</div>
+				
+				<div class="hidden-sm visible-xs text-right" style="margin-bottom:30px;">
+					<button type="button" class="btn btn-sm bg-navy guardarIcono" disabled>Actualizar Icono</button>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="box-footer hidden-xs">
+		
+		<div class="row text-right">
+			
+			<div class="col-xs-12 col-sm-6">
+				
+				<button type="button" class="btn btn-sm bg-navy guardarLogo" disabled>Actualizar Imagen</button>
+
+			</div>
+
+			<div class="col-xs-12 col-sm-6">
+
+				<button type="button" class="btn btn-sm bg-navy guardarIcono" disabled>Actualizar Icono</button>
+				
+			</div>
+
+		</div>
+
+	</div>
+
+
+</div>

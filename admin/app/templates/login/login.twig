@@ -1,0 +1,81 @@
+{% extends 'overall/layout' %}
+{% block appHeader %}
+{# Select2 #}
+<link rel="stylesheet" href="assets/plantilla/AdminLTE/bower_components/select2/dist/css/select2.min.css">
+
+{# recaptcha V2 #}
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
+
+{% endblock %} 
+
+{% block aperturaBody %}
+
+<body class="hold-transition login-page">
+
+{% endblock %}
+
+{% block appBody %}
+
+	<div class="login-box animated fadeIn">
+
+	  	<div class="login-box-body">
+
+		    <form role="form" id="login_form">
+		        
+                <div class="form-group has-feedback">
+                    <input type="email" name="email" id="email" class="form-control input validar" placeholder="Correo electrónico" autocomplete="off" autofocus>
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                
+                <div class="form-group has-feedback">
+                    <input type="password" name="pass" class="form-control input pass" placeholder="Introduce tu contraseña" autocomplete="off">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+		      	
+		      	<div class="form-group " id='perfiles'>
+					<div class="loader hidden"></div>
+		      	</div>
+		      	
+		      	<div class="form-group hidden" id="almacenes"></div>
+
+		      	<div class="row">
+		            <div class="col-xs-12 text-center" style="margin-bottom:20px;">
+		      	        <div id="g-recaptcha" style="margin:auto;"></div>
+		      	    </div>
+		      	</div>
+		      	
+		      	<!--<div class="form-group has-feedback">
+					<input type="text" name="key_code" id="key_code" class="form-control" placeholder="Código de verificación" autocomplete="off">
+		        	<span class="fa fa-fw fa-key form-control-feedback" style="margin-right:10px;"></span>
+			    </div>-->
+			    
+			    <input type="hidden" name="key_code" id="key_code">
+			    
+		      	<div class="row">    
+		        	<div class="col-xs-12 text-right">
+		          		<button type="button" id="login" class="btn btn-block bg-blue btn-flat text-uppercase font-weight-bold" disabled>Iniciar sesión</button>
+		        	</div>
+		      	</div>
+		    </form>
+
+	 	</div>
+	  	<!-- /.login-box-body -->
+
+	</div>
+	<!-- /.login-box -->
+
+
+{% endblock %}
+
+{% block scripts %}
+
+{# Select2  #}
+<script src="assets/plantilla/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+<!-- Libreria español -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>  
+
+<script src="assets/jscontrollers/login/login.js"></script>
+
+{% endblock %}

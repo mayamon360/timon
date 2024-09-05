@@ -1,0 +1,51 @@
+<?php
+
+/* home/grafico-visitas.twig */
+class __TwigTemplate_9e8b0156618c660bf2d953b2789b4fff3e68ba9d3a09c5f671d680e4b77a4b58 extends Twig_Template
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->parent = false;
+
+        $this->blocks = array(
+        );
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        // line 1
+        echo "<div class=\"box box-warning\">
+            <div class=\"box-header with-border\">
+              <h3 class=\"box-title\">Gráfico de visitas de México</h3>
+
+              <div class=\"box-tools pull-right\">
+                <button type=\"button\" class=\"btn btn-box-tool\" data-widget=\"collapse\"><i class=\"fa fa-minus\"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class=\"box-body\" style=\"\">
+              <div id=\"geochart-colors\" style=\"width: auto; height: 353px;\"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>";
+    }
+
+    public function getTemplateName()
+    {
+        return "home/grafico-visitas.twig";
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  19 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Twig_Source("", "home/grafico-visitas.twig", "C:\\xampp\\htdocs\\ocrend\\app\\templates\\home\\grafico-visitas.twig");
+    }
+}

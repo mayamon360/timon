@@ -1,0 +1,48 @@
+{% extends 'overall/layout' %}
+{% block appBody %}
+
+    {{change_password|raw}}
+    <main class="container mt-5">
+
+        <div class="row">
+
+            <div class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3 col-lg-4 offset-lg-4 div_form_forgot">
+                <div class="card bg-white border animated fadeIn z-depth-2">
+                    <div class="card-body">
+                        <h4 class="heading h4 pt-1 pb-4">Solicitar contraseña
+                        </h4>
+                        <form role="form" id="form_forgot">
+                            <div class="form-group">
+                                <div class="input-group input-group-transparent mb-2">
+                                    <input type="email" name="f_mail" class="form-control form-control-sm" placeholder="Correo electrónico">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <small class="form-text text-muted mb-3">Ingresa la dirección de correo electrónico asociada a tu cuenta y te enviaremos un correo con las instrucciones para obtener una nueva contraseña.</small>
+                            <div class="text-right">
+                                <button type="button" class="btn btn-sm btn-icon boton_color" id="btn_forgot" disabled>
+                                    <span class="spinner-grow spinner-grow-sm d-none" role="status" aria-hidden="true"></span>
+                                    <span class="btn-inner--text">Enviar solicitud</span>
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <span class="text-muted">¿Tienes cuenta?</span> <a href="{{config.build.url}}autenticacion">Iniciar sesión</a><br><br>
+                        <span class="text-muted">¿Eres nuevo?</span> <a href="{{config.build.url}}autenticacion/registro">Regístrate</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+{% endblock %}
+
+{% block appFooter %}
+	<script src="assets/jscontrollers/autenticacion/recuperar.js"></script>
+{% endblock %}

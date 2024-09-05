@@ -1,0 +1,172 @@
+{% extends 'overall/layout' %}
+
+{% block appTitle %}
+    <title>Mi cesta</title>
+{% endblock %}
+
+{% block appHeader %}
+<style>
+.table-cards tr.bg-white>th:after,
+.table-cards tr.bg-white>td:after {
+    border-top: 1px solid var(--borderColor);
+    border-bottom: 1px solid var(--borderColor);
+}
+.table-hover tr.bg-white:hover {
+    background-color: #fff!important;
+}
+.table-hover tr.bg-white:hover>th,
+.table-hover tr.bg-white:hover>td{
+    background-color: #f8f9fa!important;
+}
+.table-cards tr.bg-white.empty>th:after{
+    border:none!important;
+}
+</style>
+<link rel="stylesheet" href="./assets/plantilla/stripe.css">
+{% endblock %}
+{% block appBody %}
+
+    <main class="container px-3 px-md-0 mt-2">
+
+        <div class="row px-0 align-items-center destacados">
+            <div class="col-5 col-md-7 col-lg-9">
+                <p class="m-0 p-0 text-muted font-weight-bold animated fadeIn"><small class="font-weight-bold"><span class="resultados"></span></small></p>
+                    <h1 class="m-0 p-0 animated fadeIn titulo_destacado"><i class="fas fa-shopping-bag"></i> Mi cesta</h1>
+				<div class="my-1 animated fadeIn separador separador_color"></div>
+            </div>
+            <div class="col-7 col-md-5 col-lg-3 text-right">
+                <a href="compra" class="btn btn-sm btn-icon boton_negro">
+                    <i class="fas fa-chevron-left"></i>
+                    <span class="btn-inner--text">Modificar compra</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="row px-0 mt-3">
+            <div class="col-12 col-lg-8 order-12 order-lg-1">
+                
+                <div class="tabla_carrito d-block">
+                    
+                </div>
+                
+            </div>
+            <div class="col-12 col-lg-4 d-none order-1 order-lg-12 mb-4 mb-lg-0 div_procesar_pago">
+                
+                {% if telefono == '' or cp == '' or rfc == ''%}
+                    <div class="alert bg-light" role="alert">
+                        <h4 class="alert-heading">¡Acción necesaria!</h4>
+                        <p>Completa los siguientes datos:</p>
+                        <ul>
+                            <li>Número de teléfono</li>
+                            <li>Dirección de envió</li>
+                            <li>RFC</li>
+                        </ul>
+                        <hr>
+                        <p class="mb-0">Entra a tu perfil y después haz clic en la pestaña <a class="btn-link font-weight-bold" href="cuenta/mis-datos">Mis datos</a>.</p>
+                    </div>
+                {% else %}
+
+                    {#<div class="text-center">
+                        <img src="./assets/plantilla/img/general/stripe.svg" width="30%" class="mt-0 mb-4">
+                    </div>#}
+
+                    <div class="p-4 border rounded text-center z-depth-1">
+                        <table class="w-100 border-bottom">
+                            <tr>
+                                <td class="w-50">Subtotal <span class="subtotal" style="font-weight:normal;">$ 0.00</span></td>
+                                <td><span class="envio" style="font-weight:normal;">--</span></td>
+                            </tr>
+                        </table>
+
+                        <h1 class="mb-4 p-0 text-app"><span class="total"></span></h1>
+                        
+                        <form action="{{url_post}}" method="post" id="payment-form">
+                            <div class="form-group">
+                                <label for="card-element">
+                                    Paga con <img src="./assets/plantilla/img/general/tarjeta.svg" width="35px"> de crédito o débito
+                                </label>
+                                
+                                <div id="card-element">
+                                    <!-- A Stripe Element will be inserted here. -->
+                                </div>
+                                <!-- Used to display form errors. -->
+                                {% if message != '' %}
+                                    <div id="card-errors" role="alert">{{message}}</div>
+                                {% else %}
+                                    <div id="card-errors" role="alert"></div>
+                                {% endif %}
+                            </div>
+                            <div class="text-center div_pagar_tarjeta">
+                                <button class="btn btn-sm btn-icon boton_color">
+                                    <span class="btn-inner--text">Procesar pago</span>
+                                    <span class="btn-inner--icon"><i class="far fa-credit-card"></i></span>
+                                </button>
+                            </div>
+                        </form>
+                        <div class="cargando_ d-none">
+                            <span class="spinner-grow spinner-grow-sm bg-app" role="status" aria-hidden="true"></span>
+                        </div>
+                        
+                        <hr class="mt-4">
+                        
+                        <label>
+                            Paga en efectivo con vale <img src="./assets/plantilla/img/general/oxxo.svg" width="35px">
+                        </label>
+                        <div class="text-center div_solicitar_vale">
+                            <button class="btn btn-sm btn-icon boton_color">
+                                <span class="btn-inner--text">Solicitar vale</span>
+                                <span class="btn-inner--icon"><i class="fas fa-receipt"></i></span>
+                            </button>
+                            <p class="alert alert-danger mt-2 animated flash">Tome en cuenta que los pagos en OXXO tardan un máximo de 72 horas en verse reflejados en nuestro sistema. Se recomienda compartir el comprobante de pago y el folio asociado al número de whatsapp 55 1286 6402.</p>
+                        </div>
+                        
+                        <div class="cargando d-none">
+                            <span class="spinner-grow spinner-grow-sm bg-app" role="status" aria-hidden="true"></span>
+                        </div>
+                        
+                        <form id="payment-form-oxxo" class="d-none">
+                                
+                            <input type="hidden" id="name" name="name" value="">
+                            <input type="hidden" id="email" name="email" value="">
+                            <input type="hidden" id="intent" name="intent" value="">
+                            <input type="hidden" id="id_stripe" name="id_stripe" value="">
+                            
+                            <div id="error-message" role="alert"></div>
+                            
+                            <div class="alert alert-info p-2 text-center mb-3 mt-0" role="alert" style="font-size:11px!important;">
+                                <span class="alert-inner--text"><strong>!Importante¡</strong>. Después de imprimir el vale OXXO, cierra la ventana emergente para que los datos puedan ser asociados a tu cuenta correctamente. Utliza el botón <i class="fa fa-times" aria-hidden="true"></i> que aparece en la ezquina superior derecha de la ventana emergente.</span>
+                            </div>
+                            
+                            <div class="text-center div_imprimir_vale">
+                                <button id="submit-button" class="btn btn-sm btn-icon boton_color">
+                                    <span class="btn-inner--text">Imprimir vale</span>
+                                    <span class="btn-inner--icon"><i class="fas fa-receipt"></i></span>
+                                </button>
+                            </div>
+                            
+                        </form>
+                    
+                    </div>
+                    
+                {% endif %}
+            
+            </div>
+        </div>
+        
+        <div class="d-block d-lg-none mt-3 text-right">
+            <a href="compra" class="btn btn-sm btn-icon boton_negro">
+                <i class="fas fa-chevron-left"></i>
+                <span class="btn-inner--text">Modificar compra</span>
+            </a>
+        </div>
+    </main>
+    
+{% endblock %}
+
+{% block appFooter %}
+    <script src="./assets/jscontrollers/compra/procesar.js"></script>
+    
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="./assets/jscontrollers/compra/stripe.js"></script>
+    
+{% endblock %}

@@ -1,0 +1,160 @@
+<?php
+
+/* login/login.twig */
+class __TwigTemplate_c405b48c4b195a8b2735b0a766822e48e8b528fd0030a18dcbdcf0b9b7b518a9 extends Twig_Template
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        // line 1
+        $this->parent = $this->loadTemplate("overall/layout", "login/login.twig", 1);
+        $this->blocks = array(
+            'appHeader' => array($this, 'block_appHeader'),
+            'aperturaBody' => array($this, 'block_aperturaBody'),
+            'appBody' => array($this, 'block_appBody'),
+            'appFooter' => array($this, 'block_appFooter'),
+            'scripts' => array($this, 'block_scripts'),
+        );
+    }
+
+    protected function doGetParent(array $context)
+    {
+        return "overall/layout";
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 3
+    public function block_appHeader($context, array $blocks = array())
+    {
+        // line 4
+        echo "
+\t<!-- iCheck -->
+\t<link rel=\"stylesheet\" href=\"assets/plantilla/AdminLTE/plugins/iCheck/square/blue.css\">
+
+";
+    }
+
+    // line 10
+    public function block_aperturaBody($context, array $blocks = array())
+    {
+        // line 11
+        echo "
+\t<body class=\"hold-transition login-page\">
+
+";
+    }
+
+    // line 16
+    public function block_appBody($context, array $blocks = array())
+    {
+        // line 17
+        echo "
+<div class=\"login-box\">
+  \t<div class=\"login-logo\">
+    \t<a href=\"../../index2.html\"><b>Admin</b>LTE</a>
+  \t</div>
+  \t<!-- /.login-logo -->
+  \t<div class=\"login-box-body\">
+    \t<p class=\"login-box-msg\">Sign in to start your session</p>
+
+\t    <form role=\"form\" id=\"login_form\">
+\t      <div class=\"form-group has-feedback\">
+\t        <input type=\"email\" name=\"email\" class=\"form-control\" placeholder=\"Email\">
+\t        <span class=\"glyphicon glyphicon-envelope form-control-feedback\"></span>
+\t      </div>
+\t      <div class=\"form-group has-feedback\">
+\t        <input type=\"password\" name=\"pasword\" class=\"form-control\" placeholder=\"Password\">
+\t        <span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>
+\t      </div>
+\t      <div class=\"row\">
+\t        <div class=\"col-xs-8\">
+\t          <div class=\"checkbox icheck\">
+\t            <label>
+\t              <input type=\"checkbox\"> Remember Me
+\t            </label>
+\t          </div>
+\t        </div>
+\t        <!-- /.col -->
+\t        <div class=\"col-xs-4\">
+\t          <button type=\"button\" id=\"login\" class=\"btn btn-primary btn-block btn-flat\">Sign In</button>
+\t        </div>
+\t        <!-- /.col -->
+\t      </div>
+\t    </form>
+
+\t    <div class=\"social-auth-links text-center\">
+\t      <p>- OR -</p>
+\t      <a href=\"#\" class=\"btn btn-block btn-social btn-facebook btn-flat\"><i class=\"fa fa-facebook\"></i> Sign in using
+\t        Facebook</a>
+\t      <a href=\"#\" class=\"btn btn-block btn-social btn-google btn-flat\"><i class=\"fa fa-google-plus\"></i> Sign in using
+\t        Google+</a>
+\t    </div>
+\t    <!-- /.social-auth-links -->
+
+\t    <a href=\"#\">I forgot my password</a><br>
+\t    <a href=\"register.html\" class=\"text-center\">Register a new membership</a>
+
+ \t</div>
+  \t<!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+";
+    }
+
+    // line 70
+    public function block_appFooter($context, array $blocks = array())
+    {
+        // line 71
+        echo "
+\t<script src=\"assets/jscontrollers/login/login.js\"></script>
+
+";
+    }
+
+    // line 76
+    public function block_scripts($context, array $blocks = array())
+    {
+        // line 77
+        echo "
+\t<!-- iCheck -->
+\t<script src=\"assets/plantilla/AdminLTE/plugins/iCheck/icheck.min.js\"></script>
+\t
+\t<script>
+\t  \$(function () {
+\t    \$('input').iCheck({
+\t      checkboxClass: 'icheckbox_square-blue',
+\t      radioClass: 'iradio_square-blue',
+\t      increaseArea: '20%' /* optional */
+\t    });
+\t  });
+\t</script>
+
+";
+    }
+
+    public function getTemplateName()
+    {
+        return "login/login.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  124 => 77,  121 => 76,  114 => 71,  111 => 70,  56 => 17,  53 => 16,  46 => 11,  43 => 10,  35 => 4,  32 => 3,  11 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Twig_Source("", "login/login.twig", "C:\\xampp\\htdocs\\ocrend\\app\\templates\\login\\login.twig");
+    }
+}

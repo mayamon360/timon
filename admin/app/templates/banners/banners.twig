@@ -1,0 +1,121 @@
+{% extends 'overall/layout' %}
+{% block appBody %}
+{% block appHeader %}
+<!-- DataTables -->
+<!-- <link rel="stylesheet" href="assets/plantilla/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/css/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/css/responsive.bootstrap.css"/>
+{% endblock %} 
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+  	{% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+  		<!-- Content Header (Page header) -->
+    	<section class="content-header">
+
+	      	<h1>
+                {{datosModulo.texto}}
+                <small>{{datosModulo.modulo}}</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="./"><i class="fas fa-tachometer-alt"></i> Panel de control</a></li>
+                <li class="active"><i class="{{datosModulo.icono}}"></i> {{datosModulo.modulo}}</li>
+            </ol>
+
+	    </section>
+
+	    <!-- Main content -->
+	    <section class="content">
+
+	    	<div class="box">
+
+    			<div class="box-header with-border">
+    				
+					<h3 class="box-title">{{datosModulo.modulo}}</h3>
+						
+    			</div>
+
+    			<div class="box-body">
+    				
+    				<div class="table-responsive">
+
+    					<table class="table table-inverse table-bordered table-hover table-condensed" style="width:100%" id="tablaBanners">
+    						<thead>
+					            <tr>
+					                <th>ID</th>
+									<th>Ruta</th>
+					                <th>Tipo</th>					                
+					                <th>Estado</th>
+					                <th>Imagen</th>
+					                <th>Título</th>
+					                <th>Subtítulo</th>
+					                <th>Descripción</th>
+					                <th width="55px">Acciones</th>
+					            </tr>
+					        </thead>
+    					</table>
+
+    				</div>
+
+    			</div>
+
+    		</div>
+			
+			    <!-- MODAL EDITAR -->
+          <div id="modalEditar" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+              <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                          <h4 class="modal-title"><i class="fas fa-pencil-alt"></i> Editar banner</h4>
+                      </div>
+                      <div class="modal-body">
+                          <div class="box-body">
+                              <form role="form" id="editar_form" enctype="multipart/form-data">
+                                  
+                              </form>
+                          </div>
+                      </div>
+                      <div class="modal-footer text-right">
+                          <button type="button" class="btn btn-primary btn-sm" id="editar">Guardar cambios</button>
+                          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Salir</button>
+                      </div>
+                  </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+          </div>
+          <!-- /.modal -->
+
+	    </section>
+	    <!-- /.content -->
+
+	</div>
+  	<!-- /.content-wrapper -->
+
+  	{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+<!-- DataTables -->
+<!-- <script src="assets/plantilla/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script> 
+<script src="assets/plantilla/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> -->
+<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/js/dataTables.responsive.js"></script>
+	
+    <script src="./assets/jscontrollers/banners/banners.js"></script>
+{% endblock %}

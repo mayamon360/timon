@@ -1,0 +1,160 @@
+{% extends 'overall/layout' %}
+{% block appHeader %}
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/css/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/css/responsive.bootstrap.css"/>
+{% endblock %} 
+{% block appBody %}
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+	{% include 'overall/sidebar' %} 
+
+	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+  		<!-- Content Header (Page header) -->
+    	<section class="content-header">
+
+	      	<h1>
+	        	Ajustes
+	        	<small>Mi cuenta</small>
+	      	</h1>
+	      	<ol class="breadcrumb">
+	      		<li><a href="./"><i class="fas fa-tachometer-alt"></i> Panel de control</a></li>
+	        	<li class="active"><i class="fas fa-user-circle"></i> Mi cuenta</li>
+	      	</ol>
+
+	    </section>
+
+	    <!-- Main content -->
+	    <section class="content">
+	
+			<div class="row">
+				<div class="col-xs-12 col-md-4 col-lg-3" id="cargarCuenta">
+					
+				</div>
+				<div class="col-xs-12 col-md-8 col-lg-9">
+
+					<div class="nav-tabs-custom">
+
+			            <ul class="nav nav-tabs">
+			              	<li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true"><i class="fas fa-user-cog"></i> Ajustes de mi cuenta</a></li>
+			              	<li><a href="#history" data-toggle="tab" aria-expanded="true"><i class="fas fa-history"></i> Mi historial</a></li>
+			            </ul>
+
+			            <div class="tab-content">
+
+			              	<div class="tab-pane active" id="settings">
+			                	<form role="form" class="form-horizontal" id="nuevosDatos">
+			                  		<div class="form-group">
+			                    		<label for="inputName" class="col-xs-12 col-sm-3 col-md-4 col-lg-2 control-label"><small>Nombre</small></label>
+
+			                    		<div class="col-xs-12 col-sm-9 col-md-8 col-lg-10">
+			                     			<input type="email" class="form-control input-sm validar" tipo="name" id="name" name="nombre" key="{{datosPerfil.id_user}}" placeholder="Mi nuevo nombre">
+			                    		</div>
+			                  		</div>
+			                  		<div class="form-group">
+			                    		<label for="inputEmail" class="col-xs-12 col-sm-3 col-md-4 col-lg-2 control-label"><small>Correo electrónico</small></label>
+
+		                    			<div class="col-xs-12 col-sm-9 col-md-8 col-lg-10">
+		                      				<input type="email" class="form-control input-sm validar" tipo="email" id="email" name="correo" key="{{datosPerfil.id_user}}" tipo="inputEmail" placeholder="Mi nuevo correo electrónico">
+		                    			</div>
+			                 		</div>
+			                  		<div class="form-group">
+			                    		<label for="inputPass" class="col-xs-12 col-sm-3 col-md-4 col-lg-2 control-label"><small>Nueva contraseña</small></label>
+
+			                    		<div class="col-xs-12 col-sm-9 col-md-8 col-lg-10">
+			                      			<input type="password" class="form-control input-sm" name="nueva_pass" id="inputPass" placeholder="Mi nueva contraseña">
+			                    		</div>
+			                  		</div>
+			                  		<div class="form-group">
+			                    		<label for="inputRePass" class="col-xs-12 col-sm-3 col-md-4 col-lg-2 control-label"><small>Confirmar</small></label>
+
+			                    		<div class="col-xs-12 col-sm-9 col-md-8 col-lg-10">
+			                      			<input type="password" class="form-control input-sm" name="re_nueva_pass" id="inputRePass" disabled placeholder="Confirmar mi nueva contraseña">
+			                    		</div>
+			                  		</div>
+			                  		<div class="form-group">
+			                    		<label for="inputPassU" class="col-xs-12 col-sm-3 col-md-4 col-lg-2 control-label"><small>Escribir contraseña actual</small></label>
+
+			                    		<div class="col-xs-12 col-sm-9 col-md-8 col-lg-10">
+			                      			<input type="password" class="form-control input-sm" name="pass" id="inputPassU" disabled placeholder="Mi contraseña actual">
+			                    		</div>
+			                  		</div>
+			                  		<div class="form-group">
+			                    		<label for="foto" class="col-xs-12 col-sm-3 col-md-4 col-lg-2 control-label"><small>Foto</small></label>
+
+			                    		<div class="col-xs-12 col-sm-9 col-md-8 col-lg-10">
+			                      			<div>
+											    <label for="foto" class="btn btn-sm btn-default btn-block"><i class="fa fa-upload"></i> Seleccionar una imagen para cambiar mi foto</label>
+											    <input type="file" name="foto" id="foto" style="visibility:hidden;" accept="image/*">
+										    </div>
+			                    		</div>
+			                    		<div class="col-xs-12 text-right">
+			                    			<p class="help-block" style="margin:0; margin-top:-10px;" id="nombreImagen"></p>
+			                    		</div>
+			                  		</div>
+			                  		<div class="form-group">
+			                    		<div class="col-xs-12 text-right">
+			                      			<button type="button" class="btn btn-sm bg-navy" id="guardar" disabled>Guardar cambios</button>
+			                    		</div>
+			                  		</div>
+			                	</form>
+			              	</div>
+			              	<!-- /#settings -->
+
+			              	<div class="tab-pane" id="history">
+
+			              		<div class="table-responsive">
+
+		        					<table class="table table-inverse table-bordered table-hover table-condensed" style="width:100%" id="tablaHistorial">
+		        						<thead>
+		    					            <tr>
+		    					                <th>Tiempo transcurrido</th>
+		    					                <th>Modulo del movimiento</th>
+		    					                <th style="min-width:150px;">Descripción</th>
+		    					                <th style="min-width:110px;">Fecha y hora de registro</th>
+		    					            </tr>
+		    					        </thead>
+		        					</table>
+
+		        				</div>
+			              		
+			              	</div>
+			              	<!-- /#history -->
+
+			            </div>
+			            <!-- /.tab-content -->
+
+			        </div>
+			        <!-- /.nav-tabs-custom -->
+					
+				</div>
+
+			</div>
+
+	    </section>
+	    <!-- /.content -->
+
+	</div>
+  	<!-- /.content-wrapper -->
+
+  	{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+{% block appFooter %}
+<!-- DataTables -->
+	<!-- <script src="assets/plantilla/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script> 
+	<script src="assets/plantilla/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> -->
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/js/dataTables.responsive.js"></script>
+
+	<script src="./assets/jscontrollers/mi_cuenta/mi_cuenta.js"></script>
+{% endblock %}

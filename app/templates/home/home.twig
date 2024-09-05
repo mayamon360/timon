@@ -1,0 +1,232 @@
+{% extends 'overall/layout' %}
+
+{% block appHeader %}
+{# Estilos personalizados para la página #}
+	<link rel="stylesheet" href="./assets/plantilla/inicio.css">
+{% endblock %}
+
+{% block appBody %}
+
+<main>
+
+	{% include 'home/slides' %}
+	
+	{% if novedades is empty %}
+	{% else %}
+	<section class="container-fluid p-0 pt-5 pb-2 mt-0 mt-sm-5 bg-light destacados">
+		<div class="container px-4 p-sm-0">
+			<div class="row flex align-items-center">
+				<div class="col-7">
+					<h1 class="m-0 p-0 animated zoomIn titulo_destacado">Lo más nuevo</h1>
+					<p class="m-0 animated fadeInRight descripcion_destacado">Conoce nuestras novedades</p>
+					<div class="my-1 animated zoomInLeft separador separador_color"></div>
+				</div>
+				<div class="col-5 text-right">
+					<a class="animated zoomIn enlace_negro" href="{{config.build.url}}destacados/novedades">
+						<i class="fas fa-angle-right mr-1 animated fadeInLeft infinite"></i> Ver todos
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="container px-2 px-sm-0 my-4">
+    		<div class="owl-carousel carrusel_libros_nuevos owl-theme">
+    		{{novedades|raw}}
+    		</div>
+    	</div>
+	</section>
+	{% endif %}
+	
+	<section class="container-fluid p-0 pb-2 mt-0 mt-5 destacados">
+		<div class="container px-4 p-sm-0">
+			<div class="row flex align-items-center">
+				<div class="col-7">
+					<h1 class="m-0 p-0 animated zoomIn titulo_destacado">Stephen King</h1>
+					<p class="m-0 animated fadeInRight descripcion_destacado d-block d-md-none">Los monstruos son reales y los fantasmas también. Viven dentro de nosotros y a veces ellos ganan...</p>
+					<p class="m-0 animated fadeInRight descripcion_destacado d-none d-md-block">Los monstruos son reales y los fantasmas también.<br> Viven dentro de nosotros y a veces ellos ganan...</p>
+					<div class="my-1 animated zoomInLeft separador separador_color"></div>
+				</div>
+				<div class="col-5 text-right">
+					<a class="animated zoomIn enlace_negro" href="{{config.build.url}}autor/stephen-king">
+						<i class="fas fa-angle-right mr-1 animated fadeInLeft infinite"></i> Ver todos
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="container px-2 px-sm-0 my-4">
+    		<div class="owl-carousel carrusel_varios owl-theme">
+    		{{stephen|raw}}
+    		</div>
+    	</div>
+	</section>
+	
+	<section class="container-fluid p-0 pt-5 pb-2 mt-0 bg-light destacados">
+		<div class="container px-4 p-sm-0">
+			<div class="row flex align-items-center">
+				<div class="col-7">
+					<h1 class="m-0 p-0 animated zoomIn titulo_destacado">Paulo Coelho</h1>
+					<p class="m-0 animated fadeInRight descripcion_destacado d-block d-md-none">Todo me dice que estoy a punto de cometer la decisión incorrecta, pero cometer errores es parte de la vida.</p>
+					<p class="m-0 animated fadeInRight descripcion_destacado d-none d-md-block">Todo me dice que estoy a punto de cometer la decisión incorrecta,<br> pero cometer errores es parte de la vida.</p>
+					<div class="my-1 animated zoomInLeft separador separador_color"></div>
+				</div>
+				<div class="col-5 text-right">
+					<a class="animated zoomIn enlace_negro" href="{{config.build.url}}autor/paulo-coelho">
+						<i class="fas fa-angle-right mr-1 animated fadeInLeft infinite"></i> Ver todos
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="container px-2 px-sm-0 my-4">
+    		<div class="owl-carousel carrusel_varios owl-theme">
+    		{{paulo|raw}}
+    		</div>
+    	</div>
+	</section>
+	
+	<section class="container-fluid p-0 pb-2 mt-0 mt-5 destacados">
+		<div class="container px-4 p-sm-0">
+			<div class="row flex align-items-center">
+				<div class="col-7">
+					<h1 class="m-0 p-0 animated zoomIn titulo_destacado">Carlos Fuentes</h1>
+					<p class="m-0 animated fadeInRight descripcion_destacado d-block d-md-none">No existe la libertad, sino la búsqueda de la libertad, y esa búsqueda es la que nos hace libres.</p>
+					<p class="m-0 animated fadeInRight descripcion_destacado d-none d-md-block">No existe la libertad, sino la búsqueda de la libertad,<br> y esa búsqueda es la que nos hace libres.</p>
+					<div class="my-1 animated zoomInLeft separador separador_color"></div>
+				</div>
+				<div class="col-5 text-right">
+					<a class="animated zoomIn enlace_negro" href="{{config.build.url}}autor/carlos-fuentes">
+						<i class="fas fa-angle-right mr-1 animated fadeInLeft infinite"></i> Ver todos
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="container px-2 px-sm-0 my-4">
+    		<div class="owl-carousel carrusel_varios owl-theme">
+    		{{carlos|raw}}
+    		</div>
+    	</div>
+	</section>
+	
+	<section class="container-fluid p-0 pt-5 pb-2 mt-0 bg-light destacados">
+		<div class="container px-4 p-sm-0">
+			<div class="row flex align-items-center">
+				<div class="col-7">
+					<h1 class="m-0 p-0 animated zoomIn titulo_destacado">Dan Brown</h1>
+					<p class="m-0 animated fadeInRight descripcion_destacado">Todo es posible. Lo imposible simplemente nos lleva más tiempo</p>
+					<div class="my-1 animated zoomInLeft separador separador_color"></div>
+				</div>
+				<div class="col-5 text-right">
+					<a class="animated zoomIn enlace_negro" href="{{config.build.url}}autor/dan-brown">
+						<i class="fas fa-angle-right mr-1 animated fadeInLeft infinite"></i> Ver todos
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="container px-2 px-sm-0 my-4">
+    		<div class="owl-carousel carrusel_varios owl-theme">
+    		{{dan|raw}}
+    		</div>
+    	</div>
+	</section>
+	
+	<section class="container-fluid p-0 pb-2 mt-0 mt-5 destacados">
+		<div class="container px-4 p-sm-0">
+			<div class="row flex align-items-center">
+				<div class="col-7">
+					<h1 class="m-0 p-0 animated zoomIn titulo_destacado">Gravity Falls</h1>
+					<p class="m-0 animated fadeInRight descripcion_destacado d-block d-md-none">El tío Stan invita a Dipper y Mabel Pines a pasar el verano en el misterioso pueblo de Gravity Falls, Oregón.</p>
+					<p class="m-0 animated fadeInRight descripcion_destacado d-none d-md-block">El tío Stan invita a Dipper y Mabel Pines a pasar el verano<br> en el misterioso pueblo de Gravity Falls, Oregón.</p>
+					<div class="my-1 animated zoomInLeft separador separador_color"></div>
+				</div>
+				<div class="col-5 text-right">
+					<a class="animated zoomIn enlace_negro" href="{{config.build.url}}autor/alex-hirsch">
+						<i class="fas fa-angle-right mr-1 animated fadeInLeft infinite"></i> Ver todos
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="container px-2 px-sm-0 my-4">
+    		<div class="owl-carousel carrusel_varios owl-theme">
+    		{{alex|raw}}
+    		</div>
+    	</div>
+	</section>
+
+	{% if mas_vendidos is empty %}
+	{% else %}
+	<section class="container-fluid p-0 pt-5 pb-2 bg-light destacados">
+		<div class="container px-4 p-sm-0">
+			<div class="row flex align-items-center">
+				<div class="col-7 pr-0">
+					<h1 class="m-0 p-0 animated zoomIn titulo_destacado">Lo más vendido</h1>
+					<p class="m-0 animated fadeInRight descripcion_destacado">Descubre los ibros preferidos</p>
+					<div class="my-1 animated zoomInLeft separador separador_color"></div>
+				</div>
+				<div class="col-5 text-right">
+					<a class="animated zoomIn enlace_negro" href="{{config.build.url}}destacados/mas-vendidos">
+						<i class="fas fa-angle-right mr-1 animated fadeInLeft infinite"></i> Ver todos
+					</a>
+				</div>
+			</div>
+		</div>
+    	<div class="container px-2 px-sm-0 my-4">
+    		<div class="owl-carousel carrusel_libros_mas_vendidos owl-theme">
+    		{{mas_vendidos|raw}}
+    		</div>
+    	</div>
+	</section>
+	{% endif %}
+
+	{#<div class="container p-2">
+		<div class="row">
+			<div class="col-five">
+				
+			</div>
+			<div class="col-five">
+				
+			</div>
+			<div class="col-five">
+				
+			</div>
+			<div class="col-five">
+				
+			</div>
+			<div class="col-five">
+				
+			</div>
+		</div>
+	</div>#}
+	
+<!-- Modal -->
+{#<div class="modal modal-fluid fade" id="anuncio" tabindex="-1" role="dialog" aria-labelledby="anuncio" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 text-center p-0">
+                        <h1 class="display-1 animated infinite pulse">ENVÍO GRATIS</h1>
+                        <p class="lead animated bounceInDown">
+                            <span class="p-2 rounded text-uppercase">A todo el país, en compras de $800.00</span>
+                        </p>
+                        <button type="button" class="btn btn-danger btn-icon-only rounded-circle" data-dismiss="modal">
+                            <span class="btn-inner--icon"><i class="fas fa-times"></i></span>
+                        </button>
+                        <!--<div class="py-0">
+                            <img src="./assets/plantilla/img/general/envio-gratis.jpg" class="img-fluid img-center">
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>#}
+
+</main>
+
+{% endblock %}
+
+{% block appFooter %}
+	<script src="./assets/jscontrollers/inicio/inicio.js"></script>
+	<script>
+	    
+	    $("#anuncio").modal("show");
+	</script>
+{% endblock %}

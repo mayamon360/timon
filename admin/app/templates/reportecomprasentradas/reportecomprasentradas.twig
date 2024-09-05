@@ -1,0 +1,52 @@
+{% extends 'overall/layout' %}
+{% block titleSeccion %}
+    <title>Reporte entradas</title>
+{% endblock %}
+{% block appHeader %}
+<!-- http://www.daterangepicker.com/ -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+{% endblock %} 
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+  	{% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+	    <!-- Main content -->
+	    <section class="content">
+
+            <div class="row">
+	    		{% include 'reportecomprasentradas/grafico-compras' %}
+                {% include 'reportecomprasentradas/grafico-mas-comprados' %}
+                {% include 'reportecomprasentradas/grafico-top-proveedores' %}
+	    	</div>
+
+	    </section>
+	    <!-- /.content -->
+
+	</div>
+  	<!-- /.content-wrapper -->
+
+  	{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+{# Google gráficos #}
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- http://www.daterangepicker.com/ -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <script src="./assets/jscontrollers/reportecomprasentradas/reportecomprasentradas.js"></script>
+{% endblock %}

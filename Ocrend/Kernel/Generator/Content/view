@@ -1,0 +1,8 @@
+{% extends 'overall/layout' %}
+{% block appBody %}
+
+    <main class="container-fluid">
+    
+    </main>
+    
+{% endblock %}

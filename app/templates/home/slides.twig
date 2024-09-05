@@ -1,0 +1,175 @@
+<section class="container-fluid px-0 pt-0 pb-0 pt-sm-5">
+<section class="container p-0 rounded-bottom z-depth-3">
+    <div id="carrusel_superior" class="carousel slide carousel-fade" data-ride="carousel" data-interval="5000" data-pause="hover">
+        <div class="carousel-inner rounded-top">
+            {% if slides is empty %}
+                ...
+            {% else %}
+                
+                {% set cont = 1 %}
+                {% set active = ' active' %}
+
+                {% for s in slides %}
+
+                    {% if cont != 1 %}
+                        {% set active = '' %}
+                    {% endif %}
+
+                    <div class="carousel-item {{s.tipo}}{{active}}">
+
+                        <img src="{{config.build.url}}{{s.fondo}}">
+                        <span class="mask bg-dark alpha-1"></span>
+
+                        {% if s.tipo != 'tipo_cinco' %}
+
+                        <div class="container h-100 card-img-overlay contenido_carrusel">
+                            <div class="row h-100">
+
+                            {% if s.tipo == 'tipo_uno' or s.tipo == 'tipo_tres' %}
+                                <div class="col-8 px-5 p-sm-0 col-sm-6 col-md-6 my-auto text-center text-sm-right">
+                                    <h1 class="p-0 text-truncate animated {{s.animatedTitulo}} titulo_carrusel">
+                                        <span class="rounded">{{s.titulo}}</span>
+                                    </h1>
+                                    <div class="my-1 mx-auto mx-sm-0 ml-sm-auto animated {{s.animatedTitulo}} separador separador_blanco"></div>
+                                    <p class="mt-0 mt-lg-4 rounded animated {{s.animatedTexto}} text-center descripcion_carrusel">
+                                        {{s.descripcion}}
+                                    </p>
+
+                                    {% if s.enlace != '' %}
+                                    <a href="{{s.enlace}}" class="btn btn-sm btn-icon noSwipe z-depth-1 animated fadeInUpBig boton_border_color">
+                                        <span class="btn-inner--icon"><i class="fas fa-info-circle"></i></span>
+                                        <span class="btn-inner--text">Más información</span>
+                                    </a>
+                                    {% endif %}
+
+                                </div>
+                                <div class="col-4 col-sm-6 col-md-6 {{s.alignImg}} text-center">
+                                    <img class="img-fluid z-depth-4 {{s.roundedImg}} animated {{s.animatedImagen}} imagen_carrusel" src="{{config.build.url}}{{s.imagen}}">
+                                </div>
+                            {% else %}
+                                <div class="col-4 col-sm-6 col-md-6 {{s.alignImg}} text-center">
+                                    <img class="img-fluid z-depth-4 {{s.roundedImg}} animated {{s.animatedImagen}} imagen_carrusel" src="{{config.build.url}}{{s.imagen}}">
+                                </div>
+                                <div class="col-8 px-5 p-sm-0 col-sm-6 col-md-6 my-auto text-center text-sm-left">
+                                    <h1 class="p-0 text-truncate animated {{s.animatedTitulo}} titulo_carrusel">
+                                        <span class="rounded">{{s.titulo}}</span>
+                                    </h1>
+                                    <div class="my-1 mx-auto mx-sm-0 mr-sm-auto animated {{s.animatedTitulo}} separador separador_blanco"></div>
+                                    <p class=" mt-0 mt-lg-4 rounded animated {{s.animatedTexto}} text-center descripcion_carrusel">
+                                        {{s.descripcion}}
+                                    </p>
+
+                                    {% if s.enlace != '' %}
+                                    <a href="{{s.enlace}}" class="btn btn-sm btn-icon noSwipe z-depth-1 animated fadeInUpBig boton_border_color">
+                                        <span class="btn-inner--icon"><i class="fas fa-info-circle"></i></span>
+                                        <span class="btn-inner--text">Más información</span>
+                                    </a>
+                                    {% endif %}
+
+                                </div>
+                            {% endif %}
+                            </div>
+
+                        </div>
+                        {% else %}
+                            {% if s.enlace != '' %}
+                                <div class="container h-100 card-img-overlay contenido_carrusel">
+                                    <div class="row pb-2 align-items-end h-100">
+                                        <div class="col-12 px-0 pr-sm-4 text-right text-sm-right animated slideInUp">
+                                            <a href="{{s.enlace}}" class="btn btn-sm btn-icon noSwipe z-depth-1 boton_border_color boton_enlace_slider">
+                                                <span class="btn-inner--icon"><i class="fas fa-info-circle"></i></span>
+                                                <span class="btn-inner--text ml-0">Más información</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+
+                    </div>
+                
+                    {% set cont = cont + 1 %}
+
+                {% endfor %}
+
+            {% endif %}
+
+        </div>
+        
+        <a class="carousel-control-prev d-none d-sm-inline-flex" href="#carrusel_superior" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next d-none d-sm-inline-flex" href="#carrusel_superior" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <div class="container rounded-bottom bg-white informacion_compra_pagos">
+        <div class="row py-2 py-md-3">
+            <div class="col-6 col-lg-3 border-right border-bottom-0">
+                <div class="row p-0 p-sm-2 pl-lg-3">
+                    <div class="col-12 col-sm-2 svg_icon text-center text-sm-left animated fadeInLeft">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="col-12 col-sm-10 text-center text-sm-left">
+                        <span class="d-block text-truncate titulo animated fadeInDown">
+                            Media superior:
+                        </span>
+                        <span class="d-block descripcion animated fadeInUp" title="DGB, CoBaEm, Epoem, UAEM, Cbt, Cetis, Cebetis, Cecytem, Conalep, etc.">
+                            DGB, COBAEM, EPOEM, UAEM, CBT, CETIS, CEBETIS, CECYTEM, CONALEP
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 border-right border-bottom-0 eliminar_borde_md">
+                <div class="row p-0 p-sm-2 pl-lg-3">
+                    <div class="col-12 col-sm-2 svg_icon text-center text-sm-left animated fadeInLeft">
+                        <i class="fab fa-audible"></i>
+                    </div>
+                    <div class="col-12 col-sm-10 text-center text-sm-left">
+                        <span class="d-block text-truncate titulo animated fadeInDown">
+                            Gran surtido en:
+                        </span>
+                        <span class="d-block descripcion animated fadeInUp" title="Literatura clásica y contemporanea, Infantiles e Interés general">
+                            Literatura clásica y contemporánea, Infantiles e Interés general
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 border-right border-bottom-0">
+                <div class="row p-0 p-sm-2 pl-lg-3">
+                    <div class="col-12 col-sm-2 svg_icon text-center text-sm-left animated fadeInLeft">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <div class="col-12 col-sm-10 text-center text-sm-left">
+                        <span class="d-block text-truncate titulo animated fadeInDown">
+                            Contáctanos
+                        </span>
+                        <span class="d-block descripcion animated fadeInUp">
+                            Si no lo tenemos, te ayudamos a conseguirlo
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="row p-0 p-sm-2 pl-lg-3">
+                    <div class="col-12 col-sm-2 svg_icon text-center text-sm-left animated fadeInLeft">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="col-12 col-sm-10 text-center text-sm-left">
+                        <span class="d-block text-truncate titulo animated fadeInDown">
+                            Compra en línea
+                        </span>
+                        <span class="d-block descripcion animated fadeInUp">
+                            Paga con tarjeta (crédito/débito) o en efectivo con vale OXXO
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+</section>

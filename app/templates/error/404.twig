@@ -1,0 +1,10 @@
+{% extends 'overall/layout' %}
+{% block appBody %}
+    <main>
+        <div class="container py-5 text-center">
+            <img src="{{config.build.url}}assets/plantilla/img/logotipo/404.svg" class="animated bounceIn" height="200px">
+            <h1 class="mt-5 animated flash" style="font-weight:500; color:var(--red)">ERROR 404</h1>
+            <p class="animated fadeIn" style="color:var(--textAlternative);">¡La página solicitada no ha sido encontrada!</p>
+        </div>
+    </main>
+{% endblock %}

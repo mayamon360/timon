@@ -1,0 +1,46 @@
+<div class="container">
+<div class="carousel-item {{sl.tipoSlide}}">
+
+	<a id="vinculo{{sl.id}}" {{ (sl.vinculo != "") ? "href=" ~ sl.vinculo  : "style=cursor:default" }}>
+
+		<div class="view {{sl.colorMascara}}">
+			<img src="assets/plantilla/{{sl.fondo}}" style="width:100%; height:auto;" id="fondo{{sl.id}}">
+			<div class="mask {# pattern-6 #}"></div>
+      	</div>
+
+      	<div class="carousel-caption">
+
+      		<div class="alineacionTexto {{sl.alineacionContenido}} {{sl.alineacionTexto}}">
+        		<h1 class="h1-responsive {# animated {{sl.claseTitulo}} #}"><span style="background-color: {{estiloTitulo.background}} !important; color: {{estiloTitulo.color}} !important;" id="titulo{{sl.id}}">{{sl.titulo}}</span></h1>
+        		<h2 class="h3-responsive {# animated {{sl.claseSubtitulo}} #}"><span style="background-color: {{estiloSubtitulo.background}} !important; color: {{estiloSubtitulo.color}} !important;" id="subtitulo{{sl.id}}">{{sl.subtitulo}}</span></h2>
+        		<p class="{# animated {{sl.claseDescripcion}} #}"><span style="background-color: {{estiloDescripcion.background}} !important; color !important: {{estiloDescripcion.color}} !important;" id="descripcion{{sl.id}}">{{sl.descripcion}}</span></p>
+        	</div>
+
+      	</div>
+
+      	{% if sl.imagen != "" %}
+
+	      	<div class="carousel-img">
+	      		
+	      		<div class="alineacionImagen {{sl.alineacionImagen}}">
+	      			<img class="imagen img-responsive {# animated {{sl.claseImagen}} #} {{sl.direccionImagen}}" id="imagen{{sl.id}}" style="width: {{sl.anchoImagen}}px;" src="assets/plantilla/{{sl.imagen}}">
+	      		</div>
+
+	      	</div>
+
+        {% else %}
+
+          <div class="carousel-img">
+            
+            <div class="alineacionImagen SlideDerechaCentroImg">
+              <img class="imagen img-responsive {# animated {{sl.claseImagen}} #} float-right" id="imagen{{sl.id}}" style="width: 250px;">
+            </div>
+
+          </div>
+
+      	{% endif %}
+
+  	</a>
+
+</div>
+</div>

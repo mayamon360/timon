@@ -1,0 +1,145 @@
+<?php
+
+/* login/login.twig */
+class __TwigTemplate_c405b48c4b195a8b2735b0a766822e48e8b528fd0030a18dcbdcf0b9b7b518a9 extends Twig_Template
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        // line 1
+        $this->parent = $this->loadTemplate("overall/layout", "login/login.twig", 1);
+        $this->blocks = array(
+            'appHeader' => array($this, 'block_appHeader'),
+            'aperturaBody' => array($this, 'block_aperturaBody'),
+            'appBody' => array($this, 'block_appBody'),
+            'appFooter' => array($this, 'block_appFooter'),
+            'scripts' => array($this, 'block_scripts'),
+        );
+    }
+
+    protected function doGetParent(array $context)
+    {
+        return "overall/layout";
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 3
+    public function block_appHeader($context, array $blocks = array())
+    {
+        // line 4
+        echo "
+<!-- iCheck -->
+<link rel=\"stylesheet\" href=\"assets/plantilla/AdminLTE/plugins/iCheck/square/blue.css\">
+
+";
+    }
+
+    // line 10
+    public function block_aperturaBody($context, array $blocks = array())
+    {
+        // line 11
+        echo "
+<body class=\"hold-transition login-page\">
+
+";
+    }
+
+    // line 16
+    public function block_appBody($context, array $blocks = array())
+    {
+        // line 17
+        echo "
+\t<div class=\"login-box\">
+\t  \t<div class=\"login-logo\">
+\t    \t<img src=\"assets/plantilla/img/plantilla/logotipo.svg\" class=\"img-responsive\" style=\"padding: 10px 50px; margin: 0 auto;\" width=\"80%\">
+\t  \t</div>
+\t  \t<!-- /.login-logo -->
+\t  \t<div class=\"login-box-body\">
+\t    \t<p class=\"login-box-msg\">Inicia sesión para comenzar</p>
+
+\t\t    <form role=\"form\" id=\"login_form\">
+\t\t      <div class=\"form-group has-feedback\">
+\t\t        <input type=\"email\" name=\"email\" class=\"form-control\" placeholder=\"Correo electrónico\" autocomplete=\"off\">
+\t\t        <span class=\"glyphicon glyphicon-envelope form-control-feedback\"></span>
+\t\t      </div>
+\t\t      <div class=\"form-group has-feedback\">
+\t\t        <input type=\"password\" name=\"pasword\" class=\"form-control\" placeholder=\"Contraseña\">
+\t\t        <span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>
+\t\t      </div>
+\t\t      <hr>
+\t\t      <div class=\"row\">
+\t\t        <div class=\"col-xs-8\">
+\t\t        \t<a href=\"#\">¿Olvidó su contraseña?</a>
+\t\t        </div>
+\t\t        <!-- /.col -->
+\t\t        <div class=\"col-xs-4\">
+\t\t          <button type=\"button\" id=\"login\" class=\"btn btn-sm btn-primary btn-block btn-flat\">Iniciar sesión</button>
+\t\t        </div>
+\t\t        <!-- /.col -->
+\t\t      </div>
+\t\t    </form>
+
+\t \t</div>
+\t  \t<!-- /.login-box-body -->
+\t</div>
+\t<!-- /.login-box -->
+
+";
+    }
+
+    // line 55
+    public function block_appFooter($context, array $blocks = array())
+    {
+        // line 56
+        echo "
+<script src=\"assets/jscontrollers/login/login.js\"></script>
+
+";
+    }
+
+    // line 61
+    public function block_scripts($context, array $blocks = array())
+    {
+        // line 62
+        echo "
+<!-- iCheck -->
+<script src=\"assets/plantilla/AdminLTE/plugins/iCheck/icheck.min.js\"></script>
+
+<script>
+  \$(function () {
+    \$('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' /* optional */
+    });
+  });
+</script>
+
+";
+    }
+
+    public function getTemplateName()
+    {
+        return "login/login.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  109 => 62,  106 => 61,  99 => 56,  96 => 55,  56 => 17,  53 => 16,  46 => 11,  43 => 10,  35 => 4,  32 => 3,  11 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Twig_Source("", "login/login.twig", "C:\\xampp\\htdocs\\ocrend\\app\\templates\\login\\login.twig");
+    }
+}

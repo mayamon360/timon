@@ -1,0 +1,142 @@
+{% extends 'overall/layout' %}
+{% block titleSeccion %}
+    <title>Editar salida</title>
+{% endblock %}
+{% block appHeader %}
+<link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
+{% endblock %} 
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+  	{% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+	    <!-- Main content -->
+	    <section class="content">
+
+	    	<audio id="errorSound" src="{{assets}}vistas/sound/error.wav" preload="auto"></audio>
+			<audio id="notifySound" src="{{assets}}vistas/sound/notify.wav" preload="auto"></audio>
+
+	    	{% if cajaAbiertaHoy == 'no' %}
+			    <div class="callout callout-warning animated flash">
+			        <h4>!Caja en $ 0.00!</h4>
+			        Para poder editar ventas, es necesario <a href="caja">registrar monto incial en caja</a> para el día de hoy.
+			    </div>
+			{% endif %}
+
+			<div class="row">
+				<!-- DETALLES DE LA VENTA -->
+				<div class="col-sm-6 col-md-7">
+					<div class="box" id="resumenVenta">
+						<!-- .box-header -->
+						<div class="box-header with-border">
+							<div class="row">
+								<div class="col-xs-5" style="min-height:30px;">
+									<h3 class="box-title" style="vertical-align:middle;">Productos en lista</h3>
+								</div>
+							</div>
+			            </div>
+			            <!-- .box-body -->
+			            <div class="box-body no-padding">
+			            	<div class="table-responsive">
+				            	<table class="table table-condensed table-bordered">
+				            		<thead class="bg-navy text-uppercase">
+				            			<tr>
+									<th style="width:105px; min-width:105px;" class="text-center"></th>
+				            				<th style="width:50px;" class="text-center">Cantidad</th>
+				            				<th style="width:500px;">Descripción</th>
+				            				<th style="width:140px; min-width:140px;" class="text-center">Precio</th>
+				            				<th style="width:70px; min-width:70px;" class="text-center">Descuento</th>
+				            				<th style="width:80px; min-width:80px;" class="text-right">Subtotal</th>
+				            				<th style="width:32.5px;"></th>
+				            			</tr>
+				            		</thead>
+				            		<tbody id="listaProductosVenta">
+				            			
+				            		</tbody>
+				            		<tfoot>
+				            			<tr>
+											<th></th>
+				            				<th class="text-center">
+				            					<span id="sumaCantidad">0</span>
+				            				</th>
+				            				<th colspan="3" class="text-right">TOTAL:</th>
+				            				<th class="text-right text-red">
+				            					<span id="total">$ 0.00</span>
+				            				</th>
+				            			</tr>
+				            		</tfoot>
+				            	</table>
+				            </div>
+			            </div>
+					</div>
+				</div>
+				<!--  -->
+				<div class="col-xs-12 col-sm-6 col-md-5">
+
+					<div class="box" id="infoVenta">
+			            <div class="box-header with-border">
+			              	<h3 class="box-title">VENTA: {{folio}}</h3>
+			              	<div class="box-tools pull-right">
+
+		                        <a href="ventasDeMostrador" class="btn btn-link btn-flat text-uppercase btn-xs">ADMINISTRAR SALIDAS</a>
+		                        <a href="ventasDeMostrador/ticket/{{id_venta}}" class="btn btn-link btn-flat text-uppercase btn-xs" target="_blank">IMPRIMIR TICKET</a>
+
+		                    </div>
+			            </div>
+
+			            <div class="box-body no-padding bg-black-active text-center" style="border-radius:0;">
+			            	<h1 id="totalTitulo" style="font-family: 'Russo One', sans-serif; color:#00ff00;">$ 0.00</h1>
+			            	<input type="hidden" id="id_venta" value="{{id_venta}}">
+			            </div>
+
+						<div class="box-body no-padding">
+							<div class="table-responsive">
+								<table class="table table-condensed" style="margin:0;"> 
+									<tbody> 
+										<tr> 
+											<th scope="row" style="width:30%;" class="text-right">Fecha:</th> 
+											<td style="width:70%;">{{fecha}}</td> 
+										</tr> 
+										<tr> 
+											<th scope="row" style="width:30%;" class="text-right">Cliente:</th> 
+											<td style="width:70%;">{{cliente}}</td> 
+										</tr>
+										<tr> 
+											<th scope="row" style="width:30%;" class="text-right">Método de pago:</th> 
+											<td style="width:70%;">{{mp}}</td> 
+										</tr> 
+									</tbody> 
+								</table>
+							</div>
+						</div>
+			        </div>
+
+				</div>
+			</div>
+
+	    </section>
+	    <!-- /.content -->
+
+	</div>
+  	<!-- /.content-wrapper -->
+
+  	{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+{# InputMask #}
+	<script src="assets/plantilla/AdminLTE/plugins/input-mask/dist/jquery.inputmask.bundle.js"></script>
+
+    <script src="./assets/jscontrollers/ventasdemostrador/editarventamostrador.js"></script>
+{% endblock %}

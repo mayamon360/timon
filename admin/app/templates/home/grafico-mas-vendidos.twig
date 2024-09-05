@@ -1,0 +1,49 @@
+<div class="box box-default" id="grafico-mas-vendidos-online">
+
+  <div class="box-header with-border">
+
+    <h3 class="box-title">Gráfico TOP 8 más vendidos</h3>
+
+    <div class="box-tools pull-right">
+
+      <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i></button>
+
+    </div>
+
+  </div>
+
+  <div class="box-body no-padding">
+
+    <div id="piechart" style="width: auto; height: 328px;"></div>
+
+  </div>
+
+  <div class="box-footer no-padding">
+
+    <ul class="nav nav-pills nav-stacked ulmasVendidos">
+        
+        {% set ventasNumero = 0 %}
+
+        {% for tp in todosProductos %}
+
+          {% set ventasNumero = ventasNumero + tp.ventas %}
+
+        {% endfor %}
+        
+        {% for mv in masVendidos %}
+          
+          <li>
+
+            {% set codigo = (mv.folio == '') ? 'ID'~mv.id : mv.folio %}
+
+            <a>{{codigo}} - {{ mv.producto }} <span class="pull-right"><strong> {{ mv.ventas }} ventas </strong></span></a>
+
+          </li>
+
+        {% endfor %}
+
+    </ul>
+
+  </div>
+
+</div>

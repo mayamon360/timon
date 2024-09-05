@@ -1,0 +1,64 @@
+<!--=====================================
+ÚLTIMOS USUARIOS
+======================================-->
+
+<!-- USERS LIST -->
+<div class="box box-default">
+
+	<!-- box-header -->
+  	<div class="box-header with-border">
+  
+	    <h3 class="box-title">Últimos usuarios web registrados</h3>
+
+	    <div class="box-tools pull-right">
+	      
+	      <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimizar"><i class="fa fa-minus"></i>
+	      </button>
+	  
+	    </div>
+
+  	</div>
+  	<!-- /.box-header -->
+
+  	<!-- box-body -->
+  	<div class="box-body no-padding">
+
+	    <!-- users-list -->
+	    <ul class="users-list clearfix">
+
+	    	
+			
+			{% for u in ultimosUsuarios %}
+
+				<li>
+					{% if u.modo == 'directo' %}
+		      			<img src="assets/plantilla/{{ u.foto }}" alt="User Image" width="80" height="80">
+		      		{% else %}
+		      			<img src="{{ u.foto }}" alt="User Image" width="80" height="80">
+		      		{% endif %}
+		      		<a class="users-list-name" href="usuarios">{{ u.nombre }}</a>
+		      		<span class="users-list-date">{{ amigable_time(u.fechaRegistro) }}</span>
+		      	</li>
+
+			{% endfor %}
+
+	    </ul>
+	  	<!-- /.users-list -->
+
+  	</div>
+  	<!-- /.box-body -->
+
+  	<!-- box-footer -->
+  	<div class="box-footer text-center">
+    	
+    	{% if totalUsuarios >= 8 %}
+    		<a href="usuarios" class="uppercase">Ver todos los usuarios</a>
+    	{% else %}
+    		No hay más usuarios registrados
+		{% endif %}
+  
+  	</div>
+  	<!-- /.box-footer -->
+
+</div>
+<!-- USERS LIST -->

@@ -1,0 +1,305 @@
+{% extends 'overall/layout' %}
+
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+  	{% include 'overall/header' %}
+
+  	{% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+    	<!-- Main content -->
+	    <section class="content">
+            
+            {# Recorrer los perfiles asignados al usuario activo #}
+			{% for p in owner_user.perfiles %}
+                
+                {# Si el perfil esta marcado como principal #}
+				{% if p.principal == 1 %}
+                    
+					{% if p.id_perfil == 1 %} 		{# Control de acceso #}
+
+						Direccionando, por favor espere...
+						{{ redir(url ~ 'perfiles') }}
+
+					{% elseif p.id_perfil == 2 %}	{# Ajustes y estadísticas del sitio web #}
+
+						<!-- Small boxes (Stat box) -->
+						<div class="row">
+
+							{% include 'home/estadistica-superior-perfil2' %}
+
+						</div>
+						<div class="row">
+
+							<div class="col-sm-12 col-md-6">
+								
+								{% include 'home/grafico-visitas' %}
+
+							</div>
+
+							<div class="col-sm-12 col-md-6">
+								
+								{% include 'home/ultimos-usuarios' %}
+
+							</div>
+
+						</div>
+
+					{% elseif p.id_perfil == 3 %}	{# Configuraciones generales y cuentas administrativas #}
+
+						Direccionando, por favor espere...
+
+						{{ redir(url ~ 'comercio') }}
+
+					{% elseif p.id_perfil == 4 %}	{# Administración de sucursal #}
+
+						<div class="row animated fadeIn">
+
+							<div class="col-xs-12">
+
+								<div class="row">
+
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="info-box">
+											<span class="info-box-icon bg-blue"><i class="fas fa-search-dollar"></i></span>
+
+											<div class="info-box-content">
+												<span class="info-box-text">TOTAL EN INVENTARIO</span>
+												<span class="info-box-number" data-toggle="tooltip" data-placement="top" title="En costo: {{totalInventario.costo}}">{{totalInventario.precio}}</span>
+												<span class="info-box-text" style="text-transform: none;">
+
+												</span>
+											</div>
+
+											<a class="btn btn-block btn-sm btn-flat btn-default" style="margin:0; border:none; margin-top:6px;" href="productos">Más información <i class="fa fa-arrow-circle-right"></i></a>
+
+										</div>
+									</div>
+
+									<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="info-box">
+											<span class="info-box-icon bg-aqua"><i class="fas fa-shopping-bag"></i></span>
+
+											<div class="info-box-content">
+												<span class="info-box-text">COMPRAS DEL MES</span>
+												<span class="info-box-number">{{totalCompras}}</span>
+												<span class="info-box-text" style="text-transform: none;">
+													
+												</span>
+											</div>
+
+											<a class="btn btn-block btn-sm btn-flat btn-default" style="margin:0; border:none; margin-top:6px;" href="compras">Más información <i class="fa fa-arrow-circle-right"></i></a>
+
+										</div>
+									</div>
+
+									<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="info-box">
+											<span class="info-box-icon bg-green"><i class="far fa-money-bill-alt"></i></span>
+
+											<div class="info-box-content">
+												<span class="info-box-text">VENTAS DEL DÍA</span>
+												<span class="info-box-number">{{totalVentas}}</span>
+												<span class="info-box-text" style="text-transform: none;">
+
+												</span>
+											</div>
+
+											<a class="btn btn-block btn-sm btn-flat btn-default" style="margin:0; border:none; margin-top:6px;" href="ventasDeMostrador">Más información <i class="fa fa-arrow-circle-right"></i></a>
+
+										</div>
+									</div>
+
+									<div class="col-md-3 col-sm-6 col-xs-12">
+										{% set classCaja = (montoTotalCaja != 0) ? '' : 'animated flash infinite' %}
+										<div class="info-box">
+											<span class="info-box-icon bg-black">
+												<i class="fas fa-cash-register {{classCaja}}"></i>
+											</span>
+
+											<div class="info-box-content">
+												<span class="info-box-text">Monto actual en caja</span>
+												<span class="info-box-number {{classCaja}}">{{ montoTotalCaja }}</span>
+												<span class="info-box-text" style="text-transform: none;">
+
+												</span>
+											</div>
+											
+											<a class="btn btn-block btn-sm btn-flat btn-default" style="margin:0; border:none; margin-top:6px;" href="caja">Más información <i class="fa fa-arrow-circle-right"></i></a>
+										</div>
+									</div>
+
+									<div class="col-md-3 col-sm-6 col-xs-12">
+										{% set classCuentas = (cuentasPorCobrar == 0) ? '' : 'animated flash infinite' %}
+										<div class="info-box">
+											<span class="info-box-icon bg-red">
+												<i class="fas fa-file-invoice-dollar {{classCuentas}}"></i>
+											</span>
+
+											<div class="info-box-content">
+												<span class="info-box-text">CUENTAS POR COBRAR</span>
+												<span class="info-box-number {{classCuentas}}">{{cuentasPorCobrar}}</span>
+												<span class="info-box-text" style="text-transform: none;">
+
+												</span>
+											</div>
+
+											<a class="btn btn-block btn-sm btn-flat btn-default" style="margin:0; border:none; margin-top:6px;" href="creditos">Más información <i class="fa fa-arrow-circle-right"></i></a>
+
+										</div>
+									</div>
+
+                                    <div class="col-md-9 col-xs-12 text-center">
+                                        <a href="categorias" class="btn btn-app">
+											<span class="badge bg-blue">{{ totalCategorias }}</span>
+											<i class="fas fa-tag"></i> Categorías
+										</a>
+                                        <a href="subcategorias" class="btn btn-app">
+											<span class="badge bg-blue">{{ totalSubcategorias }}</span>
+											<i class="fas fa-tags"></i> Subcategorías
+										</a>
+                                        <a href="editoriales" class="btn btn-app">
+											<span class="badge bg-blue">{{ totalEditoriales }}</span>
+											<i class="fas fa-building"></i> Editoriales
+										</a>
+                                        <a href="autores" class="btn btn-app">
+											<span class="badge bg-blue">{{ totalAutores }}</span>
+											<i class="fas fa-user-tie"></i> Autores
+										</a>
+										<a href="productos" class="btn btn-app">
+											<span class="badge bg-blue">{{ totalProductos }}</span>
+											<i class="fas fa-box-open"></i> Productos
+										</a>
+                                        <a href="clientes" class="btn btn-app">
+											<span class="badge bg-blue">{{ totalClientes }}</span>
+											<i class="fas fa-users"></i> Clientes
+										</a>
+                                        <a href="proveedores" class="btn btn-app">
+											<span class="badge bg-blue">{{ totalProveedores }}</span>
+											<i class="fas fa-truck"></i> Proveedores
+										</a>
+                                        <a href="registrarCompras" class="btn btn-app font-weight-bold">
+											<i class="fas fa-barcode text-purple"></i> Entrada
+										</a>
+                                        <a href="registrarCredito" class="btn btn-app font-weight-bold">
+											<i class="fas fa-barcode text-orange"></i> Crédito
+										</a>
+                                        <a href="puntoDeVenta" class="btn btn-app font-weight-bold">
+											<i class="fas fa-barcode text-aqua"></i> Salida
+										</a>
+                                    </div>
+
+									<!--<div class="col-md-4 col-sm-6 col-xs-12">
+										<div class="info-box">
+											<span class="info-box-icon bg-yellow"><i class="fas fa-cart-plus"></i></span>
+
+											<div class="info-box-content">
+												<span class="info-box-text">Ventas en linea por atender</span>
+												<span class="info-box-number">0</span>
+												<span class="info-box-text" style="text-transform: none;">
+
+												</span>
+											</div>
+											
+											<a class="btn btn-block btn-sm btn-flat btn-default" style="margin:0; border:none; margin-top:6px;" href="ventasEnLinea">Más información <i class="fa fa-arrow-circle-right"></i></a>
+										</div>
+									</div>-->
+
+									<div class="col-xs-12">
+										<div class="box">
+											<div class="box-header">
+												<h3 class="box-title">Resumen de ventas por mes</h3>
+												<div class="box-tools pull-right">
+													<a href="ventasDeMostrador" class="btn btn-sm btn-default btn-flat font-weight-bold" style="width:160px;">VER SALIDAS</a>
+												</div>
+											</div>
+											<div class="box-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-condensed" id="ventasPorMes">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width:100px;">Año</th>
+                                                                <th style="width:100px;">Mes</th>
+                                                                <th class="text-right" style="width:120px;">Ventas ($)</th>
+                                                                <th class="text-center" style="width:100px;">Porcentaje</th>
+                                                                <th class="text-center">REPRESENTACIÓN GRÁFICA DEL % POR MES</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xs-12">
+										<div class="box">
+											<div class="box-header">
+												<h3 class="box-title">Resumen de compras por mes</h3>
+												<div class="box-tools pull-right">
+													<a href="compras" class="btn btn-sm btn-default btn-flat font-weight-bold" style="width:160px;">VER ENTRADAS</a>
+												</div>
+											</div>
+											<div class="box-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-condensed" id="comprasPorMes">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width:100px;">Año</th>
+                                                                <th style="width:100px;">Mes</th>
+                                                                <th class="text-right" style="width:120px;">Compras ($)</th>
+                                                                <th class="text-center" style="width:100px;">Porcentaje</th>
+                                                                <th class="text-center">REPRESENTACIÓN GRÁFICA DEL % POR MES</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
+											</div>
+										</div>
+									</div>
+								
+								</div>
+
+							</div>
+
+						</div>
+						
+					{% endif %}
+
+				{% endif %}
+				
+			{% endfor %}
+
+	    </section>
+	    <!-- /.content -->
+
+  	</div>
+  	<!-- /.content-wrapper -->
+	
+	{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+{# Morris.js charts #}
+	<!--<script src="assets/plantilla/AdminLTE/bower_components/raphael/raphael.min.js"></script>
+	<script src="assets/plantilla/AdminLTE/bower_components/morris.js/morris.min.js"></script>-->
+{# Google gráficos #}
+	<!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  	<script src="http://www.google.com/jsapi"></script>-->
+  	
+  	<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>-->
+{% endblock %}
+
+{% block scripts %}
+  <script src="assets/jscontrollers/home/home.js"></script>
+{% endblock %}

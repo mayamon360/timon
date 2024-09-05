@@ -1,0 +1,53 @@
+{% extends 'overall/layout' %}
+
+{% block appTitle %}
+    <title>Los más vendidos</title>
+{% endblock %}
+
+{% block appBody %}
+
+    <main class="container mt-2 destacados mb-5">
+        <div class="row px-0 align-items-center">
+            <div class="col-8 col-sm-6 col-md-7 col-lg-9">
+                <p class="m-0 p-0 text-muted font-weight-bold animated fadeIn"><span class="coincidencias"></span></p>
+                <h1 class="m-0 p-0 animated fadeIn titulo_destacado"><i class="fas fa-certificate"></i> Los más vendidos</h1>
+				<div class="my-1 animated fadeIn separador separador_color"></div>
+            </div>
+            <div class="col-4 col-sm-6 col-md-5 col-lg-3 text-right">
+                <div class="input-group input-group-sm mb-0 animated fadeIn my-auto">
+                    <div class="input-group-prepend d-none d-sm-flex">
+                        <label class="input-group-text text-uppercase py-1" for="mostar_resultados"><small>Mostrar</small></label>
+                    </div>
+                    <select class="custom-select custom-select-sm" id="mostar_resultados">
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="75">75</option>
+                        <option value="100">100</option>
+                    </select>
+                    <div class="input-group-prepend">
+                        <label class="input-group-text text-uppercase border-left-0 rounded-right d-none d-sm-flex py-1" for="mostar_resultados"><small>Registros</small></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mt-2">
+                <div class="row" id="resultados">
+                    
+                </div>
+            </div>
+
+            <div class="col-12 mt-5">
+                <div class="text-center d-none div_cargando">
+                    <span class="spinner-grow spinner-grow-sm bg-app" role="status" aria-hidden="true"></span>
+                    Procesando, por favor espere...
+                </div>
+            </div>
+
+        </div>
+    </main>
+    
+{% endblock %}
+
+{% block appFooter %}
+	<script src="assets/jscontrollers/destacados/mas-vendidos.js"></script>
+{% endblock %}

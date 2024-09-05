@@ -1,0 +1,236 @@
+<?php
+
+/* comercio/logotipo.twig */
+class __TwigTemplate_b72f566e853c599a8eced171fd90d21cafcd09b7907a088d840f80bd4d3a90c8 extends Twig_Template
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->parent = false;
+
+        $this->blocks = array(
+        );
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        // line 1
+        echo "<div class=\"box box-primary\">
+
+\t<!--=====================================
+  \tLOGOTIPO
+  \t======================================-->
+
+\t<div class=\"box-header with-border\">
+
+\t\t<h3 class=\"box-title\">LOGOTIPO</h3>
+
+\t\t<div class=\"box-tools pull-right\">
+\t\t\t
+\t\t\t<button type=\"button\" class=\"btn btn-box-tool\" data-widget=\"collapse\" data-toggle=\"tooltip\" title=\"Minimizar\">
+
+\t\t\t\t<i class=\"fa fa-minus\"></i>
+
+\t\t\t</button>
+
+\t\t</div>
+\t
+\t</div>
+
+\t<div class=\"box-body\">
+
+\t\t<div class=\"row\">
+
+\t\t\t<div class=\"col-xs-12 col-sm-6 text-center\">
+\t\t\t\t
+\t\t\t\t<label>Cambiar logo</label>
+
+\t\t\t\t<div>
+\t\t\t\t\t<label for=\"subirLogo\" class=\"btn btn-sm btn-default btn-block\"><i class=\"fa fa-upload\"></i> Selecciona una imagen de tu equipo</label>
+\t\t\t\t\t<input type=\"file\" id=\"subirLogo\" style=\"visibility:hidden;\">
+\t\t\t\t</div>
+
+\t\t\t\t<p class=\"help-block\" style=\"margin-top:-10px;\">Tamaño recomendado 200px * 150px</p>";
+        // line 36
+        echo twig_escape_filter($this->env, ($context["iconoURL"] ?? null), "html", null, true);
+        echo "\t
+\t\t\t\t
+\t\t\t\t<p>
+\t\t\t\t\t<img src=\"assets/plantilla/";
+        // line 39
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["plantilla"] ?? null), "logotipo", array()), "html", null, true);
+        echo "\" class=\"img-thumbnail previsualizarLogo\" style=\"width:200px; max-width: 200px; height: 150px; max-height: 150px;\">
+\t\t\t\t</p>
+\t\t\t\t
+\t\t\t\t<div class=\"hidden-sm visible-xs\" style=\"margin-bottom:30px;\">
+\t\t\t\t\t<button type=\"button\" class=\"btn btn-sm btn-primary guardarLogo\" disabled><i class=\"fa fa-floppy-o\"></i> Guardar Logotipo</button>
+\t\t\t\t</div>
+
+\t\t\t</div>
+\t\t\t
+\t\t\t<div class=\"col-xs-12 col-sm-6 text-center\">
+\t\t\t\t
+\t\t\t\t<label>Cambiar icono</label>
+\t\t\t\t
+\t\t\t\t<div>
+\t\t\t\t\t<label for=\"subirIcono\" class=\"btn btn-sm btn-default btn-block\"><i class=\"fa fa-upload\"></i> Selecciona una imagen de tu equipo</label>
+\t\t\t\t\t<input type=\"file\" id=\"subirIcono\" style=\"visibility:hidden;\">
+\t\t\t\t</div>
+
+\t\t\t\t<p class=\"help-block\" style=\"margin-top:-10px;\">Tamaño recomendado 50px * 50px</p>
+\t\t\t\t
+\t\t\t\t<p style=\"min-height:150px;\">
+\t\t\t\t\t<img src=\"assets/plantilla/";
+        // line 60
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["plantilla"] ?? null), "icono", array()), "html", null, true);
+        echo "\" class=\"img-thumbnail previsualizarIcono\" width=\"width:50px; max-width: 50px; height: 50px; max-height: 50px;\">
+\t\t\t\t</p>
+\t\t\t\t
+\t\t\t\t<div class=\"hidden-sm visible-xs\" style=\"margin-bottom:30px;\">
+\t\t\t\t\t<button type=\"button\" class=\"btn btn-sm btn-primary guardarIcono\" disabled><i class=\"fa fa-floppy-o\"></i> Guardar Icono</button>
+\t\t\t\t</div>
+
+\t\t\t</div>
+
+\t\t</div>
+
+\t</div>
+
+\t<div class=\"box-footer hidden-xs\">
+\t\t
+\t\t<div class=\"row text-center\">
+\t\t\t
+\t\t\t<div class=\"col-xs-12 col-sm-6\">
+\t\t\t\t
+\t\t\t\t<button type=\"button\" class=\"btn btn-sm btn-primary guardarLogo\" disabled><i class=\"fa fa-floppy-o\"></i> Guardar Logotipo</button>
+
+\t\t\t</div>
+
+\t\t\t<div class=\"col-xs-12 col-sm-6\">
+
+\t\t\t\t<button type=\"button\" class=\"btn btn-sm btn-primary guardarIcono\" disabled><i class=\"fa fa-floppy-o\"></i> Guardar Icono</button>
+\t\t\t\t
+\t\t\t</div>
+
+\t\t</div>
+
+\t</div>
+
+
+</div>";
+    }
+
+    public function getTemplateName()
+    {
+        return "comercio/logotipo.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  86 => 60,  62 => 39,  56 => 36,  19 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Twig_Source("<div class=\"box box-primary\">
+
+\t<!--=====================================
+  \tLOGOTIPO
+  \t======================================-->
+
+\t<div class=\"box-header with-border\">
+
+\t\t<h3 class=\"box-title\">LOGOTIPO</h3>
+
+\t\t<div class=\"box-tools pull-right\">
+\t\t\t
+\t\t\t<button type=\"button\" class=\"btn btn-box-tool\" data-widget=\"collapse\" data-toggle=\"tooltip\" title=\"Minimizar\">
+
+\t\t\t\t<i class=\"fa fa-minus\"></i>
+
+\t\t\t</button>
+
+\t\t</div>
+\t
+\t</div>
+
+\t<div class=\"box-body\">
+
+\t\t<div class=\"row\">
+
+\t\t\t<div class=\"col-xs-12 col-sm-6 text-center\">
+\t\t\t\t
+\t\t\t\t<label>Cambiar logo</label>
+
+\t\t\t\t<div>
+\t\t\t\t\t<label for=\"subirLogo\" class=\"btn btn-sm btn-default btn-block\"><i class=\"fa fa-upload\"></i> Selecciona una imagen de tu equipo</label>
+\t\t\t\t\t<input type=\"file\" id=\"subirLogo\" style=\"visibility:hidden;\">
+\t\t\t\t</div>
+
+\t\t\t\t<p class=\"help-block\" style=\"margin-top:-10px;\">Tamaño recomendado 200px * 150px</p>{{ iconoURL }}\t
+\t\t\t\t
+\t\t\t\t<p>
+\t\t\t\t\t<img src=\"assets/plantilla/{{ plantilla.logotipo }}\" class=\"img-thumbnail previsualizarLogo\" style=\"width:200px; max-width: 200px; height: 150px; max-height: 150px;\">
+\t\t\t\t</p>
+\t\t\t\t
+\t\t\t\t<div class=\"hidden-sm visible-xs\" style=\"margin-bottom:30px;\">
+\t\t\t\t\t<button type=\"button\" class=\"btn btn-sm btn-primary guardarLogo\" disabled><i class=\"fa fa-floppy-o\"></i> Guardar Logotipo</button>
+\t\t\t\t</div>
+
+\t\t\t</div>
+\t\t\t
+\t\t\t<div class=\"col-xs-12 col-sm-6 text-center\">
+\t\t\t\t
+\t\t\t\t<label>Cambiar icono</label>
+\t\t\t\t
+\t\t\t\t<div>
+\t\t\t\t\t<label for=\"subirIcono\" class=\"btn btn-sm btn-default btn-block\"><i class=\"fa fa-upload\"></i> Selecciona una imagen de tu equipo</label>
+\t\t\t\t\t<input type=\"file\" id=\"subirIcono\" style=\"visibility:hidden;\">
+\t\t\t\t</div>
+
+\t\t\t\t<p class=\"help-block\" style=\"margin-top:-10px;\">Tamaño recomendado 50px * 50px</p>
+\t\t\t\t
+\t\t\t\t<p style=\"min-height:150px;\">
+\t\t\t\t\t<img src=\"assets/plantilla/{{ plantilla.icono }}\" class=\"img-thumbnail previsualizarIcono\" width=\"width:50px; max-width: 50px; height: 50px; max-height: 50px;\">
+\t\t\t\t</p>
+\t\t\t\t
+\t\t\t\t<div class=\"hidden-sm visible-xs\" style=\"margin-bottom:30px;\">
+\t\t\t\t\t<button type=\"button\" class=\"btn btn-sm btn-primary guardarIcono\" disabled><i class=\"fa fa-floppy-o\"></i> Guardar Icono</button>
+\t\t\t\t</div>
+
+\t\t\t</div>
+
+\t\t</div>
+
+\t</div>
+
+\t<div class=\"box-footer hidden-xs\">
+\t\t
+\t\t<div class=\"row text-center\">
+\t\t\t
+\t\t\t<div class=\"col-xs-12 col-sm-6\">
+\t\t\t\t
+\t\t\t\t<button type=\"button\" class=\"btn btn-sm btn-primary guardarLogo\" disabled><i class=\"fa fa-floppy-o\"></i> Guardar Logotipo</button>
+
+\t\t\t</div>
+
+\t\t\t<div class=\"col-xs-12 col-sm-6\">
+
+\t\t\t\t<button type=\"button\" class=\"btn btn-sm btn-primary guardarIcono\" disabled><i class=\"fa fa-floppy-o\"></i> Guardar Icono</button>
+\t\t\t\t
+\t\t\t</div>
+
+\t\t</div>
+
+\t</div>
+
+
+</div>", "comercio/logotipo.twig", "C:\\xampp\\htdocs\\ocrend\\app\\templates\\comercio\\logotipo.twig");
+    }
+}

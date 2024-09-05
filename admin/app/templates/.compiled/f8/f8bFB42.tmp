@@ -1,0 +1,322 @@
+<?php
+
+/* comercio/colores.twig */
+class __TwigTemplate_1b5338c3e7912e7416de15ce3acb6e8dd4f34bd75c8e13ecae34aeb6eed9dc59 extends Twig_Template
+{
+    public function __construct(Twig_Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->parent = false;
+
+        $this->blocks = array(
+        );
+    }
+
+    protected function doDisplay(array $context, array $blocks = array())
+    {
+        // line 1
+        echo "<div class=\"box box-warning\" id=\"boxColores\">
+\t
+\t<div class=\"box-header with-border\">
+\t\t
+\t\t<h3 class=\"box-title\">COLORES</h3>
+
+\t\t<div class=\"box-tools pull-right\">
+
+      \t\t<button type=\"button\" class=\"btn btn-box-tool\" data-widget=\"collapse\" data-toggle=\"tooltip\" title=\"Collapse\">
+
+        \t\t<i class=\"fa fa-minus\"></i>
+
+        \t</button>
+
+        </div>
+
+\t</div>
+
+ \t<div class=\"box-body\">
+\t\t
+\t\t<div class=\"text-center\">
+ \t\t\t<label>Barra superior</label>
+ \t\t</div>
+
+\t  \t<div class=\"form-group\">
+\t      
+\t      \t<p>Color del fondo:</p>
+
+\t      \t<div class=\"input-group my-colorpicker\">
+\t      \t\t
+\t\t\t \t<input type=\"text\" class=\"form-control my-colorpicker cambioColor\" id=\"barraSuperior\" value=\"";
+        // line 31
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["plantilla"] ?? null), "fondoBarraSuperior", array()), "html", null, true);
+        echo "\">
+
+\t\t\t  \t<div class=\"input-group-addon\" style=\"background: #fcfcfc;\">
+\t\t          <i></i>
+\t    \t\t</div>
+\t      \t\t\t
+\t      \t</div>
+
+\t \t</div>
+
+      \t<div class=\"form-group\">
+      
+\t  \t\t<p>Color del texto:</p>
+
+\t      \t<div class=\"input-group my-colorpicker\">
+\t        
+\t        \t<input type=\"text\" class=\"form-control my-colorpicker cambioColor\" id=\"textoSuperior\" value=\"";
+        // line 47
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["plantilla"] ?? null), "colorTextoBarraSuperior", array()), "html", null, true);
+        echo "\">
+
+\t        \t<div class=\"input-group-addon\" style=\"background: #fcfcfc;\">
+\t          \t\t<i></i>
+\t        \t</div>
+
+\t      \t</div>
+
+\t    </div>
+
+\t    <div class=\"form-group\">
+      
+\t  \t\t<p>Color al pasar sobre el texto:</p>
+
+\t      \t<div class=\"input-group my-colorpicker\">
+\t        
+\t        \t<input type=\"text\" class=\"form-control my-colorpicker cambioColor\" id=\"textoHover\" value=\"";
+        // line 63
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["plantilla"] ?? null), "colorTextoHoverBarraSuperior", array()), "html", null, true);
+        echo "\">
+
+\t        \t<div class=\"input-group-addon\" style=\"background: #fcfcfc;\">
+\t          \t\t<i></i>
+\t        \t</div>
+
+\t      \t</div>
+
+\t    </div>
+
+\t   \t<div class=\"form-group\">
+\t      
+\t\t    <p>Color borde:</p>
+
+\t    \t<div class=\"input-group my-colorpicker\">
+\t        
+\t        \t<input type=\"text\" class=\"form-control my-colorpicker cambioColor\" id=\"colorBorde\" value=\"";
+        // line 79
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["plantilla"] ?? null), "borderDivisor", array()), "html", null, true);
+        echo "\">
+
+\t        \t<div class=\"input-group-addon\" style=\"background: #fcfcfc;\">
+\t        \t\t<i></i>
+\t        \t</div>
+
+\t      \t</div>
+
+\t    </div>
+
+\t    <div class=\"text-center\">
+ \t\t\t<label>Plantilla</label>
+ \t\t</div>
+
+\t    <div class=\"form-group\">
+\t      
+\t      <p>Primer color:</p>
+
+\t      <div class=\"input-group my-colorpicker\">
+\t        
+\t        <input type=\"text\" class=\"form-control my-colorpicker cambioColor\" id=\"colorP1\" value=\"";
+        // line 99
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["plantilla"] ?? null), "colorPlantilla", array()), "html", null, true);
+        echo "\">
+
+\t        <div class=\"input-group-addon\" style=\"background: #fcfcfc;\">
+\t          <i></i>
+\t        </div>
+
+\t      </div>
+
+\t    </div>
+\t\t
+\t\t
+\t\t<p>Segundo color:</p>
+\t\t<div class=\"input-group\">
+      \t\t
+\t\t\t<input type=\"text\" class=\"form-control colorPlantillaDos\" value=\"";
+        // line 113
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["plantilla"] ?? null), "colorPlantillaDos", array()), "html", null, true);
+        echo "\">
+
+      \t\t<div class=\"input-group-addon\" id=\"colorPlantillaDos\" style=\"cursor: pointer; color: ";
+        // line 115
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->getSourceContext(), ($context["plantilla"] ?? null), "colorPlantillaDos", array()), "html", null, true);
+        echo ";\">
+
+      \t\t\t<i class=\"fa fa-square\"></i>
+
+      \t\t</div>
+    \t
+    \t</div>
+
+ \t</div>
+
+ \t<div class=\"box-footer\">
+      
+    \t<button type=\"button\" id=\"guardarColores\" class=\"btn btn-sm btn-primary pull-right\" disabled><i class=\"fa fa-floppy-o\"></i> Guardar colores</button>
+    
+  \t</div>
+
+</div>";
+    }
+
+    public function getTemplateName()
+    {
+        return "comercio/colores.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  153 => 115,  148 => 113,  131 => 99,  108 => 79,  89 => 63,  70 => 47,  51 => 31,  19 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Twig_Source("<div class=\"box box-warning\" id=\"boxColores\">
+\t
+\t<div class=\"box-header with-border\">
+\t\t
+\t\t<h3 class=\"box-title\">COLORES</h3>
+
+\t\t<div class=\"box-tools pull-right\">
+
+      \t\t<button type=\"button\" class=\"btn btn-box-tool\" data-widget=\"collapse\" data-toggle=\"tooltip\" title=\"Collapse\">
+
+        \t\t<i class=\"fa fa-minus\"></i>
+
+        \t</button>
+
+        </div>
+
+\t</div>
+
+ \t<div class=\"box-body\">
+\t\t
+\t\t<div class=\"text-center\">
+ \t\t\t<label>Barra superior</label>
+ \t\t</div>
+
+\t  \t<div class=\"form-group\">
+\t      
+\t      \t<p>Color del fondo:</p>
+
+\t      \t<div class=\"input-group my-colorpicker\">
+\t      \t\t
+\t\t\t \t<input type=\"text\" class=\"form-control my-colorpicker cambioColor\" id=\"barraSuperior\" value=\"{{plantilla.fondoBarraSuperior}}\">
+
+\t\t\t  \t<div class=\"input-group-addon\" style=\"background: #fcfcfc;\">
+\t\t          <i></i>
+\t    \t\t</div>
+\t      \t\t\t
+\t      \t</div>
+
+\t \t</div>
+
+      \t<div class=\"form-group\">
+      
+\t  \t\t<p>Color del texto:</p>
+
+\t      \t<div class=\"input-group my-colorpicker\">
+\t        
+\t        \t<input type=\"text\" class=\"form-control my-colorpicker cambioColor\" id=\"textoSuperior\" value=\"{{plantilla.colorTextoBarraSuperior}}\">
+
+\t        \t<div class=\"input-group-addon\" style=\"background: #fcfcfc;\">
+\t          \t\t<i></i>
+\t        \t</div>
+
+\t      \t</div>
+
+\t    </div>
+
+\t    <div class=\"form-group\">
+      
+\t  \t\t<p>Color al pasar sobre el texto:</p>
+
+\t      \t<div class=\"input-group my-colorpicker\">
+\t        
+\t        \t<input type=\"text\" class=\"form-control my-colorpicker cambioColor\" id=\"textoHover\" value=\"{{plantilla.colorTextoHoverBarraSuperior}}\">
+
+\t        \t<div class=\"input-group-addon\" style=\"background: #fcfcfc;\">
+\t          \t\t<i></i>
+\t        \t</div>
+
+\t      \t</div>
+
+\t    </div>
+
+\t   \t<div class=\"form-group\">
+\t      
+\t\t    <p>Color borde:</p>
+
+\t    \t<div class=\"input-group my-colorpicker\">
+\t        
+\t        \t<input type=\"text\" class=\"form-control my-colorpicker cambioColor\" id=\"colorBorde\" value=\"{{plantilla.borderDivisor}}\">
+
+\t        \t<div class=\"input-group-addon\" style=\"background: #fcfcfc;\">
+\t        \t\t<i></i>
+\t        \t</div>
+
+\t      \t</div>
+
+\t    </div>
+
+\t    <div class=\"text-center\">
+ \t\t\t<label>Plantilla</label>
+ \t\t</div>
+
+\t    <div class=\"form-group\">
+\t      
+\t      <p>Primer color:</p>
+
+\t      <div class=\"input-group my-colorpicker\">
+\t        
+\t        <input type=\"text\" class=\"form-control my-colorpicker cambioColor\" id=\"colorP1\" value=\"{{plantilla.colorPlantilla}}\">
+
+\t        <div class=\"input-group-addon\" style=\"background: #fcfcfc;\">
+\t          <i></i>
+\t        </div>
+
+\t      </div>
+
+\t    </div>
+\t\t
+\t\t
+\t\t<p>Segundo color:</p>
+\t\t<div class=\"input-group\">
+      \t\t
+\t\t\t<input type=\"text\" class=\"form-control colorPlantillaDos\" value=\"{{plantilla.colorPlantillaDos}}\">
+
+      \t\t<div class=\"input-group-addon\" id=\"colorPlantillaDos\" style=\"cursor: pointer; color: {{plantilla.colorPlantillaDos}};\">
+
+      \t\t\t<i class=\"fa fa-square\"></i>
+
+      \t\t</div>
+    \t
+    \t</div>
+
+ \t</div>
+
+ \t<div class=\"box-footer\">
+      
+    \t<button type=\"button\" id=\"guardarColores\" class=\"btn btn-sm btn-primary pull-right\" disabled><i class=\"fa fa-floppy-o\"></i> Guardar colores</button>
+    
+  \t</div>
+
+</div>", "comercio/colores.twig", "C:\\xampp\\htdocs\\ocrend\\app\\templates\\comercio\\colores.twig");
+    }
+}

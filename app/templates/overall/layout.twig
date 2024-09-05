@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+{% block appTitle %}
+     <title>{{ cabeceras.titulo }}</title>
+     <meta name="title" content="{{ cabeceras.titulo }}">
+{% endblock %}
+{% block appDescription %}
+     <meta name="description" content="{{ cabeceras.descripcion[0:297] }}">
+{% endblock %}
+{% block appKeyword %}
+     <meta name="keyword" content="{{ cabeceras.palabrasClave }}"> 
+{% endblock %}
+{% block appImage %}
+     <link rel="image_src" href="{{cabeceras.portada}}">
+{% endblock %}
+     <meta name="revisit" content="15 days">
+     <meta name="revisit-after" content="1 days">
+     <meta name="robots" content="index,follow">
+{% block ogTitle %}  
+     <meta property="og:title" content="{{ cabeceras.titulo }}">
+{% endblock %}
+{% block ogUrl %}
+     <meta property="og:url" content="{{config.build.url}}{{cabeceras.ruta}}">
+{% endblock %}
+{% block ogdescription %}
+     <meta property="og:description" content="{{cabeceras.descripcion}}">
+{% endblock %}
+{% block ogImage %}
+     <meta property="og:image" content="{{config.build.url}}{{cabeceras.portada}}">
+{% endblock %}
+{% block ogType %}
+     <meta property="og:type" content="website">
+{% endblock %}
+{% block ogSiteName %}
+     <meta property="og:site_name" content="{{config.build.name}}">
+{% endblock %}
+{% block ogLocale %}
+     <meta property="og:locale" content="es_MX">
+{% endblock %}
+
+     {{ base_assets()|raw }}
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+     <meta name="theme-color" id="theme-color" content="{{colores.appColor1}}"/>
+     <link rel="icon" href="{{config.build.url}}{{config.mailer.favicon}}" sizes="any" type="image/svg+xml">
+{# Fonts #}
+     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet"> 
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Asap+Condensed:400,500,600,700&display=swap">
+{# Animate CSS #}
+     <link rel="stylesheet" href="./assets/plugins/animate/animate.css">
+{# Boomerang CSS (including Bootstrap) #}
+     <link rel="stylesheet" href="./assets/plantilla/boomerang-ui-kit/assets/css/theme.css">
+{# https://owlcarousel2.github.io/OwlCarousel2/ #}
+     <link rel="stylesheet" href="./assets/plugins/carousel/owl.carousel.min.css">
+{# Estilos personalizados en general #}
+     <link rel="stylesheet" href="./assets/plantilla/plantilla.css">
+     <style>
+     :root {
+         --appColor1-HEX:{{colores.appColor1}}!important;--appColor2-HEX:{{colores.appColor2}}!important;--appColor3-HEX:{{colores.appColor3}}!important;--appColor4-HEX:{{colores.appColor4}}!important;
+     } 
+     </style>
+     <!-- Global site tag (gtag.js) - Google Analytics -->
+     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-85055210-3"></script>
+     <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'UA-85055210-3');
+    </script>
+    <script type="application/ld+json">
+    {
+    	"@context" : "https://schema.org",
+    	"@type" : "Store",
+    	"name" : "{{config.build.name}}",
+    	"url" : "{{config.build.url}}",
+    	"logo": "{{config.build.url}}{{config.mailer.logo}}",
+    	"address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Instituto Literario, esquina, Juan Aldama 300-A",
+            "addressLocality": "Toluca de Lerdo",
+            "addressRegion": "México",
+            "addressCountry" : "México",
+            "postalCode": "50130" 
+        },
+        "priceRange": "$$",
+        "image": "{{config.build.url}}{{ config.mailer.logo }}",
+        "telephone": "722 167 0727 ",
+        "email": "montiel_989@hotmail.com"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "{{config.build.name}}"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "{{config.build.url}}",
+      "logo": "{{config.build.url}}{{config.mailer.logo}}"
+    }
+    </script>
+    
+{% block appHeader %}
+{% endblock %}
+</head>
+<body style="overflow-x:hidden;">
+    <!--<div class="tpl-snow">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>-->
+{% include 'overall/header' %}
+    {% block appBody %}
+    {% endblock %}
+    {% include 'overall/footer' %}
+    {# jQuery primero #}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--<script src="./assets/vendor/jquery-3.3.1.min.js"></script>-->
+    {# Popper.js #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <!--<script src="./assets/vendor/popper.min.js"></script>-->
+    {# Bootstrap JS #}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!--<script src="./assets/vendor/bootstrap.min.js"></script>-->
+    {# FontAwesome 5.7.2 #}
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    {# https://github.com/mattbryson/TouchSwipe-Jquery-Plugin #}
+    <script src="./assets/plugins/jquery-touchSwipe/jquery.touchSwipe.min.js"></script>
+    {# https://owlcarousel2.github.io/OwlCarousel2/ #}
+    <script src="./assets/plugins/carousel/owl.carousel.min.js"></script>
+    {# Sweet alert 2.0 #}
+    <script src="./assets/plugins/sweetalert/sweetalert.min.js"></script>
+    
+    <script src="./assets/plantilla/boomerang-ui-kit/assets/js/theme.js"></script>
+    
+    {# js funciones generales #}
+    <script src="./assets/plantilla/plantilla.js"></script>
+    {% block appFooter %}
+    {% endblock %}
+</body>
+</html>

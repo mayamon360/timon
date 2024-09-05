@@ -1,0 +1,491 @@
+{# PLANTILLA PUNTO DE VENTA #}
+
+{% extends 'overall/layout' %}
+
+{% block titleSeccion %}
+    <title>Registrar salida</title>
+{% endblock %}
+
+{% block appHeader %}
+{# DataTables #}
+    <link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/1.10.20/css/dataTables.bootstrap.min.css"><!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css">-->
+    <link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/css/responsive.bootstrap.css"/>
+{# Select2 #}
+    <link rel="stylesheet" href="assets/plantilla/AdminLTE/bower_components/select2/dist/css/select2.min.css">
+{# Bootstrap Datetimepicker #} 
+{# https://bootstrap-datepicker.readthedocs.io/en/latest/index.html #} 
+    <link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/css/bootstrap-datepicker.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
+{# Estilos personalizados #}
+<link rel="stylesheet" href="assets/plantilla/vistas/css/datatables.css">
+{% endblock %} 
+
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+  	{% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+	    <!-- Section content -->
+	    <section class="content">
+
+			{% if cajaAbiertaHoy == 'no' %}
+			    <div class="callout callout-warning animated flash">
+			        <h4>!Caja en $ 0.00!</h4>
+			        Para poder realizar ventas, es necesario <a id="opciones_aperturaCaja" href="#" data-toggle="modal" data-target="#modalRegistrarMonto">registrar monto incial del día en caja</a>.
+			    </div>
+				{% include 'caja/registrarMonto' %}
+			{% endif %}
+
+			<div class="row">
+
+                {# CAJA BUSCADOR SUPERIOR #}
+                <div class="col-xs-12">
+
+                    <div class="box">
+
+			            <div class="box-header with-border">
+			                <h3 class="box-title text-uppercase font-weight-bold">Registrar salida</h3>
+                            <div class="box-tools pull-right">
+                            	<a href="caja" class="btn btn-default btn-sm btn-flat font-weight-bold text-uppercase">CAJA</a>
+                            	<a href="productos" class="btn btn-default btn-sm btn-flat font-weight-bold text-uppercase">PRODUCTOS</a>
+                                <a href="ventasDeMostrador" class="btn btn-default btn-sm btn-flat font-weight-bold text-uppercase">VER SALIDAS</a>
+                                <button data-toggle="modal" data-target="#modalConfirmarVenta" id="btnModalConfirmarVenta" class="btn bg-aqua btn-sm btn-flat font-weight-bold hidden" style="margin-left:20px;">CONTINUAR <i class="fas fa-angle-double-right"></i></button>  
+                            </div>
+			            </div>
+
+			            <div class="box-body">
+
+		            		<div class="row">
+								
+                                {# BUSCADOR #}
+                                <div class="col-xs-6">
+                                    <form id="buscador">
+                                        <div class="form-group" style="margin-bottom:0;">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control input-sm" id="busqueda" name="busqueda" placeholder="Buscar por código o nombre del producto" autocomplete='off'>
+                                                <span class="input-group-btn buscarLimpiar">
+                                                    <button type="button" class="btn btn-sm btn-flat btn-default" id="buscarProducto">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-flat btn-default hidden" id="limpiarB">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-xs-2">
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="modal" data-target="#modalProductos" id="btnModalProductos"><i class="fas fa-search-plus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-4 text-right">
+                                    <span class="badge bg-aqua font-weight-bold text-uppercase" style="margin-right:10px;">En salida:</span>
+                                    <span class="badge bg-black" style="vertical-align:middle;" id="totalCantSuperior">0</span>
+                                    <span class="badge bg-red" style="vertical-align:middle;" id="totalSuperior">0.00</span>
+                                </div>
+
+		            		</div>
+			            	
+			            </div>
+
+                        <div id="diProcesando" class="hidden" style="vertical-align:middle;">
+                            <p class="text-center" style="margin:0; padding:10px 0px 20px 0px;">Procesando, por favor espere...</p>
+                        </div>
+			            <div class="box-body no-padding divResultadosBusquedaPV hidden">							
+							<div class="table-responsive tableFixHead">
+				              	<table class="table table-bordered table-hover resultadosBusquedaPV">
+				                	<tbody><div class="loader hidden"></div></tbody>
+				              	</table>
+				             </div>
+			            </div>
+
+			        </div>
+
+                </div>
+                {# BUSCADOR SUPERIOR #}
+
+				{# PRODUCTOS EN LA LISTA #}
+				<div class="col-xs-12">
+					
+					<div class="box" id="resumenVenta">
+
+						<div class="box-header with-border">
+							<div class="row">
+								<div class="col-xs-5">
+									<h3 class="box-title" style="vertical-align:middle;">Productos en lista de salida</h3>
+								</div>
+								<div class="col-xs-7">
+									<div class="divLimpiarListaVenta hidden">
+										<div class="col-xs-9 col-sm-10 col-lg-11 text-right">
+					              			<div class="form-group pull-right" style="margin-bottom:0;">
+							              		<div class="input-group" style="width:140px;">
+												  	<span class="input-group-addon bg-gray" style="padding-left:5px; padding-right:5px;"><small><b>DTO. GRAL.</b></small></span>
+				                    				<input class="form-control input-sm" type="text" value="0" id="descuentoGeneral" placeholder="0">
+				                    				<span class="input-group-addon bg-gray" style="padding-left:1px; padding-right:1px;"><i class="fas fa-percent fa-xs"></i></span>
+				                				</div>
+				                			</div>
+				                		</div>
+				                		<div class="col-xs-3 col-sm-2 col-lg-1 no-padding text-right">
+											<button type="button" class="btn btn-default btn-flat btn-sm limpiarListaVenta" data-toggle="tooltip" title="Vaciar lista">
+												<i class="fas fa-trash-alt text-red"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+			            </div>
+						<!-- .box-header -->
+
+			            <div class="box-body no-padding">
+			            	<div class="table-responsive">
+				            	<table class="table table-condensed">
+				            		<thead class="bg-navy text-uppercase">
+				            			<tr>
+                                            <th style="width:50px; min-width:50px;" class="text-center"></th>
+				            				<th style="width:70px; min-width:70px;" class="text-center">Cantidad</th>
+				            				<th style="width:500px;">Descripción</th>
+				            				<th style="width:140px; min-width:140px;" class="text-center"><span class="badge bg-blue">Precio</span></th>
+				            				<th style="width:70px; min-width:70px;" class="text-right">Descuento</th>
+				            				<th style="width:80px; min-width:80px;" class="text-right">Importe</th>
+				            				<th style="width:32.5px;"></th>
+				            			</tr>
+				            		</thead>
+				            		<tbody id="listaProductosVenta"></tbody>
+				            		<tfoot>
+										<tr>
+                                            <th></h>
+				            				<th class="text-center" id="sumaCantidad"></th>
+				            				<th colspan="3" class="text-right">TOTAL:</th>
+				            				<th class="text-right text-red" style="font-weight:bold;" id="total"></th>
+				            			</tr>
+				            		</tfoot>
+				            	</table>
+				            </div>
+			            </div>
+						<!-- .box-body -->
+
+					</div>
+					<!-- .box -->	
+				      
+				</div>
+                {# PRODUCTOS EN LA LISTA #}
+
+				{# MODAL INFORMACIÓN DE LA SALIDA #}
+                <div id="modalConfirmarVenta" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-black-active text-center">
+                                <h1 id="totalTitulo" style="font-family: 'Russo One', sans-serif; color:#00ff00; margin:0; padding: 0px;">0.00</h1>
+                                <input type="hidden" id="totalInput" value="">
+                            </div>
+                            <div class="box-body">
+
+                                <div id="infoVenta">
+                                    <ul class="nav nav-tabs nav-justified">
+                                        <li class="">
+                                            <a class="font-weight-bold text-uppercase" href="#tab_consignacion" id="btn_tab_consignacion" data-toggle="tab" aria-expanded="false">
+                                                Salida DE CONSIGNACIÓN o ajuste
+                                            </a>
+                                        </li>
+                                        <li class="active">
+                                            <a class="font-weight-bold text-uppercase" href="#tab_venta" id="btn_tab_venta" data-toggle="tab" aria-expanded="true">
+                                                Venta de mostrador
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane" id="tab_consignacion" style="padding-top:20px;">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <p class="font-weight-bold text-uppercase"><small>Proveedor o acción:</small></p>
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fas fa-truck"></i></span>
+                                                            <select class="form-control seleccionar input-sm" name="proveedor" id="seleccionar_proveedor" style="width: 100%; max-width:100%;" lang="es" data-placeholder="Proveedor o acción" data-allow-clear="true">
+                                                                <option></option>
+                                                                <optgroup label="Acciones disponibles">
+                                                                    <option value='1'>AJUSTE DE INVENTARIO</option>
+                                                                    <option value='2'>MOVIMIENTO DE BODEGA</option>
+                                                                </option>
+                                                                <optgroup label="Proveedores disponibles">
+                                                                    {% for d in proveedores %}
+                                                                        {% if d.estado == 1 and d.id_proveedor != 1 and d.id_proveedor != 2 %}
+                                                                            <option value='{{d.id_proveedor}}'>{{d.proveedor}}</option>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                </optgroup>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="divConfirmarVenta hidden">
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <p class="font-weight-bold text-uppercase"><small>Referencia</small></p>
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fas fa-file-invoice"></i></span>
+                                                                <input type="text" class="form-control input-sm" placeholder="Referencia" id="referencia">
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                
+                                                    <div class="col-xs-4">
+                                                        <button type="button" class="btn btn-sm btn-block bg-blue btn-flat text-uppercase font-weight-bold" id="consignacion">Salida de consignación</button>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <button type="button" class="btn btn-sm btn-block bg-navy btn-flat text-uppercase font-weight-bold" id="ajuste">Ajuste de inventario (restar)</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- #tab_consignacion -->
+
+                                        <div class="tab-pane active" id="tab_venta" style="padding-top:20px;">
+                                            <div class="row">
+                                        
+                                                <div class="col-xs-10 col-sm-6">											
+                                                    <div class="form-group">
+                                                        <label class="font-weight-bold text-uppercase"><small>Cliente:</small></label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fas fa-user"></i></span>
+                                                            <select class="form-control seleccionar input-sm" name="cliente" id="seleccionar_cliente" style="width: 100%; max-width:100%;" lang="es" data-placeholder="Seleccionar cliente" data-allow-clear="true"></select>
+                                                            <span class="input-group-btn">
+                                                                <button type="button" class="btn btn-sm btn-default btn-block agregarCliente" data-toggle="modal" data-target="#modalAgregar">
+                                                                    <i class="fas fa-plus"></i>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-12 col-md-6">											
+                                                    <div class="form-group">
+                                                        <label class="font-weight-bold text-uppercase"><small>Comprobante:</small></label>
+                                                        <select class="form-control input-sm" name="documento" id="documento" style="width: 100%;">
+                                                            <option value="1">Ticket</option>
+                                                        </select>
+                                                    </div>
+                                                </div>									
+
+                                                <div class="divConfirmarVenta hidden">
+
+                                                    <div class="col-xs-12 col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="font-weight-bold text-uppercase"><small>Método de pago:</small></label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fas fa-wallet"></i></span>
+                                                                <select class="form-control input-sm" id="metodoPago" name="metodoPago" style="width: 100%;" placeholder="Método de pago">
+                                                                    <option value="efectivo" selected="selected">Efectivo</option>
+                                                                    <option value="tarjeta">Tarjeta</option>
+                                                                    <option value="mixto">Mixto</option>
+                                                                    <option value="puntos">Puntos</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    {# PAGO EFECTIVO #}
+                                                    <div class="divPagoEfectivo">
+                                                        <div class="col-xs-12 col-md-2"></div>
+                                                        <div class="col-xs-6 col-md-3">
+                                                            <div class="form-group hidden">
+                                                                <label class="font-weight-bold text-uppercase"><small>Cambio:</small></label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fas fa-dollar-sign"></i></span>
+                                                                    <input type="text" class="form-control input-sm text-right" placeholder="0.00" id="cambio" disabled="disabled">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="font-weight-bold text-uppercase"><small>Monto en efectivo:</small></label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fas fa-dollar-sign"></i></span>
+                                                                    <input type="text" class="form-control input-sm text-right" placeholder="0.00" id="efectivo" value="" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    {# PAGO TARJETA #}
+                                                    <div class="divPagoTarjeta hidden">
+                                                        <div class="col-xs-12 col-md-9">
+                                                            <div class="form-group">
+                                                                <label class="font-weight-bold text-uppercase"><small>Código de transacción:</small></label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fas fa-receipt"></i></span>
+                                                                    <input type="text" class="form-control input-sm" placeholder="Código de transacción" id="transaccion" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    {# PAGO MIXTO #}
+                                                    <div class="divPagoMixto hidden">
+                                                        <div class="col-xs-6 col-md-3 hidden">
+                                                            <div class="form-group">
+                                                                <label class="font-weight-bold text-uppercase"><small>Cambio:</small></label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fas fa-dollar-sign"></i></span>
+                                                                    <input type="text" class="form-control input-sm text-right" placeholder="0.00" id="cambioMixto" disabled="disabled">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    	<div class="col-xs-12 col-md-5">
+                                                    		<div class="form-group">
+                                                                <label class="font-weight-bold text-uppercase"><small>Monto en tarjeta:</small></label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fas fa-dollar-sign"></i></span>
+                                                                    <input type="text" class="form-control input-sm text-right" placeholder="0.00" id="montoTarjeta" value="">
+                                                                </div>
+                                                            </div>
+                                                    	</div>
+                                                    	<div class="col-xs-12 col-md-4">
+                                                    		<div class="form-group">
+                                                                <label class="font-weight-bold text-uppercase"><small>Monto en efectivo:</small></label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fas fa-dollar-sign"></i></span>
+                                                                    <input type="text" class="form-control input-sm text-right" placeholder="0.00" id="montoEfectivo" value="">
+                                                                </div>
+                                                            </div>
+                                                    	</div>
+                                                        <div class="col-xs-12 col-xs-offset-0 col-md-9 col-md-offset-3">
+                                                            <div class="form-group">
+                                                                <label class="font-weight-bold text-uppercase"><small>Código de transacción:</small></label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fas fa-receipt"></i></span>
+                                                                    <input type="text" class="form-control input-sm" placeholder="Código de transacción" id="transaccionMixto" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-12">
+                                                        <div class="row">
+                                                            <div class="col-xs-8 text-right">
+                                                                <p class="help-block text-red font-weight-bold btnClick hidden" style="margin:0; padding-top:5px;">Clic sobre el botón >></p>
+                                                            </div>
+                                                            <div class="col-xs-4">
+                                                                <button type="button" class="btn btn-sm btn-block btn-flat bg-blue text-uppercase font-weight-bold" id="confirmar" metodo="confirmar"><i class="fas fa-check"></i> Confirmar Venta</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        
+                                    <!-- #tab_venta -->
+                                    </div>
+                                
+                                <!-- .tab-content -->
+                                </div>
+                            <!-- .box-body -->
+                            </div>
+                            <div class="modal-footer text-right">
+                              <button type="button" class="btn btn-default btn-sm text-uppercase btn-flat font-weight-bold btnCerrar" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				{# MODAL INFORMACIÓN DE LA SALIDA #}
+
+                {# MODAL CARGAR PRODUCTOS #}
+                <div id="modalProductos" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Productos</h4>
+                            </div>
+                            <div class="box-body">
+					            <div class="table-responsive">
+                                    <table class="table table-condensed table-bordered table-hover" style="width:100%" id="tablaProductosVer">
+                                        <thead class="bg-navy text-uppercase">
+                                            <th>CÓDIGO</th>
+                                            <th>ID</th>
+                                            <th>PRODUCTO</th>
+                                            <th>AUTOR</th>
+                                            <th>EDITORIAL</th>
+                                            <th><span class="badge bg-blue">PRECIO</span></th>
+                                            <th>STOCK</th>
+                                            
+                                            <th></th>
+                                        </thead>
+                                        <tbody></tdoby>
+                                        <tfoot class="bg-navy text-uppercase">
+                                            <th>CÓDIGO</th>
+                                            <th>ID</th>
+                                            <th>PRODUCTO</th>
+                                            <th>AUTOR</th>
+                                            <th>EDITORIAL</th>
+                                            <th><span class="badge bg-blue">PRECIO</span></th>
+                                            <th>STOCK</th>
+                                            <th></th>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer text-right">
+                              <button type="button" class="btn btn-default font-weight-bold btn-flat text-uppercase btn-sm btnCerrar" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {# MODAL CARGAR PRODUCTOS #}
+
+			</div>
+			<!-- .row -->
+
+			{% include 'clientes/agregar' %}
+
+	    </section>
+	    <!-- /.content -->
+
+	</div>
+  	<!-- /.content-wrapper -->
+
+  	{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+{# DataTables #}
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/js/dataTables.responsive.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.20/filtering/type-based/accent-neutralise.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.20/features/searchHighlight/dataTables.searchHighlight.min.js"></script>
+	<script type="text/javascript" src="https://bartaz.github.io/sandbox.js/jquery.highlight.js"></script>
+{# InputMask #}
+	<script src="assets/plantilla/AdminLTE/plugins/input-mask/dist/jquery.inputmask.bundle.js"></script>
+{# Bootstrap Datetimepicker#}
+{# https://bootstrap-datepicker.readthedocs.io/en/latest/index.html #}
+  	<script type="text/javascript" src="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+  	<script type="text/javascript" src="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/locales/bootstrap-datepicker.es.min.js"></script>
+{# Select2 #}
+    <script src="assets/plantilla/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+{# Libreria español #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>  
+
+{# Script principal #}
+    <script src="assets/jscontrollers/puntodeventa/puntodeventa.js"></script>
+{% endblock %}
+
+{# PLANTILLA PUNTO DE VENTA #}

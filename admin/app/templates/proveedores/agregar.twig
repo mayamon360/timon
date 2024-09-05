@@ -1,0 +1,77 @@
+<!-- MODAL AGREGAR -->
+<div id="modalAgregar" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		    <div class="modal-content">
+			<div class="modal-header">
+  			   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    			    <span aria-hidden="true">&times;</span>
+    			</button>
+  			    <h4 class="modal-title"><i class="fas fa-plus"></i> Agregar proveedor</h4>
+			</div>
+		    <div class="modal-body">
+  			    <div class="box-body">
+  				    <form role="form" id="agregar_form">
+                        <input type="hidden" name="metodo" value="agregar">
+                        <div class="row">
+                        	<div class="col-xs-12 col-sm-6">
+      					        <div class="form-group">
+      						          <div class="input-group">
+      							            <span class="input-group-addon">
+      								              <i class="fas fa-id-badge"></i>
+      							            </span>
+      							            <input type="text" class="form-control text-uppercase validar" tipo="rfc" id="rfc" name="rfc" placeholder="RFC" required>
+      						          </div>
+      					        </div>
+                        	</div>
+                        	<div class="col-xs-12 col-sm-6">
+      					        <div class="form-group">
+      						          <div class="input-group">
+      							            <span class="input-group-addon">
+      								            <i class="fas fa-user-alt"></i>
+      							            </span>
+      							            <input type="text" class="form-control validar" tipo="proveedor" id="proveedor" name="proveedor" placeholder="Proveedor" required>
+      						          </div>
+      					        </div>
+                        	</div>
+                        	<div class="col-xs-12 col-sm-6">
+      					        <div class="form-group">
+      						          <div class="input-group">
+      							            <span class="input-group-addon">
+      								            <i class="fas fa-envelope"></i>
+      							            </span>
+      							            <input type="text" class="form-control validar" tipo="correo_electronico" id="correo_electronico" name="correoElectronico" placeholder="Correo electrónico" required>
+      						          </div>
+      					        </div>
+                        	</div>
+                        	<div class="col-xs-12 col-sm-6">
+      					        <div class="form-group">
+      						          <div class="input-group">
+      							            <span class="input-group-addon">
+      								            <i class="fas fa-phone"></i>
+      							            </span>
+      							            <input type="text" class="form-control validar" tipo="telefono" id="telefono" name="telefono" placeholder="Teléfono" required>
+      						          </div>
+      					        </div>
+                        	</div>	
+  					    </div>
+					        <div class="form-group">
+						        <div class="input-group">
+							        <span class="input-group-addon">
+								        <i class="fas fa-edit"></i>
+							        </span>
+							        <textarea class="form-control" maxlength="120" rows="5" name="direccion" style="resize: none;" placeholder="Dirección" required></textarea>
+						        </div>
+					        </div>
+  				    </form>
+  			    </div>
+			</div>
+			<div class="modal-footer text-right">
+				<button type="button" class="btn bg-blue btn-sm btn-flat font-weight-bold text-uppercase" id="enviar">Registrar proveedor</button>
+  			    <button type="button" class="btn btn-default btn-sm btn-flat font-weight-bold text-uppercase" data-dismiss="modal">Salir</button>
+			</div>
+		    </div>
+		    <!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->

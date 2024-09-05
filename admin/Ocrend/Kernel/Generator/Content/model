@@ -1,0 +1,26 @@
+<?php
+
+namespace app\models;
+
+use app\models as Model;
+use Ocrend\Kernel\Helpers as Helper;
+use Ocrend\Kernel\Models\Models;
+use Ocrend\Kernel\Models\IModels;
+use Ocrend\Kernel\Models\ModelsException;
+use Ocrend\Kernel\Models\Traits\DBModel;
+use Ocrend\Kernel\Router\IRouter;
+
+/**
+ * Modelo {{model}}
+ */
+class {{model}} extends Models implements IModels {
+    {{trait_db_model}}
+{{content}}
+
+    /**
+     * __construct()
+    */
+    public function __construct(IRouter $router = null) {
+        parent::__construct($router);{{trait_db_model_construct}}
+    }
+}

@@ -1,0 +1,422 @@
+{% extends 'overall/layout' %}
+{% block titleSeccion %}
+    <title>Registrar pedido</title>
+{% endblock %}
+{% block appHeader %}
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/css/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/css/responsive.bootstrap.css"/>
+
+<!-- Bootstrap Tags Input https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/ -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/plugins/bootstrap-tagsinput-latest/bootstrap-tagsinput.css"/>
+
+{# Select2 #}
+<link rel="stylesheet" href="assets/plantilla/AdminLTE/bower_components/select2/dist/css/select2.min.css">
+<style>
+	input[type="search"]::-webkit-search-cancel-button {
+    		-webkit-appearance: searchfield-cancel-button;
+    		cursor:pointer;
+	}
+</style>
+{% endblock %} 
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+  	{% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+	    <!-- Main content -->
+	    <section class="content">
+			
+			{% if cajaAbiertaHoy == 'no' %}
+			    <div class="callout callout-warning animated flash">
+			        <h4>!Caja en $ 0.00!</h4>
+			        Para poder realizar pedidos, es necesario <a id="opciones_aperturaCaja" href="#" data-toggle="modal" data-target="#modalRegistrarMonto">registrar monto incial del día en caja</a>.
+			    </div>
+
+				{% include 'caja/registrarMonto' %}
+			{% endif %}
+			
+			<div class="row">
+
+                <div class="col-xs-12 col-lg-4">
+					
+					<div class="box">
+						<div class="box-body">
+							
+							<form role="form" id="form_productoPedido">
+							    
+							    <input type="hidden" id="id_producto" name="id_producto">
+							    
+								<div class="row">
+                                    
+                                    <div class="col-xs col-sm-2">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="modal" data-target="#modalProductos" id="btnModalProductos"><i class="fas fa-search-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    
+                                    {# CANTIDAD #}
+									<div class="col-xs-4 col-sm-4" data-toggle="tooltip" title="Cantidad">
+										<div class="form-group">
+											<input type="number" min="1" class="form-control cantidadNuevo" id="cantidadNuevo" name="cantidadNuevo" placeholder="Cant." value="1" autocomplete="off">
+										</div>
+									</div>
+									
+									{# CODIGO #}
+									<div class="col-xs-8 col-sm-6">
+										<div class="form-group" data-toggle="tooltip" title="Código">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fas fa-barcode"></i>
+                                                </span>
+                                                <input type="text" class="form-control" id="codigoP" name="codigoP" placeholder="Código" autocomplete="off">
+                                            </div>
+                                        </div>
+									</div>
+									
+									{# PRODUCTO #}
+									<div class="col-xs-12">
+										<div class="form-group" data-toggle="tooltip" title="Nombre del producto">
+          						          	<div class="input-group">
+          							            <span class="input-group-addon text-red">
+          								            <i class="fas fa-book"></i>
+          							            </span>
+          							            <input type="text" class="form-control text-uppercase validarP" id="nombreP" name="nombreP" placeholder="Nombre del producto" autocomplete="off">
+          						          	</div>
+              					        </div>
+									</div>
+									
+									{# LEYENDA #}
+									<div class="col-xs-12">
+									    <div class="form-group" data-toggle="tooltip" title="Leyenda adicional">
+          						          	<div class="input-group">
+          							            <span class="input-group-addon">
+          								            <i class="fas fa-edit"></i>
+          							            </span>
+          							            <input type="text" class="form-control" id="leyenda" name="leyenda" placeholder="Leyenda adicional" autocomplete="off">
+          						          	</div>
+              					        </div>
+									</div>
+									
+									{# EDITORIAL #}
+									<div class="col-xs-12" id="editorial_inputs">
+									    {# select #}
+										<div class="form-group" data-toggle="tooltip" title="Selecciona editorial">
+											<div class="input-group">
+												<span class="input-group-addon">
+													<i class="fas fa-building"></i>
+												</span>
+												<select class="form-control js-example-placeholder-single js-states seleccionarEditorial" name="editorial" id="editorial" style="width: 100%;" lang="es" data-placeholder="Editorial" data-allow-clear="true"></select>	
+												<span class="input-group-btn">
+													<button class="btn btn-default agregarEditorial" type="button"><i class="far fa-plus-square"></i></button>
+												</span>											
+											</div>
+										</div>
+										{# nueva #}
+										<div class="divAgregarEditorial hidden" style="margin-top:-13px; margin-bottom:50px;">
+											<div class="box box-default box-solid">
+												<div class="box-header with-border">
+													<h3 class="box-title">Agregar editorial</h3>
+												</div>
+												<div class="box-body">
+													<div class="form-group" style="margin:0;" data-toggle="tooltip" title="Nombre de la nueva editorial">
+														<div class="input-group">
+															<span class="input-group-addon">
+																<i class="fas fa-building"></i>
+															</span>
+															<input type="text" class="form-control text-uppercase validarEditorial" id="nuevaEditorial" placeholder="Nombre de la editorial" autocomplete="off">
+															<span class="input-group-btn">
+																<button type="button" class="btn btn-primary btn-block" id="registrarEditorial"><i class="fas fa-chevron-right"></i></button>
+															</span>
+														</div>
+													</div>																													
+												</div>
+											</div>
+										</div>
+										
+									</div>
+									{# BD #}
+									<div class="col-xs-12 hidden" id="editorial_text">
+									    <div class="form-group" data-toggle="tooltip" title="Editorial">
+											<div class="input-group">
+												<span class="input-group-addon">
+													<i class="fas fa-building"></i>
+												</span>
+												<input type="text" class="form-control" id="editorial_BD" readonly>
+											</div>
+										</div>
+									</div>
+									
+									{# AUTOR #}
+									<div class="col-xs-12" id="autor_inputs">
+									    {# select #}
+										<div class="form-group" data-toggle="tooltip" title="Selecciona Autor o autores">
+											<div class="input-group">
+												<span class="input-group-addon">
+													<i class="fas fa-user-tie"></i>
+												</span>
+												<select class="form-control js-example-placeholder-single select2-selection--multiple js-states seleccionarAutores" name="autores" id="autores" lang="es" multiple="multiple" data-placeholder="Autor(es)" style="width: 100%; max-width: 300px;"></select>	
+												<span class="input-group-btn">
+													<button class="btn btn-default agregarAutor" type="button"><i class="far fa-plus-square"></i></button>
+												</span>	
+											</div>
+										</div>
+										{# nuevo #}
+										<div class="divAgregarAutor hidden" style="margin-top:-13px; margin-bottom:50px;">
+											<div class="box box-default box-solid">
+												<div class="box-header with-border">
+													<h3 class="box-title">Agregar autor</h3>
+												</div>
+												<div class="box-body">
+													<div class="form-group" style="margin:0;" data-toggle="tooltip" title="Nombre del nuevo autor">
+														<div class="input-group">
+															<span class="input-group-addon">
+																<i class="fas fa-user-tie"></i>
+															</span>
+															<input type="text" class="form-control text-uppercase validarAutor" id="nuevoAutor" placeholder="Nombre del autor" autocomplete="off">
+															<span class="input-group-btn">
+																<button type="button" class="btn btn-primary btn-block" id="registrarAutor"><i class="fas fa-chevron-right"></i></button>
+															</span>
+														</div>
+													</div>																													
+												</div>
+											</div>
+										</div>
+										
+									</div>
+									{# BD #}
+									<div class="col-xs-12 hidden" id="autor_text">
+									    <div class="form-group" data-toggle="tooltip" title="Autor(es)">
+											<div class="input-group">
+												<span class="input-group-addon">
+													<i class="fas fa-user-tie"></i>
+												</span>
+												<input type="text" class="form-control" id="autor_BD" readonly>
+											</div>
+										</div>
+									</div>
+									
+									{# COSTO #}
+									<div class="col-xs-12 col-sm-6">
+									    Precio de compra:
+										<div class="form-group" data-toggle="tooltip" title="Precio de compra">
+											<div class="input-group">
+												<span class="input-group-addon text-red">
+													<i class="fa fa-dollar"></i>
+												</span>
+												<input type="text" class="form-control" id="precioCompra" name="precioCompra" placeholder="Precio de compra" autocomplete="off">
+											</div>
+										</div>
+									</div>
+                                    
+                                    {# PRECIO #}
+									<div class="col-xs-12 col-sm-6">
+									    Precio de venta:
+										<div class="form-group" data-toggle="tooltip" title="Precio de venta">
+											<div class="input-group">
+												<span class="input-group-addon text-red">
+													<i class="fa fa-dollar"></i>
+												</span>
+												<input type="text" class="form-control" id="precio" name="precio" placeholder="Precio de venta" autocomplete="off">
+											</div>
+										</div>
+									</div>
+									
+                                    {# TOTAL #}
+									<div class="col-xs-12 col-sm-6">
+									    TOTAL:
+										<div class="form-group" data-toggle="tooltip" title="Total">
+											<div class="input-group">
+												<span class="input-group-addon">
+													<i class="fa fa-dollar"></i>
+												</span>
+												<input type="text" class="form-control text-right" id="total" placeholder="Total" disabled>
+											</div>
+										</div>
+									</div>
+                                    
+                                    {# ANTICIPO #}
+									<div class="col-xs-12 col-sm-6">
+									    Anticipo:
+										<div class="form-group" data-toggle="tooltip" title="Anticipo">
+											<div class="input-group">
+												<span class="input-group-addon">
+													<i class="fa fa-dollar"></i>
+												</span>
+												<input type="text" class="form-control" id="anticipo" name="anticipo" placeholder="Anticipo">
+											</div>
+										</div>
+									</div>
+									
+									{# METODO PAGO ANTICIPO #}
+									<div class="col-xs-12 col-md-6">
+									    Método de pago:
+									    <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fas fa-wallet"></i></span>
+                                                <select class="form-control" id="metodoPago" name="metodoPago" style="width: 100%;" placeholder="Método de pago">
+                                                    <option value="efectivo" selected="selected">Efectivo</option>
+                                                    <option value="tarjeta">Tarjeta</option>
+                                                </select>
+                                            </div>
+                                        </div>
+									</div>
+									
+									{# A NOMBRE #}	
+									<div class="col-xs-12 col-md-6">
+									    A nombre de:
+									    <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+													<i class="fas fa-user-tie"></i>
+												</span>
+                                                <input type="text" class="form-control" id="a_nombre" name="a_nombre" placeholder="A nombre de">
+                                            </div>
+                                        </div>
+									</div>
+									
+                                    <div class="col-xs-12 col-md-6">
+										<button type="reset" class="btn btn-sm btn-flat btn-default text-uppercase font-weight-bold" id="limpiar">Limpiar</button>
+									</div>
+									<div class="col-xs-12 col-md-6 text-right">
+										<button type="button" class="btn btn-sm btn-flat bg-blue text-uppercase font-weight-bold" id="enviar">Agregar al pedido</button>
+									</div>
+									
+
+								</div>
+								
+							</form>
+							
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-xs-12 col-lg-8">
+					<div class="box">
+					    
+			    		<div class="box-header with-border">
+			    			<h3 class="box-title">Detalles del pedido <span id="folio_pedido"></span></h3>
+							<div class="box-tools pull-right">
+                                <a href="pedidos" class="btn btn-sm btn-default btn-flat font-weight-bold text-uppercase">VER PEDIDOS</a>
+								<button type="button" class="btn btn-sm btn-flat font-weight-bold text-uppercase bg-blue" id="nuevoPedido" style="margin-left:20px;">
+									<i class="fas fa-file-import"></i> NUEVO PEDIDO
+								</button>
+							</div>
+			    		</div>
+
+						<div class="box-body no-padding">
+			    			<div class="table-responsive">
+				    			<table class="table table-condensed table-hover" id="listaPedido" style="margin-bottom:0px;">
+
+				    				<thead class="bg-navy text-uppercase">
+				    				    <th></th>
+				    					<th style="width:120px; min-width:100px;" class="text-center">Cantidad</th>
+				    					<th>Descripción</th>
+				    					<th style="width:80px; min-width:80px;" class="text-center">P. compra</th>
+				    					<th style="width:80px; min-width:80px;" class="text-center">P. venta</th>
+				    					<th style="width:80px; min-width:80px;" class="text-right">Importe P.compra</th>
+				    					<th style="width:80px; min-width:80px;" class="text-right">Importe P.venta</th>
+				    					<th style="width:80px; min-width:80px;" class="text-center">Anticipo</th>
+				    					<th style="width:80px; min-width:80px;" class="text-center">Método</th>
+				    				</thead>
+				    				<tbody>
+				    					<td colspan="9" class="text-center">
+				    						No hay productos en la lista.
+				    					</td>
+				    				</tbody>
+				    			</table>
+				    		</div>
+			    		</div>
+
+			    	</div>
+				</div>
+
+			</div>
+
+	    </section>
+	    <!-- /.content -->
+	    
+	    
+	    {# MODAL CARGAR PRODUCTOS #}
+        <div id="modalProductos" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Productos</h4>
+                    </div>
+                    <div class="box-body">
+			            <div class="table-responsive">
+                            <table class="table table-condensed table-bordered table-hover" style="width:100%" id="tablaProductosVer">
+                                <thead class="bg-navy text-uppercase">
+                                    <th>CÓDIGO</th>
+                                    <th>ID</th>
+                                    <th>PRODUCTO</th>
+                                    <th>AUTOR</th>
+                                    <th>EDITORIAL</th>
+                                    <th><span class="badge bg-gray">COSTO</span></th>
+                                    <th><span class="badge bg-blue">PRECIO</span></th>
+                                    <th></th>
+                                </thead>
+                                <tbody></tdoby>
+                                <tfoot class="bg-navy text-uppercase">
+                                    <th>CÓDIGO</th>
+                                    <th>ID</th>
+                                    <th>PRODUCTO</th>
+                                    <th>AUTOR</th>
+                                    <th>EDITORIAL</th>
+                                    <th><span class="badge bg-gray">COSTO</span></th>
+                                    <th><span class="badge bg-blue">PRECIO</span></th>
+                                    <th></th>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer text-right">
+                      <button type="button" class="btn btn-default font-weight-bold btn-flat text-uppercase btn-sm btnCerrar" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {# MODAL CARGAR PRODUCTOS #}
+	    
+
+	</div>
+  	<!-- /.content-wrapper -->
+
+  	{% include 'overall/footer' %}
+ 
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+<!-- DataTables -->
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/js/dataTables.responsive.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.20/filtering/type-based/accent-neutralise.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.20/features/searchHighlight/dataTables.searchHighlight.min.js"></script>
+	<script type="text/javascript" src="https://bartaz.github.io/sandbox.js/jquery.highlight.js"></script>
+
+{# InputMask #}
+    <script src="assets/plantilla/AdminLTE/plugins/input-mask/dist/jquery.inputmask.bundle.js"></script>
+    
+{# Select2  #}
+    <script src="assets/plantilla/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+<!-- Libreria español -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>  
+	
+<!--<script src="./assets/jscontrollers/pedidoscompras/pedidoscompras.js"></script>-->
+    <script src="./assets/jscontrollers/pedidoscompras/registrarpedidos.js"></script
+
+{% endblock %}

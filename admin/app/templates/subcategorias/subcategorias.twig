@@ -1,0 +1,215 @@
+{% extends 'overall/layout' %}
+{% block titleSeccion %}
+    <title>Subcategorías</title>
+{% endblock %}
+{% block appHeader %}
+<!-- DataTables -->
+<!-- <link rel="stylesheet" href="assets/plantilla/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/css/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/css/responsive.bootstrap.css"/>
+
+<!-- Bootstrap Tags Input https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/ -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/plugins/bootstrap-tagsinput-latest/bootstrap-tagsinput.css"/>
+
+<!-- Bootstrap Datetimepicker https://bootstrap-datepicker.readthedocs.io/en/latest/index.html -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/css/bootstrap-datepicker.css"/>
+{# Select2 #}
+<link rel="stylesheet" href="assets/plantilla/AdminLTE/bower_components/select2/dist/css/select2.min.css">
+{% endblock %} 
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+  	{% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+	    <!-- Main content -->
+	    <section class="content">
+
+	    	<div class="box">
+
+    			<div class="box-header with-border">
+    				
+					<h3 class="box-title">{{datosModulo.modulo}}</h3>
+
+					<div class="box-tools pull-right">
+						
+						<a href="categorias" class="btn btn-sm btn-default btn-flat text-uppercase font-weight-bold">Categorías</a>
+						<a href="productos" class="btn btn-sm btn-default btn-flat text-uppercase font-weight-bold">Productos</a>
+						<button type="button" class="btn btn-flat bg-blue btn-sm text-uppercase font-weight-bold agregarSubcategoria" style="margin-left:20px;" data-toggle="modal" data-target="#modalAgregar">
+
+							<i class="fas fa-plus"></i> Nueva subcategoría
+
+						</button>
+
+					</div>
+						
+    			</div>
+
+    			<div class="box-body">
+    				
+    				<div class="table-responsive">
+
+    					<table class="table table-inverse table-bordered table-hover table-condensed" style="width:100%" id="tablaSubcategorias">
+    						<thead class="bg-navy text-uppercase">
+					            <tr>
+					                <th style="width:30px;">ID</th>
+					                <th>Categoría</th>
+					                <th>Subcategoría</th>
+							        <th>#Pctos.</th>
+					                <th>Oferta en línea</th>
+					                <th>Fin oferta</th>
+					                <th width="60px">Acciones</th>
+					            </tr>
+					        </thead>
+    					</table>
+
+    				</div>
+
+    			</div>
+
+    		</div>
+
+    		<!-- MODAL EDITAR -->
+    		<div id="modalEditar" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+        		<div class="modal-dialog">
+            	    <div class="modal-content">
+                        <div class="modal-header">
+                	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  			    <span aria-hidden="true">&times;</span>
+                  			</button>
+                		    <h4 class="modal-title"><i class="fas fa-pencil-alt"></i> Editar subcategoría</h4>
+              			</div>
+              			<div class="modal-body">
+              			    <div class="box-body">
+                		        <form role="form" id="editar_form" enctype="multipart/form-data"></form>
+                            </div>
+              			</div>
+              			<div class="modal-footer text-right">
+              			    <button type="button" class="btn btn-flat font-weight-bold text-uppercase bg-blue btn-sm" id="editar">Guardar cambios</button>
+                		    <button type="button" class="btn btn-flat font-weight-bold text-uppercase btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+              			</div>
+            		</div>
+          		<!-- /.modal-content -->
+        		</div>
+        		<!-- /.modal-dialog -->
+      	</div>
+      	<!-- /.modal -->
+
+          	<!-- MODAL AGREGAR -->
+          	<div id="modalAgregar" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+          	    <div class="modal-dialog">
+        		    <div class="modal-content">
+        			    <div class="modal-header bg-blue">
+          			  	    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            			        <span aria-hidden="true">&times;</span>
+            				</button>
+          			        <h4 class="modal-title"><i class="fas fa-plus"></i> Agregar subcategoría</h4>
+        		        </div>
+          		        <div class="modal-body">
+            			    <div class="box-body">
+            			        <form role="form" id="agregar_form">
+                          	        <input type="hidden" name="metodo" value="agregar">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            
+                                	        <div class="form-group">
+        						                <div class="input-group">
+        							                <span class="input-group-addon text-red">
+						                                <i class="fas fa-tag"></i>
+					                                </span>
+        							                <select class="form-control js-example-placeholder-single js-states seleccionarCategoria" name="categoria" style="width: 100%;" lang="es" data-placeholder="CATEGORÍA" data-allow-clear="true" required>
+        							            	    <option></option>
+					            	                    <optgroup label="Categorías disponibles">
+					      		                            {% for categoria in categorias %}
+					      		                                {% if categoria.id != 1 %}
+					      			                                <option value="{{categoria.id}}">{{categoria.categoria}}</option>
+					      			                            {% endif %}
+					      		                            {% endfor %}
+					            	                    </optgroup>
+				      	                            </select>
+        						          	    </div>
+            					            </div>
+            					            
+                  					        <div class="form-group">
+          						          	    <div class="input-group">
+          							                <span class="input-group-addon text-red">
+          								                <i class="fas fa-tag"></i>
+          							                </span>
+          							                <input type="text" class="form-control text-uppercase validarS" name="nombreS" placeholder="Subcategoría" required>
+          						          	    </div>
+                  					        </div>
+
+                  					        <div class="form-group">
+              						            <div class="input-group">
+              							            <span class="input-group-addon">
+              								            <i class="fas fa-edit"></i>
+              							            </span>
+              							            <textarea class="form-control desc" rows="5" name="desc" style="resize: none;" placeholder="Descripción" required></textarea>
+              						            </div>
+                  					        </div>
+                  					        
+                  					        <div class="form-group">
+              						            <div class="input-group">
+                                                    <span class="input-group-addon">
+              								            <i class="fas fa-tags"></i>
+              							            </span>
+              							            <input type="text" class="form-control pClave tagsinput" name="pClave" data-role="tagsinput" placeholder="Palabras clave (separadas por coma)" required>
+              						            </div>
+                  					        </div>
+                  					        
+                                        </div>
+                                    </div>
+        				                </form>
+        			              </div>
+          			        </div>
+                  			<div class="modal-footer text-right">
+                  				  <button type="button" class="btn btn-flat bg-blue btn-sm text-uppercase font-weight-bold" id="enviar">Registrar subcategoría</button>
+                    			  <button type="button" class="btn btn-flat btn-default btn-sm text-uppercase font-weight-bold" data-dismiss="modal">Cerrar</button>
+                  			</div>
+          			    </div><!-- /.modal-content -->
+          			
+          		  </div><!-- /.modal-dialog -->
+          		
+          	</div><!-- /.modal -->
+          	
+	      </section><!-- /.content -->
+	    
+	  </div><!-- /.content-wrapper -->
+  	
+  	{% include 'overall/footer' %}
+
+</div><!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+<!-- DataTables -->
+	<!-- <script src="assets/plantilla/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script> 
+	<script src="assets/plantilla/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> -->
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/js/dataTables.responsive.js"></script>
+
+{# InputMask #}
+<script src="assets/plantilla/AdminLTE/plugins/input-mask/dist/jquery.inputmask.bundle.js"></script>
+
+<!-- Bootstrap Tags Input https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/ -->
+	<script type="text/javascript" src="assets/plantilla/AdminLTE/plugins/bootstrap-tagsinput-latest/bootstrap-tagsinput.min.js"></script>
+
+<!-- Bootstrap Datetimepicker https://bootstrap-datepicker.readthedocs.io/en/latest/index.html -->
+  	<script type="text/javascript" src="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+  	<script type="text/javascript" src="assets/plantilla/AdminLTE/plugins/bootstrap-datepicker-master/locales/bootstrap-datepicker.es.min.js"></script>
+
+{# Select2  #}
+<script src="assets/plantilla/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+<!-- Libreria español -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>  
+
+    <script src="./assets/jscontrollers/subcategorias/subcategorias.js"></script>
+{% endblock %}

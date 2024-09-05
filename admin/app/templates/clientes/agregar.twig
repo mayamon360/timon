@@ -1,0 +1,110 @@
+<!-- MODAL AGREGAR -->
+<div id="modalAgregar" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+  			   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    			    <span aria-hidden="true">&times;</span>
+    			</button>
+  			    <h4 class="modal-title"><i class="fas fa-plus"></i> Agregar cliente</h4>
+			</div>
+		    <div class="modal-body">
+  			    <div class="box-body">
+  				    <form role="form" id="agregar_form">
+                        <div class="row">
+
+							<div class="col-xs-12 col-md-3">
+      					        <div class="form-group" data-toggle="tooltip" title="Tipo de cliente">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fas fa-user-tag"></i>
+										</span>
+										<select class="form-control" name="tipoCliente" id="tipoCliente" style="width: 100%;">
+											<option value="2">Crédito</option>
+										</select>
+									</div>
+								</div>
+                        	</div>
+							
+                        	<div class="col-xs-12 col-md-3">
+      					        <div class="form-group" data-toggle="tooltip" title="RFC">
+      						          <div class="input-group">
+      							            <span class="input-group-addon">
+      								              <i class="fas fa-id-badge"></i>
+      							            </span>
+      							            <input type="text" class="form-control text-uppercase validar" tipo="rfc" id="rfc" name="rfc" placeholder="RFC">
+      						          </div>
+      					        </div>
+                        	</div>
+                        	
+                        	<div class="col-xs-12 col-md-6">
+      					        <div class="form-group" data-toggle="tooltip" title="Nombre completo">
+      						          <div class="input-group">
+      							            <span class="input-group-addon">
+      								            <i class="fas fa-user-alt"></i>
+      							            </span>
+      							            <input type="text" class="form-control validar" tipo="cliente" id="cliente" name="cliente" placeholder="Nombre completo">
+      						          </div>
+      					        </div>
+                        	</div>
+
+                        	<div class="col-xs-12 col-sm-6">
+      					        <div class="form-group" data-toggle="tooltip" title="Correo electrónico">
+      						          <div class="input-group">
+      							            <span class="input-group-addon">
+      								            <i class="fas fa-envelope"></i>
+      							            </span>
+      							            <input type="text" class="form-control validar" tipo="correo_electronico" id="correo_electronico" name="correoElectronico" placeholder="Correo electrónico">
+      						          </div>
+      					        </div>
+                        	</div>
+                        	<div class="col-xs-12 col-sm-6">
+      					        <div class="form-group" data-toggle="tooltip" title="Teléfono">
+      						          <div class="input-group">
+      							            <span class="input-group-addon">
+      								            <i class="fas fa-phone"></i>
+      							            </span>
+      							            <input type="text" class="form-control validar" tipo="telefono" id="telefono" name="telefono" placeholder="Teléfono">
+      						          </div>
+      					        </div>
+                        	</div>	
+  					    </div>
+                        <div class="row">
+                                        
+                            <div class="col-xs-12 col-md-6"></div>  
+                            <div class="col-xs-6 col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control text-right descuento" id="descuento" name="descuento" placeholder="Descuento general" value="">
+                                        <span class="input-group-addon bg-gray" style="padding-left:0;padding-right:0; border-left:0;">
+                                            <i class="fas fa-percentage"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control text-right devolucion" id="devolucion" name="devolucion" placeholder="Devolución general" value="">
+                                        <span class="input-group-addon bg-gray" style="padding-left:0;padding-right:0; border-left:0;">
+                                            <i class="fas fa-percentage"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>  
+                            
+                        </div>
+						  
+  				    </form>
+  			    </div>
+			</div>
+			<div class="modal-footer text-right">
+				<button type="button" class="btn btn-flat bg-blue font-weight-bold btn-sm text-uppercase" id="enviar">Registrar cliente</button>
+  			    <button type="button" class="btn btn-flat btn-default font-weight-bold btn-sm text-uppercase" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

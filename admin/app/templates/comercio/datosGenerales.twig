@@ -1,0 +1,79 @@
+<div class="box box-solid">
+
+	<!--=====================================
+  	DATOS GENERALES
+  	======================================-->
+
+  	<div class="box-header with-border">
+
+		<h3 class="box-title">DATOS GENERALES Y DE CONTACTO</h3>
+
+		<div class="box-tools pull-right">
+
+		</div>
+	
+	</div>
+
+	<div class="box-body">
+		
+		<div class="form-group">
+			<label for="nombreComercio">Razón social</label>
+		    <div class="input-group">
+		      	<div class="input-group-addon">
+		      		<i class="fa fa-building"></i>
+		      	</div>
+		      	<input type="text" class="form-control datosComercio" id="nombreComercio" placeholder="Nombre del comercio" value="{{plantilla.nombre}}">
+		    </div>
+		</div>
+
+		<div class="form-group">
+			<label for="direccionComercio">Dirección de ubicación</label>
+		    <div class="input-group">
+		      	<div class="input-group-addon">
+		      		<i class="fas fa-map-marker-alt"></i>
+		      	</div>
+		      	<input type="text" class="form-control datosComercio" id="direccionComercio" placeholder="Dirección del comercio" value="{{plantilla.direccion}}">
+		    </div>
+		</div>
+
+		<div class="row">
+			
+			<div class="col-xs-12 col-lg-5">
+
+				<div class="form-group">
+					<label for="telefonoComercio">Teléfono de contacto</label>
+				    <div class="input-group">
+				      	<div class="input-group-addon">
+				      		<i class="fas fa-phone-square"></i>
+				      	</div>
+				      	<input type="text" class="form-control datosComercio" id="telefonoComercio" placeholder="Teléfono del comercio" value="{{plantilla.telefono}}">
+				    </div>
+				</div>
+				
+			</div>
+
+			<div class="col-xs-12 col-lg-7">
+
+				<div class="form-group">
+					<label for="correoComercio">Correo electrónico <i class="fas fa-info-circle text-aqua" data-toggle="tooltip" title="Para el envío y recepción de correos electrónicos"></i></label>
+				    <div class="input-group">
+				      	<div class="input-group-addon">
+				      		<i class="fas fa-envelope-square"></i>
+				      	</div>
+				      	<input type="text" class="form-control datosComercio" id="correoComercio" placeholder="Correo electrónico del comercio" value="{{plantilla.correoElectronico}}">
+				    </div>
+				</div>
+				
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="box-footer">
+      
+    	<button type="button" id="guardarDatosComercio" class="btn btn-sm bg-navy pull-right" disabled>Actualizar datos</button>
+    
+	</div>
+
+</div>

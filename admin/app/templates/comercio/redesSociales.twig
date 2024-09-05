@@ -1,0 +1,103 @@
+<div class="box box-solid">
+	
+	<div class="box-header with-border">
+		
+		<h3 class="box-title">REDES SOCIALES</h3>
+
+	    <div class="box-tools pull-right">
+
+	    </div>
+
+	</div>
+
+	<div class="box-body">
+		
+		<div class="text-center">
+ 			<label>Estilo de los enlaces (barra superior)</label>
+ 		</div>
+
+		<div class="form-group text-center">
+
+			<label class="checkbox-inline">
+	
+				{% if clase == 'C' %}
+
+					<input type="radio" value="C" name="colorRedSocial" class="radioRed" checked> 
+
+				{% else %}
+
+					<input type="radio" value="C" name="colorRedSocial" class="radioRed"> 
+
+				{% endif %}
+
+				Color
+			</label>
+      		<label class="checkbox-inline">
+
+      			{% if clase == 'B' %}
+
+					<input type="radio" value="B" name="colorRedSocial" class="radioRed" checked> 
+
+				{% else %}
+
+					<input type="radio" value="B" name="colorRedSocial" class="radioRed"> 
+
+				{% endif %}
+      			
+      			Blanco
+      		</label>
+      		<label class="checkbox-inline">
+
+      			{% if clase == 'N' %}
+
+					<input type="radio" value="N" name="colorRedSocial" class="radioRed" checked> 
+
+				{% else %}
+
+					<input type="radio" value="N" name="colorRedSocial" class="radioRed">  
+
+				{% endif %}
+
+      			Negro
+      		</label>
+		
+		</div>
+		<br>
+		<div class="text-center">
+ 			<label>Redes sociales disponibles</label>
+ 		</div>
+		{% for rs in redesSociales %}
+
+			<div class="form-group redesSociales">
+
+			    <div class="input-group">
+
+			      	<div class="input-group-addon redSocial {{ rs.clase|slice(-1) }}">
+			      		<i class="{{rs.estilo}} {{rs.red}} {{rs.clase}}"></i>
+			      	</div>
+
+			      	<input type="text" class="form-control cambiarUrlRed" value="{{rs.url}}">
+
+			      	<div class="input-group-addon" style="padding: 0px 5px;">
+			      		{% if rs.estatus == "on" %}
+			      			<input type="checkbox" class="seleccionarRed" ruta="{{rs.url}}" estilo="{{rs.estilo}}" red="{{rs.red}}" clase="{{rs.clase}}" estatus="on" checked>
+			      		{% else %}
+							<input type="checkbox" class="seleccionarRed" ruta="{{rs.url}}" estilo="{{rs.estilo}}" red="{{rs.red}}" clase="{{rs.clase}}" estatus="off">
+			      		{% endif %}
+			      	</div>
+
+			    </div>
+
+			 </div>
+
+		{% endfor %}
+
+	</div>
+
+	<div class="box-footer">
+      
+    	<button type="button" id="guardarRedesSociales" class="btn btn-sm bg-navy pull-right" disabled>Actualizar redes sociales</button>
+    
+	</div>
+
+</div>

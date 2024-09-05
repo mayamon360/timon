@@ -1,0 +1,11 @@
+<aside class="main-sidebar">
+        <section class="sidebar">
+        {% if menu == false %}
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header text-center" style="font-weight:600;">MENÚ DE NAVEGACIÓN</li>
+            </ul>
+        {% else %}
+            {{menu | raw}}
+        {% endif %}
+    </section>
+</aside>

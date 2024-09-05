@@ -1,0 +1,166 @@
+{% extends 'overall/layout' %}
+{% block titleSeccion %}
+    <title>Pedido {{folio}}</title>
+{% endblock %}
+{% block appHeader %}
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/css/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/css/responsive.bootstrap.css"/>
+<link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
+{% endblock %}
+{% block appBody %}
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+	{% include 'overall/header' %}
+
+  	{% include 'overall/sidebar' %}
+
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
+
+	    <!-- Main content -->
+	    <section class="content">
+
+            <div class="box">
+                
+                <div class="box-header">
+                    <h3 class="box-title font-weight-bold text-uppercase"><span id="id_pedido">{{id}}</span> | {{folio}}</h3>
+                    
+                    <div class="box-tools pull-right">
+                        <a href="caja" class="btn btn-default font-weight-bold btn-sm btn-flat">CAJA</a>
+                    	<a href="productos" class="btn btn-default font-weight-bold btn-sm btn-flat">PRODUCTOS</a>
+                        <a href="pedidos" class="btn btn-default font-weight-bold btn-sm btn-flat">VER PEDIDOS</a>
+                        <a href="pedidosCompras" class="btn bg-maroon btn-sm btn-flat font-weight-bold" t=""><i class="fas fa-barcode"></i> PEDIDO</a>
+                    </div>
+                    
+                </div>
+                
+                <div class="box-body">
+                    
+                    <table class="table table-condensed table-hover table-bordered" style="width:100%" id="pedidos">
+                        <thead class="bg-navy text-uppercase">
+                            <tr>
+                                <th style="width:90px;">Folio pedido</th>
+                                <th style="width:90px;">Fecha</th>
+                                <th style="width:100px; min-width:100px;">A nombre</th>
+                                <th style="width:50px;">Cant.</th>
+                                <th>Descripción</th>
+                                <th style="width:90px; min-width:90px;">Precio</th>
+                                <th style="width:90px; min-width:90px;">Total</th>
+                                <th style="width:90px; min-width:90px;">Anticipo</th>
+                                <th style="width:90px; min-width:90px;">Resta</th>
+                                <th style="width:100px;">Estado</th>
+                                <th style="width:90px;">Folio venta</th>
+                                <th width="130px">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    
+                </div>
+            </div>
+
+	    </section>
+	    <!-- /.content -->
+	    
+	    <div id="modalConfirmarEntrega" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                    <div class="modal-header bg-black-active text-center">
+                        <h1 id="resta" style="font-family: 'Russo One', sans-serif; color:#00ff00; margin:0; padding: 0px;">0.00</h1>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <h4 id="codigo" style="margin-bottom:0px;"></h4>
+                                <h3 id="producto" style="margin-top:0px;"></h3>
+                            </div>
+                        </div>
+                        <input type="hidden" id="id_producto">
+                        <div class="col-xs-3">
+                            Cantidad:
+                            <div class="form-group">
+								<input type="text" class="form-control text-center" id="cantidad" readonly>
+							</div>
+                        </div>
+                        <div class="col-xs-3">
+                            Precio:
+                            <div class="form-group">
+								<input type="text" class="form-control text-right" id="precio" readonly>
+							</div>
+                        </div>
+                        <div class="col-xs-3">
+                            Total:
+                            <div class="form-group">
+								<input type="text" class="form-control text-right" id="total" readonly>
+							</div>
+                        </div>
+                        <div class="col-xs-3">
+                            Anticipo:
+                            <div class="form-group">
+								<input type="text" class="form-control text-right" id="anticipo" readonly>
+							</div>
+                        </div>
+                        <div class="col-xs-4">
+                            Folio pedido:
+                            <div class="form-group">
+								<input type="text" class="form-control text-center" id="folio_pedido" readonly>
+							</div>
+                        </div>
+                        <div class="col-xs-4">
+                            Código de anticipo:
+                            <div class="form-group">
+								<input type="text" class="form-control text-center" id="codigo_anticipo" autofocus>
+							</div>
+                        </div>
+                        <div class="col-xs-4">
+                            Método de pago:
+						    <div class="form-group">
+                                <select class="form-control" id="metodoPago" style="width: 100%;" placeholder="Método de pago">
+                                    <option value="efectivo" selected="selected">Efectivo</option>
+                                    <option value="tarjeta">Tarjeta</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer text-right">
+                        <div class="row">
+                            <div class="col-xs-6 text-left">
+                                <button type="button" class="btn btn-default btn-sm text-uppercase btn-flat font-weight-bold" data-dismiss="modal">Cerrar</button>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <button type="button" class="btn btn-sm btn-flat bg-blue text-uppercase font-weight-bold" id="confirmarEntrega">
+                                    <i class="fas fa-check"></i> Confirmar entrega
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+	</div>
+  	<!-- /.content-wrapper -->
+
+  	{% include 'overall/footer' %}
+
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}
+
+{% block appFooter %}
+<!-- DataTables -->
+    <script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/DataTables-1.10.18/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="assets/plantilla/AdminLTE/bower_components/datatables/Responsive-2.2.2/js/dataTables.responsive.js"></script>
+
+    {# InputMask #}
+  	<script src="assets/plantilla/AdminLTE/plugins/input-mask/dist/jquery.inputmask.bundle.js"></script>
+
+    <script src="./assets/jscontrollers/pedidos/verpedido.js"></script>
+{% endblock %}

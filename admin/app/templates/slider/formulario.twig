@@ -1,0 +1,330 @@
+<form role="form" id="sliderForm{{sl.id}}" idSlider="{{sl.id}}" class="formSlider">
+	
+	<!-- COLUMNA 1 -->
+	<div class="col-xs-12 col-md-4">
+
+		<input type="hidden" name="metodo" value="actualizarSlider">
+		<input type="hidden" name="id" value="{{sl.id}}">
+		
+		<!-- Nombre del slider -->
+		<div class="form-group">
+			<label>Nombre:</label>
+			<input type="text" name="nombreSlider" id="nombreSlider{{sl.id}}" class="form-control nombreSlider" key="{{sl.id}}" placeholder="Nombre del slider" value="{{sl.nombre}}">
+		</div>
+		
+		<!-- Enlace del slider -->
+		<div class="form-group">
+			<label>Enlace:</label>
+			<input type="text" name="vinculoSlider" id="vinculoSlider{{sl.id}}" class="form-control vinculoSlider" key="{{sl.id}}" placeholder="Enlace del slider" value="{{sl.vinculo}}">
+		</div>
+		
+		<!-- Tipo de slider -->
+		<div class="form-group">
+			<label>
+				Tipo de slider:
+				<i class="fas fa-question-circle blue-text" data-container="body" data-toggle="popover" data-placement="auto" data-trigger="hover" title="INFORMACIÓN" data-content="TSP1: Texto izquierda e imagen derecha, TPS2: Texto derecha e imagen izquierda, TPS3: Sólo fondo, TPS4: Todo al centro, TPS5: Todo a la derecha, TPS6: Todo a la izquierda." style="cursor:pointer;"></i>
+			</label>
+			
+			<div class="row">
+
+				<div class="col-xs-4" style="margin-bottom:10px; padding:0;">
+					<label class="checkbox-inline">
+						{% if sl.tipoSlide == 'sliderOpcion1' %}
+							<input type="radio" value="sliderOpcion1" name="tipoSlider" id="tipoSlider{{sl.id}}" key="{{sl.id}}" class="tipoSlider" checked> 
+						{% else %}
+							<input type="radio" value="sliderOpcion1" name="tipoSlider" id="tipoSlider{{sl.id}}" key="{{sl.id}}" class="tipoSlider"> 
+						{% endif %}
+						TPS1
+					</label>
+				</div>
+
+				<div class="col-xs-4" style="margin-bottom:10px; padding:0;">
+					<label class="checkbox-inline">
+						{% if sl.tipoSlide == 'sliderOpcion2' %}
+							<input type="radio" value="sliderOpcion2" name="tipoSlider" id="tipoSlider{{sl.id}}" key="{{sl.id}}" class="tipoSlider" checked> 
+						{% else %}
+							<input type="radio" value="sliderOpcion2" name="tipoSlider" id="tipoSlider{{sl.id}}" key="{{sl.id}}" class="tipoSlider"> 
+						{% endif %}
+						TPS2
+					</label>
+				</div>
+
+				<div class="col-xs-4" style="margin-bottom:10px; padding:0;">
+					<label class="checkbox-inline">
+						{% if sl.tipoSlide == 'sliderOpcion3' %}
+							<input type="radio" value="sliderOpcion3" name="tipoSlider" id="tipoSlider{{sl.id}}" key="{{sl.id}}" class="tipoSlider" checked> 
+						{% else %}
+							<input type="radio" value="sliderOpcion3"
+							 name="tipoSlider" id="tipoSlider{{sl.id}}" name="tipoSlider" key="{{sl.id}}" class="tipoSlider"> 
+						{% endif %}
+						TPS3
+					</label>
+				</div>
+				
+				<div class="col-xs-4" style="margin-bottom:10px; padding:0;">
+					<label class="checkbox-inline">
+						{% if sl.tipoSlide == 'sliderOpcion4' %}
+							<input type="radio" value="sliderOpcion4" name="tipoSlider" id="tipoSlider{{sl.id}}" key="{{sl.id}}" class="tipoSlider" checked> 
+						{% else %}
+							<input type="radio" value="sliderOpcion4" name="tipoSlider" id="tipoSlider{{sl.id}}" key="{{sl.id}}" class="tipoSlider"> 
+						{% endif %}
+						TPS4
+					</label>
+				</div>
+
+				<div class="col-xs-4" style="padding:0;">
+					<label class="checkbox-inline">
+						{% if sl.tipoSlide == 'sliderOpcion5' %}
+							<input type="radio" value="sliderOpcion5" name="tipoSlider" id="tipoSlider{{sl.id}}" key="{{sl.id}}" class="tipoSlider" checked> 
+						{% else %}
+							<input type="radio" value="sliderOpcion5" name="tipoSlider" id="tipoSlider{{sl.id}}" key="{{sl.id}}" class="tipoSlider"> 
+						{% endif %}
+						TPS5
+					</label>
+				</div>
+
+				<div class="col-xs-4" style="padding:0;">
+					<label class="checkbox-inline">
+						{% if sl.tipoSlide == 'sliderOpcion6' %}
+							<input type="radio" value="sliderOpcion6" name="tipoSlider" id="tipoSlider{{sl.id}}" key="{{sl.id}}" class="tipoSlider" checked> 
+						{% else %}
+							<input type="radio" value="sliderOpcion6" name="tipoSlider" id="tipoSlider{{sl.id}}" key="{{sl.id}}" class="tipoSlider"> 
+						{% endif %}
+						TPS6
+					</label>
+				</div>
+
+			</div>
+			
+		</div>
+		<!-- //Tipo de slider -->
+
+		<!-- Imagen de fondo de slider -->
+		<div class="form-group">
+			
+			<div class="text-center">
+					
+				<label>Imagen de fondo</label>
+
+				<div>
+					<label for="fondoSlider{{sl.id}}" class="btn btn-sm btn-default btn-block"><i class="fa fa-upload"></i> Selecciona una imagen</label>
+					<input type="file" name="fondo" id="fondoSlider{{sl.id}}" key="{{sl.id}}" class="fondo" style="visibility:hidden;" accept="image/*">
+				</div>
+
+				<p class="help-block" style="margin-top:-15px;">Necesario 1600px * 707px</p>
+				
+				<div class="view hm-black-light">
+					<img src="assets/plantilla/{{sl.fondo}}" id="previsualizarFondo{{sl.id}}" style="width:100%; max-width:100%; height:auto">
+
+					<div class="mask {# pattern-6 #}"></div> 
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+		
+	<!-- COLUMNA 2 -->
+	<div id="divImagen{{sl.id}}" class="col-xs-12 col-md-4 {{ sl.tipoSlide == 'sliderOpcion3' ? 'sr-only' : '' }}">
+	
+		<!-- Imagen adicional de slider -->
+		<div class="form-group">
+			
+			<div class="text-center">
+					
+				<label>Imagen adicional</label>
+
+				<div>
+					<label for="imagenSlider{{sl.id}}" class="btn btn-sm btn-default btn-block"><i class="fa fa-upload"></i> Selecciona una imagen</label>
+					<input type="file" name="imagen" id="imagenSlider{{sl.id}}" key="{{sl.id}}" class="imagen" style="visibility:hidden;" accept="image/*">
+				</div>
+
+				<p class="help-block" style="margin-top:-15px;">Ancho recomendado 500px</p>
+				
+				<p>
+					{% if sl.imagen != '' %}
+					
+						<img src="assets/plantilla/{{sl.imagen}}" class="img-thumbnail" id="previsualizarImagen{{sl.id}}" style="width:258px; max-width:100%; height:auto">
+					
+					{% else %}
+						
+						<img src="assets/plantilla/vistas/img/carrusel/default/imagen-default.jpg" class="img-thumbnail" id="previsualizarImagen{{sl.id}}" style="width:258px; max-width:100%; height:auto">
+
+					{% endif %}
+				</p>
+
+			</div>
+
+		</div>
+
+		<div id="anchoSliderDiv{{sl.id}}" class="form-group {{ (sl.imagen == '') ? 'hidden' : '' }}">
+
+			<div class="text-center">
+				
+				<label for="ancho">Ancho</label>
+				<input type="text" name="ancho" id="anchoSlider{{sl.id}}" key="{{sl.id}}" value="{{ sl.anchoImagen == 0 ? 250 : sl.anchoImagen}}" class="slider form-control anchoSlider" 
+				data-slider-min="250" 
+				data-slider-max="400" 
+				data-slider-step="10" 
+				data-slider-value="{{ sl.anchoImagen == 0 ? 250 : sl.anchoImagen}}" 
+				data-slider-orientation="horizontal" 
+				data-slider-selection="before" 
+				data-slider-tooltip="show" 
+				data-slider-id="blue">
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- COLUMNA 3 -->
+	<div id="divTextos{{sl.id}}" class="col-xs-12 col-md-4 {{ sl.tipoSlide == 'sliderOpcion3' ? 'sr-only' : '' }}">
+		
+		<!-- TITULO -->
+		
+		<!-- Texto  -->
+		<div class="form-group">
+
+			<label for="tituloSlider{{sl.id}}">Título</label>
+			<input type="text" name="titulo" id="tituloSlider{{sl.id}}" class="form-control tituloSlider" key="{{sl.id}}" placeholder="Título del slider" value="{{sl.titulo}}">
+
+		</div>
+		
+		<div class="row" style="padding:0;">
+			<!-- Color de fondo -->
+			<div class="form-group col-xs-12 col-sm-6">
+
+				<div class="input-group">
+		      		
+					<input type="text" class="form-control fondoT" name="fondoT" id="fondoT{{sl.id}}" value="{{estiloTitulo.background}}" key="{{sl.id}}" placeholder="Color de fondo">
+
+			  		<div class="input-group-addon" id="fondoMT{{sl.id}}" key="{{sl.id}}" colorBase="{{estiloTitulo.background}}" style="cursor: pointer; color: {{estiloTitulo.background}}; background: #FCFCFC; padding: 0px 10px;">
+
+			  			<i class="fa fa-stop"></i>
+
+			  		</div>
+			    	
+			    </div>
+
+			</div>
+
+			<!-- Color de letra  -->
+			<div class="form-group col-xs-12 col-sm-6">
+
+				<div class="input-group">
+		      		
+					<input type="text" class="form-control colorT" name="colorT" id="colorT{{sl.id}}" value="{{estiloTitulo.color}}" key="{{sl.id}}" placeholder="Color de letra">
+
+			  		<div class="input-group-addon" id="colorMT{{sl.id}}" key="{{sl.id}}" colorBase="{{estiloTitulo.color}}" style="cursor: pointer; color: {{estiloTitulo.color}}; background: #FCFCFC; padding: 0px 10px;">
+
+			  			<i class="fa fa-stop"></i>
+
+			  		</div>
+			    	
+			    </div>
+
+			</div>
+
+		</div>
+
+		<!-- SUBTITULO -->
+		
+		<!-- Texto  -->
+		<div class="form-group">
+
+			<label for="subtituloSlider{{sl.id}}">Subtítulo</label>
+			<input type="text" name="subtitulo" id="subtituloSlider{{sl.id}}" class="form-control subtituloSlider" key="{{sl.id}}" placeholder="Sutítulo del slider" value="{{sl.subtitulo}}">
+
+		</div>
+
+		<div class="row" style="padding:0;">
+			
+			<!-- Color de fondo -->
+			<div class="form-group col-xs-12 col-sm-6">
+
+				<div class="input-group">
+		      		
+					<input type="text" class="form-control fondoS" name="fondoS" id="fondoS{{sl.id}}" value="{{estiloSubtitulo.background}}" key="{{sl.id}}" placeholder="Color de fondo">
+
+			  		<div class="input-group-addon" id="fondoMS{{sl.id}}" key="{{sl.id}}" colorBase="{{estiloSubtitulo.background}}" style="cursor: pointer; color: {{estiloSubtitulo.background}}; background: #FCFCFC; padding: 0px 10px;">
+
+			  			<i class="fa fa-stop"></i>
+
+			  		</div>
+			    	
+			    </div>
+
+			</div>
+
+			<!-- Color de letra  -->
+			<div class="form-group col-xs-12 col-sm-6">
+
+				<div class="input-group">
+		      		
+					<input type="text" class="form-control colorS" name="colorS" id="colorS{{sl.id}}" value="{{estiloSubtitulo.color}}" key="{{sl.id}}" placeholder="Color de letra">
+
+			  		<div class="input-group-addon" id="colorMS{{sl.id}}" key="{{sl.id}}" colorBase="{{estiloSubtitulo.color}}" style="cursor: pointer; color: {{estiloSubtitulo.color}}; background: #FCFCFC; padding: 0px 10px;">
+
+			  			<i class="fa fa-stop"></i>
+
+			  		</div>
+			    	
+			    </div>
+
+			</div>
+
+		</div>
+
+		<!-- DESCRPCION -->
+		
+		<!-- Texto  -->
+		<div class="form-group">
+
+			<label for="descSlider{{sl.id}}">Descripción</label>
+			<input type="text" name="descripcion" id="descSlider{{sl.id}}" class="form-control descSlider" key="{{sl.id}}" placeholder="Descripción del slider" value="{{sl.descripcion}}">
+
+		</div>
+
+		<div class="row" style="padding:0;">
+			
+			<!-- Color de fondo -->
+			<div class="form-group col-xs-12 col-sm-6">
+
+				<div class="input-group">
+		      		
+					<input type="text" class="form-control fondoD" name="fondoD" id="fondoD{{sl.id}}" value="{{estiloDescripcion.background}}" key="{{sl.id}}" placeholder="Color de fondo">
+
+			  		<div class="input-group-addon" id="fondoMD{{sl.id}}" key="{{sl.id}}" colorBase="{{estiloDescripcion.background}}" style="cursor: pointer; color: {{estiloDescripcion.background}}; background: #FCFCFC; padding: 0px 10px;">
+
+			  			<i class="fa fa-stop"></i>
+
+			  		</div>
+			    	
+			    </div>
+
+			</div>
+
+			<!-- Color de letra  -->
+			<div class="form-group col-xs-12 col-sm-6">
+
+				<div class="input-group">
+		      		
+					<input type="text" class="form-control colorD" name="colorD" id="colorD{{sl.id}}" value="{{estiloDescripcion.color}}" key="{{sl.id}}" placeholder="Color de letra">
+
+			  		<div class="input-group-addon" id="colorMD{{sl.id}}" key="{{sl.id}}" colorBase="{{estiloDescripcion.color}}" style="cursor: pointer; color: {{estiloDescripcion.color}}; background: #FCFCFC; padding: 0px 10px;">
+
+			  			<i class="fa fa-stop"></i>
+
+			  		</div>
+			    	
+			    </div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</form>
